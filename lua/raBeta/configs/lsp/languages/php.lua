@@ -9,14 +9,21 @@ dap.adapters.php = {
 
 dap.configurations.php = {
     {
-        name = 'Listen for Xdebug',
+        name = 'Listen for dockerized Xdebug',
         type = 'php',
         request = 'launch',
         port = 9000,
         pathMappings = { ['/var/www/html/'] = "${workspaceFolder}" },
     },
     {
-        name = 'Debug currently open script',
+        name = 'Listen for devilbox Xdebug',
+        type = 'php',
+        request = 'launch',
+        port = 9000,
+        pathMappings = { ['/shared/httpd/portal/portal'] = "${workspaceFolder}" },
+    },
+    {
+        name = 'Debug dockerized currently open script',
         type = 'php',
         request = 'launch',
         port = 9000,
@@ -26,18 +33,3 @@ dap.configurations.php = {
         pathMappings = { ['/var/www/html/'] = "${workspaceFolder}" },
     },
 }
-
--- NOTE: Set Xdebug path with keybinding
-vim.keymap.set('n', '<leader>dp', function()
-    local path = (dap.configurations.php[1].pathMappings['/var/www/html/'] ~= nil and
-        { ['/shared/httpd/portal/portal'] = "${workspaceFolder}" } or
-        { ['/var/www/html/'] = "${workspaceFolder}" })
-
-    ---@diagnostic disable-next-line: inject-field
-    dap.configurations.php[2].pathMappings = path
-    ---@diagnostic disable-next-line: inject-field
-    dap.configurations.php[1].pathMappings = path
-
-    print('The workspaceFolder path is: ' .. string.gsub(vim.inspect(path), '\n', ' '))
-end
-, { noremap = true, silent = true, desc = 'Set Xdebug [P]ath' })
