@@ -101,31 +101,31 @@ local servers = {
     bashls = {
         filetypes = { 'sh', 'zsh', 'bash' },
     },
-    -- clangd = {},
-    -- rust_analyzer = {
-    --     settings = {
-    --         ['rust-analyzer'] = {
-    --             cargo = {
-    --                 allFeatures = true,
-    --                 loadOutDirsFromCheck = true,
-    --                 runBuildScripts = true,
-    --             },
-    --             checkOnSave = {
-    --                 allFeatures = true,
-    --                 command = 'clippy',
-    --                 extraArgs = { '--no-deps' },
-    --             },
-    --             procMacro = {
-    --                 enable = true,
-    --                 ignored = {
-    --                     ['async-trait'] = { 'async_trait' },
-    --                     ['napi-derive'] = { 'napi' },
-    --                     ['async-recursion'] = { 'async_recursion' },
-    --                 },
-    --             },
-    --         },
-    --     },
-    -- },
+    clangd = {},
+    rust_analyzer = {
+        settings = {
+            ['rust-analyzer'] = {
+                cargo = {
+                    allFeatures = true,
+                    loadOutDirsFromCheck = true,
+                    runBuildScripts = true,
+                },
+                checkOnSave = {
+                    allFeatures = true,
+                    command = 'clippy',
+                    extraArgs = { '--no-deps' },
+                },
+                procMacro = {
+                    enable = true,
+                    ignored = {
+                        ['async-trait'] = { 'async_trait' },
+                        ['napi-derive'] = { 'napi' },
+                        ['async-recursion'] = { 'async_recursion' },
+                    },
+                },
+            },
+        },
+    },
     taplo = {},
     marksman = {},
     html = { filetypes = { 'html', 'twig', 'hbs' } },
@@ -147,17 +147,6 @@ local servers = {
         },
     },
     -- htmx = { filetypes = { 'html', 'twig', 'php' } },
-    -- phpactor = {
-    --     init_options = {
-    --         ["language_server_psalm.enabled"] = false,
-    --         ["language_server_php_cs_fixer.enabled"] = false,
-    --         ["language_server_completion.trim_leading_dollar"] = true,
-    --         ["language_server_phpstan.enabled"] = true,
-    --         ["language_server_phpstan.bin"] = "/home/rabeta/.local/share/nvim/mason/bin/phpstan",
-    --         ["symfony.enabled"] = true,
-    --         ["completion_worse.completor.docblock.enabled"] = true,
-    --     }
-    -- },
     intelephense = {
         cmd = { 'intelephense', '--stdio' },
         filetypes = { 'php' },
@@ -178,6 +167,14 @@ local servers = {
         },
         flags = {
             debounce_text_changes = 150,
+        },
+    },
+    zls = {
+        format = {
+            enable = true,
+        },
+        diagnostics = {
+            enable = true,
         },
     },
     sqls = {},

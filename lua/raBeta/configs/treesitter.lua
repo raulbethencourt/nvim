@@ -23,6 +23,7 @@ require('nvim-treesitter.configs').setup {
         'markdown_inline',
         'toml',
         'twig',
+        'zig',
     },
     auto_install = false,
     highlight = { enable = true },
