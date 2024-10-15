@@ -159,6 +159,7 @@ local servers = {
     --     }
     -- },
     intelephense = {
+        cmd = { 'intelephense', '--stdio' },
         filetypes = { 'php' },
         init_options = {
             licenceKey = get_intelephense_license(),
@@ -179,7 +180,6 @@ local servers = {
             debounce_text_changes = 150,
         },
     },
-    -- tsserver = {},
     sqls = {},
 }
 
