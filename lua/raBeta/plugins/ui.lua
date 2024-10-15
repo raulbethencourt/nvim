@@ -13,7 +13,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_ui_contrast = 'low'
             vim.g.gruvbox_material_float_style = 'dim'
-            vim.cmd [[colorscheme gruvbox-material]]
+            -- vim.cmd [[colorscheme gruvbox-material]]
         end,
     },
     {
@@ -28,7 +28,7 @@ return {
             vim.g.everforest_cursor = 'green'
             vim.g.everforest_ui_contrast = 'low'
             vim.g.everforest_float_style = 'dim'
-            -- vim.cmd [[colorscheme everforest]]
+            vim.cmd [[colorscheme everforest]]
         end,
     },
     {
