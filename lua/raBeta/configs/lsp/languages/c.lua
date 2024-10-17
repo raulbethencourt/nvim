@@ -10,7 +10,7 @@ dap.adapters.codelldb = {
     },
 }
 
-dap.configurations.zig = {
+dap.configurations.c = {
     {
         name = 'Launch',
         type = 'lldb',
