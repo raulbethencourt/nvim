@@ -92,6 +92,7 @@ require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'live_grep_args'
 require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'noice'
+require('telescope').load_extension 'menufacture'
 
 local function is_git_repo()
     vim.fn.system 'git rev-parse --is-inside-work-tree'
@@ -127,17 +128,17 @@ keymap('n', '<leader><space>', function()
         },
     })
 end, { desc = 'Buffers' })
+
 keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     { desc = '[S]earch [L]ive Grep Args' })
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", { desc = '[S]earch command hist[O]ry' })
-keymap('n', '<leader>sf', "<cmd>lua Git_root('find_files', {})<cr>", { desc = '[S]earch [F]iles' })
-keymap('n', '<leader>sr', require('telescope.builtin').oldfiles, { desc = '[S]earch [R]ecently opened files' })
-keymap('n', '<leader>sg', require('telescope.builtin').git_files, { desc = '[S]earch [G]it Files' })
+keymap('n', '<leader>sf', require('telescope').extensions.menufacture.find_files, { desc = '[S]earch [F]iles' })
+keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles, { desc = '[S]earch [R]ecently opened files' })
+keymap('n', '<leader>sg', require('telescope').extensions.menufacture.live_grep, { desc = '[S]earch [G]it Files' })
 keymap('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 keymap('n', '<leader>si', require('telescope.builtin').registers, { desc = '[S]earch reg[I]sters' })
-keymap('n', '<leader>sw', require('telescope-live-grep-args.shortcuts').grep_word_under_cursor,
-    { desc = '[S]earch current [W]ord' })
-keymap('n', '<leader>sv', require('telescope-live-grep-args.shortcuts').grep_visual_selection,
+keymap('n', '<leader>sw', require('telescope').extensions.menufacture.grep_string, { desc = '[S]earch reg[I]sters' })
+keymap('v', '<leader>sv', require('telescope-live-grep-args.shortcuts').grep_visual_selection,
     { desc = '[S]earch [V]isual selection' })
 keymap('n', '<leader>sc', require('telescope.builtin').colorscheme, { desc = '[S]earch [C]olorscheme' })
 keymap('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
