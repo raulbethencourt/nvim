@@ -84,15 +84,6 @@ require('telescope').setup {
             override_file_sorter = true,    -- override the file sorter
             case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
         },
-        file_browser = {
-            -- theme = "ivy",
-            previewer = false,
-            grouped = true,
-            hijack_netrw = true,
-            hidden = { file_browser = true, folder_browser = true },
-            no_ignore = true,
-            initial_mode = 'insert',
-        },
     },
 }
 
@@ -101,7 +92,6 @@ require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'live_grep_args'
 require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'noice'
-require('telescope').load_extension 'file_browser'
 
 local function is_git_repo()
     vim.fn.system 'git rev-parse --is-inside-work-tree'
@@ -168,4 +158,3 @@ keymap('n', '<leader>sb', function()
     })
 end, { desc = '[S]earch in current [B]uffer' })
 keymap('n', '<leader>st', '<cmd>todotelescope<cr>', { desc = '[s]search [t]odo' })
-keymap("n", "<space>e", "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", { desc = '[E]xplore file browser' })

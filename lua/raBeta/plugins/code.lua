@@ -7,45 +7,45 @@ local keymap = function(mode, keys, func, desc)
 end
 
 return {
-    -- {
-    --     'stevearc/oil.nvim',
-    --     opts = {},
-    --     -- Optional dependencies
-    --     dependencies = { "nvim-tree/nvim-web-devicons" },
-    --     config = function()
-    --         require('oil').setup {
-    --             skip_confirm_for_simple_edits = true,
-    --             keymaps = {
-    --                 ['<C-h>'] = false,
-    --                 ['<C-l>'] = false,
-    --             },
-    --             view_options = {
-    --                 show_hidden = true,
-    --             },
-    --             float = {
-    --                 padding = 2,
-    --                 max_width = 200,
-    --                 max_height = 55,
-    --                 border = "rounded",
-    --                 win_options = {
-    --                     winblend = 0,
-    --                 },
-    --             },
-    --             preview = {
-    --                 win_options = {
-    --                     winblend = 0,
-    --                 },
-    --             },
-    --             progress = {
-    --                 win_options = {
-    --                     winblend = 0,
-    --                 },
-    --             },
-    --         }
-    --         -- keymap('n', '<leader>e', require('oil').toggle_float,
-    --             -- '[O]il [T]oggle float')
-    --     end,
-    -- },
+    {
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require('oil').setup {
+                skip_confirm_for_simple_edits = true,
+                keymaps = {
+                    ['<C-h>'] = false,
+                    ['<C-l>'] = false,
+                },
+                view_options = {
+                    show_hidden = true,
+                },
+                float = {
+                    padding = 2,
+                    max_width = 200,
+                    max_height = 55,
+                    border = "rounded",
+                    win_options = {
+                        winblend = 0,
+                    },
+                },
+                preview = {
+                    win_options = {
+                        winblend = 0,
+                    },
+                },
+                progress = {
+                    win_options = {
+                        winblend = 0,
+                    },
+                },
+            }
+            keymap('n', '<leader>e', require('oil').toggle_float,
+                '[O]il [T]oggle float')
+        end,
+    },
     {
         'lewis6991/gitsigns.nvim',
         config = function()
@@ -150,7 +150,6 @@ return {
             },
             'nvim-telescope/telescope-ui-select.nvim',
             'nvim-tree/nvim-web-devicons',
-            "nvim-telescope/telescope-file-browser.nvim",
         },
         config = function()
             require 'raBeta.configs.telescope'
