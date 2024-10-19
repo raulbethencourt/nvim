@@ -2,6 +2,7 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 require('luasnip.loaders.from_vscode').lazy_load { paths = { '~/.config/nvim/snippets' } }
 luasnip.config.setup {}
+
 vim.keymap.set({ 'i', 's' }, '<c-k>', function()
     if luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
@@ -57,7 +58,6 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'cody' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'path' },
         { name = 'buffer' },

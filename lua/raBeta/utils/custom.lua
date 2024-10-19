@@ -17,4 +17,13 @@ M.phpManual = function()
     vim.cmd.terminal(cmd)
 end
 
+M.keymap = function(mode, keys, func, desc)
+    if desc then
+        desc = desc
+    end
+
+    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
+end
+
+
 return M
