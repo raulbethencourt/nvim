@@ -3,14 +3,25 @@ local keymap = require('raBeta.utils.custom').keymap
 return {
     {
         "sourcegraph/sg.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim"
+        },
         config = function()
-            require('sg').setup({
-                enable_cody = true,
-            })
-            keymap('n', '<leader>c', '<cmd>CodyToggle<CR>', '[C]ody Toggle')
-        end
+            ---@diagnostic disable-next-line: missing-parameter
+            require('sg').setup()
 
+            keymap('n', '<leader>ss', [[<cmd>lua require('sg.extensions.telescope').fuzzy_search_results()<cr>]],
+                '[S]g [S]earch result')
+            keymap('n', '<leader>cc', [[:CodyToggle<cr>]],
+                '[C]ody toggle')
+            keymap({ 'n', 'v' }, '<leader>ct', [[:CodyTask]],
+                '[C]ody [T]ask')
+            keymap({ 'n', 'v' }, '<leader>ca', [[:CodyAsk<cr>]],
+                '[C]ody [A]sk')
+            keymap('v', '<leader>ce', [[:CodyExplain<cr>]],
+                '[C]ody [E]xplain')
+        end,
     },
     {
         'kosayoda/nvim-lightbulb',
