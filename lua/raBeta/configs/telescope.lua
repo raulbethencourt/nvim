@@ -133,7 +133,8 @@ keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_ar
     { desc = '[S]earch [L]ive Grep Args' })
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", { desc = '[S]earch command hist[O]ry' })
 keymap('n', '<leader>sf', require('telescope').extensions.menufacture.find_files, { desc = '[S]earch [F]iles' })
-keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles, { desc = '[S]earch [R]ecently opened files' })
+keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles,
+    { desc = '[S]earch [R]ecently opened files' })
 keymap('n', '<leader>sg', require('telescope').extensions.menufacture.live_grep, { desc = '[S]earch [G]it Files' })
 keymap('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 keymap('n', '<leader>si', require('telescope.builtin').registers, { desc = '[S]earch reg[I]sters' })
