@@ -35,4 +35,3 @@ undo/*
 *.luac
 cache/
 .luarc.json
-lazy-lock.json
