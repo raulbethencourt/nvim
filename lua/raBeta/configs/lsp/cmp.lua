@@ -69,6 +69,6 @@ cmp.setup {
         {
             name = 'vsnip',
             keyword_length = 2,
-        },
+        }
     }
 }

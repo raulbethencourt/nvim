@@ -9,6 +9,8 @@ return {
                 enable_cody = true,
             })
             keymap('n', '<leader>c', '<cmd>CodyToggle<CR>', '[C]ody Toggle')
+            keymap('v', '<leader>ce', [[:CodyExplain<cr>]],
+                '[C]ody [E]xplain')
         end
 
     },
