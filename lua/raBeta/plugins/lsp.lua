@@ -2,19 +2,6 @@ local keymap = require('raBeta.utils.custom').keymap
 
 return {
     {
-        "sourcegraph/sg.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require('sg').setup({
-                enable_cody = true,
-            })
-            keymap('n', '<leader>c', '<cmd>CodyToggle<CR>', '[C]ody Toggle')
-            keymap('v', '<leader>ce', [[:CodyExplain<cr>]],
-                '[C]ody [E]xplain')
-        end
-
-    },
-    {
         'kosayoda/nvim-lightbulb',
         event = 'LspAttach',
         config = function()

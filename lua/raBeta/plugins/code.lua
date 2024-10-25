@@ -23,22 +23,21 @@ return {
                     show_hidden = true,
                 },
                 float = {
-                    padding = 2,
-                    max_width = 200,
-                    max_height = 55,
-                    border = "rounded",
+                    padding = 5,
+                    max_width = 0,
+                    max_height = 0,
                     win_options = {
-                        winblend = 0,
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                     },
                 },
                 preview = {
                     win_options = {
-                        winblend = 0,
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                     },
                 },
                 progress = {
                     win_options = {
-                        winblend = 0,
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                     },
                 },
             }
