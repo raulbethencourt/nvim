@@ -21,7 +21,8 @@ require('telescope').setup {
         initial_mode = 'insert',
         layout_strategy = 'horizontal_no_titles',
         layout_config = {
-            preview_width = 100,
+            preview_width = 0.55,
+            width = 0.9,
         },
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         file_ignore_patterns = { 'node_modules', 'vendor', 'upgrades', 'upload', 'cache' },
