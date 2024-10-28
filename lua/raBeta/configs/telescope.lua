@@ -20,10 +20,6 @@ require('telescope').setup {
         entry_prefix = '  ',
         initial_mode = 'insert',
         layout_strategy = 'horizontal_no_titles',
-        layout_config = {
-            preview_width = 0.55,
-            width = 0.9,
-        },
         file_sorter = require('telescope.sorters').get_fuzzy_file,
         file_ignore_patterns = { 'node_modules', 'vendor', 'upgrades', 'upload', 'cache' },
         generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
@@ -68,12 +64,45 @@ require('telescope').setup {
             initial_mode = 'insert',
             layout_strategy = 'vertical_no_titles',
             prompt_title = false,
+            layout_config = {
+                height = 0.2,
+                prompt_position = 'bottom',
+                width = 0.3,
+            },
+        },
+        find_files = {
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
+        },
+        oldfiles = {
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
+        },
+        grep_string = {
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
+        },
+        live_grep = {
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
         },
     },
     extensions = {
         live_grep_args = {
             auto_quoting = true,
-            layout_strategy = 'horizontal_no_titles'
+            layout_strategy = 'horizontal_no_titles',
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
         },
         ['ui-select'] = {
             require('telescope.themes').get_dropdown {
@@ -87,6 +116,10 @@ require('telescope').setup {
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
             case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
+            layout_config = {
+                preview_width = 0.55,
+                width = 0.9,
+            },
         },
     },
 }
@@ -137,7 +170,8 @@ keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_ar
     { desc = '[S]earch [L]ive Grep Args' })
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", { desc = '[S]earch command hist[O]ry' })
 keymap('n', '<leader>sf', require('telescope').extensions.menufacture.find_files, { desc = '[S]earch [F]iles' })
-keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles, { desc = '[S]earch [R]ecently opened files' })
+keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles,
+    { desc = '[S]earch [R]ecently opened files' })
 keymap('n', '<leader>sg', require('telescope').extensions.menufacture.live_grep, { desc = '[S]earch live [G]rep' })
 keymap('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 keymap('n', '<leader>si', require('telescope.builtin').registers, { desc = '[S]earch reg[I]sters' })
