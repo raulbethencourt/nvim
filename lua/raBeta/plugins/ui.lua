@@ -2,6 +2,28 @@ local icons = require 'icons'
 
 return {
     {
+        'Shatur/neovim-ayu',
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        config = function()
+            require('ayu').setup({
+                mirage = true,
+                overrides = {
+                    Normal = { bg = "None" },
+                    ColorColumn = { bg = "None" },
+                    SignColumn = { bg = "None" },
+                    Folded = { bg = "None" },
+                    FoldColumn = { bg = "None" },
+                    CursorColumn = { bg = "None" },
+                    WhichKeyFloat = { bg = "None" },
+                    VertSplit = { bg = "None" },
+                }
+            })
+            vim.cmd [[colorscheme ayu]]
+        end,
+    },
+    {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
@@ -13,7 +35,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_ui_contrast = 'low'
             vim.g.gruvbox_material_float_style = 'dim'
-            vim.cmd [[colorscheme gruvbox-material]]
+            -- vim.cmd [[colorscheme gruvbox-material]]
         end,
     },
     {
@@ -30,50 +52,6 @@ return {
             vim.g.everforest_float_style = 'dim'
             -- vim.cmd [[colorscheme everforest]]
         end,
-    },
-    {
-        'stevearc/dressing.nvim',
-        lazy = true,
-        init = function()
-            ---@diagnostic disable-next-line: duplicate-set-field
-            vim.ui.select = function(...)
-                require('lazy').load { plugins = { 'dressing.nvim' } }
-                return vim.ui.select(...)
-            end
-            ---@diagnostic disable-next-line: duplicate-set-field
-            vim.ui.input = function(...)
-                require('lazy').load { plugins = { 'dressing.nvim' } }
-                return vim.ui.input(...)
-            end
-        end,
-        config = function()
-            require('dressing').setup({
-                win_options = {
-                    winblend = 10,
-                    winhighlight =
-                    'Normal:DressingInputNormalFloat,NormalFloat:DressingInputNormalFloat,FloatBorder:DressingInputFloatBorder',
-                },
-                input = {
-                    enabled = true,
-                    default_prompt = 'Input:',
-                    prompt_align = 'left',
-                    insert_only = true,
-                    start_in_insert = true,
-                    border = 'rounded',
-                    relative = 'cursor',
-                    prefer_width = 40,
-                    width = nil,
-                    max_width = { 140, 0.9 },
-                    min_width = { 20, 0.2 },
-                    get_config = nil,
-                },
-                select = {
-                    enabled = true,
-                    backend = { 'telescope', 'fzf_lua', 'fzf', 'nui', 'builtin' },
-                    trim_prompt = true,
-                },
-            })
-        end
     },
     {
         'folke/noice.nvim',
@@ -146,7 +124,7 @@ return {
                         },
                         filter_options = {},
                         win_options = {
-                            winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+                            winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                         },
                         position = {
                             row = 10,
@@ -172,7 +150,7 @@ return {
                             padding = { 1, 2 },
                         },
                         win_options = {
-                            winhighlight = { Normal = 'Normal', FloatBorder = 'DiagnosticInfo' },
+                            winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                         },
                     },
                 },
