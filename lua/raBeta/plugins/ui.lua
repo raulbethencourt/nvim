@@ -20,7 +20,7 @@ return {
                     VertSplit = { bg = "None" },
                 }
             })
-            vim.cmd [[colorscheme ayu]]
+            -- vim.cmd [[colorscheme ayu]]
         end,
     },
     {
@@ -35,7 +35,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_ui_contrast = 'low'
             vim.g.gruvbox_material_float_style = 'dim'
-            -- vim.cmd [[colorscheme gruvbox-material]]
+            vim.cmd [[colorscheme gruvbox-material]]
         end,
     },
     {

@@ -178,6 +178,7 @@ local servers = {
         },
     },
     sqls = {},
+    ts_ls = {},
 }
 
 local icons = require 'icons'

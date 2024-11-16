@@ -15,12 +15,8 @@ return {
             require("obsidian").setup({
                 workspaces = {
                     {
-                        name = "personal",
-                        path = "~/vaults/personal",
-                    },
-                    {
-                        name = "work",
-                        path = "~/vaults/work",
+                        name = "vaults",
+                        path = "~/vaults",
                     },
                 },
             })
