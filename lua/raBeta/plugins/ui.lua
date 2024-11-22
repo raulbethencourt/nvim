@@ -2,6 +2,28 @@ local icons = require 'icons'
 
 return {
     {
+        'Shatur/neovim-ayu',
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        config = function()
+            require('ayu').setup({
+                mirage = true,
+                overrides = {
+                    Normal = { bg = "None" },
+                    ColorColumn = { bg = "None" },
+                    SignColumn = { bg = "None" },
+                    Folded = { bg = "None" },
+                    FoldColumn = { bg = "None" },
+                    CursorColumn = { bg = "None" },
+                    WhichKeyFloat = { bg = "None" },
+                    VertSplit = { bg = "None" },
+                }
+            })
+            -- vim.cmd [[colorscheme ayu]]
+        end,
+    },
+    {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
@@ -32,6 +54,7 @@ return {
         end,
     },
     {
+<<<<<<< HEAD
         'stevearc/dressing.nvim',
         lazy = true,
         init = function()
@@ -76,6 +99,8 @@ return {
         end
     },
     {
+=======
+>>>>>>> work
         'folke/noice.nvim',
         event = 'VeryLazy',
         opts = {},
@@ -146,7 +171,7 @@ return {
                         },
                         filter_options = {},
                         win_options = {
-                            winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+                            winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                         },
                         position = {
                             row = 10,
@@ -172,7 +197,7 @@ return {
                             padding = { 1, 2 },
                         },
                         win_options = {
-                            winhighlight = { Normal = 'Normal', FloatBorder = 'DiagnosticInfo' },
+                            winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                         },
                     },
                 },

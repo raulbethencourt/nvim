@@ -18,6 +18,8 @@ return {
                 keymaps = {
                     ['<C-h>'] = false,
                     ['<C-l>'] = false,
+                    ['<C-d>'] = "actions.preview_scroll_down",
+                    ['<C-u>'] = "actions.preview_scroll_up",
                 },
                 view_options = {
                     show_hidden = true,
@@ -30,7 +32,7 @@ return {
                         winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                     },
                 },
-                preview = {
+                preview_win = {
                     win_options = {
                         winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
                     },
