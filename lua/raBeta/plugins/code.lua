@@ -20,6 +20,8 @@ return {
                     ['<C-l>'] = false,
                     ['<C-d>'] = "actions.preview_scroll_down",
                     ['<C-u>'] = "actions.preview_scroll_up",
+                    ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+                    ["<esc>"] = "actions.close",
                 },
                 view_options = {
                     show_hidden = true,

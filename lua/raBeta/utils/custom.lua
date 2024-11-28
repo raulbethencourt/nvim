@@ -1,9 +1,10 @@
 M = {}
 
 ---Open a floating window with php docs
+---@param cmd string
 ---@param opts? {win?:integer}
 ---
-M.phpManual = function(opts)
+M.launchCmdFloatWin = function(cmd, opts)
     opts = opts or {}
 
     -- Create an immutable scratch buffer that is wiped once hidden
@@ -27,9 +28,7 @@ M.phpManual = function(opts)
     -- Change to the window that is floating to ensure termopen uses correct size
     vim.api.nvim_set_current_win(win)
 
-    -- Launch doc with fzf to read with lynx
-    local cmd =
-    'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)'
+    -- Launch cmd in term
     vim.fn.termopen(cmd, {
         on_exit = function(_, _, _)
             if vim.api.nvim_win_is_valid(win) then
@@ -43,10 +42,10 @@ M.phpManual = function(opts)
 end
 
 ---Creates alias for keymaps
----@param mode string
+---@param mode string|string[] 
 ---@param keys string
----@param func string
----@param desc string
+---@param func string|function
+---@param desc? string?
 ---
 M.keymap = function(mode, keys, func, desc)
     if not desc or string.len(desc) == 0 then
