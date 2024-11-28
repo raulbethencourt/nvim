@@ -1,12 +1,7 @@
 M = {}
 
-local keymap = function(mode, keys, func, desc)
-    if desc then
-        desc = desc
-    end
-
-    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
-end
+local keymap = require("raBeta.utils.custom").keymap
+local launchCmdFloatWin = require("raBeta.utils.custom").launchCmdFloatWin
 
 -- NOTE: stop space normal
 keymap({ 'n', 'v' }, '<Space>', '<Nop>')
@@ -28,13 +23,17 @@ keymap('n', '<TAB>', '<cmd>bnext<CR>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<CR>', 'Bprev')
 
 -- NOTE: Lazy
-keymap('n', '<leader>ps', '<cmd>Lazy sync<CR>', 'Lazy [S]ync')
-keymap('n', '<leader>pi', '<cmd>Lazy install<CR>', 'Lazy [I]nstall')
-keymap('n', '<leader>pu', '<cmd>Lazy update<CR>', 'Lazy [U]update')
-keymap('n', '<leader>pc', '<cmd>Lazy clean<CR>', 'Lazy [C]lean')
+keymap('n', "<leader>ps", '<cmd>Lazy sync<CR>', 'Lazy [S]ync')
+keymap('n', "<leader>pi", '<cmd>Lazy install<CR>', 'Lazy [I]nstall')
+keymap('n', "<leader>pu", "<cmd>Lazy update<CR>", 'Lazy [U]update')
+keymap('n', "<leader>pc", "<cmd>Lazy clean<CR>", 'Lazy [C]lean')
 
--- NOTE: Gnereral
-keymap('n', '<leader>mp', require('raBeta.utils.custom').phpManual, 'Lazy [C]lean')
+-- NOTE: External commandes
+keymap('n', '<leader>cp', function()
+    launchCmdFloatWin(
+        'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)'
+    )
+end, '[C]md [P]hp manual')
 
 -- NOTE: Gnereral
 keymap('n', '<leader>zb', ':bp<bar>sp<bar>bn<bar>bd!<cr>', '[B]uffer delete')
