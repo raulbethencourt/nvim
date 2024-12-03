@@ -1,6 +1,15 @@
 local icons = require 'icons'
+local keymap = require('raBeta.utils.custom').keymap
 
 return {
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+        config = function()
+            require('render-markdown').setup({ enabled = false, })
+            keymap('n', '<leader>rm', '<cmd>RenderMarkdown toggle<CR>', '[R]ender [M]arkdown')
+        end,
+    },
     {
         'Shatur/neovim-ayu',
         lazy = false,

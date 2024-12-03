@@ -1,10 +1,4 @@
-local keymap = function(mode, keys, func, desc)
-    if desc then
-        desc = desc
-    end
-
-    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
-end
+local keymap = require('raBeta.utils.custom').keymap
 
 return {
     {
