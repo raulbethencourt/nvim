@@ -2,28 +2,6 @@ local icons = require 'icons'
 
 return {
     {
-        'Shatur/neovim-ayu',
-        lazy = false,
-        priority = 1000,
-        enabled = true,
-        config = function()
-            require('ayu').setup({
-                mirage = true,
-                overrides = {
-                    Normal = { bg = "None" },
-                    ColorColumn = { bg = "None" },
-                    SignColumn = { bg = "None" },
-                    Folded = { bg = "None" },
-                    FoldColumn = { bg = "None" },
-                    CursorColumn = { bg = "None" },
-                    WhichKeyFloat = { bg = "None" },
-                    VertSplit = { bg = "None" },
-                }
-            })
-            -- vim.cmd [[colorscheme ayu]]
-        end,
-    },
-    {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
@@ -35,7 +13,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_ui_contrast = 'low'
             vim.g.gruvbox_material_float_style = 'dim'
-            -- vim.cmd [[colorscheme gruvbox-material]]
+            vim.cmd [[colorscheme gruvbox-material]]
         end,
     },
     {
@@ -50,7 +28,7 @@ return {
             vim.g.everforest_cursor = 'green'
             vim.g.everforest_ui_contrast = 'low'
             vim.g.everforest_float_style = 'dim'
-            vim.cmd [[colorscheme everforest]]
+            -- vim.cmd [[colorscheme everforest]]
         end,
     },
     {
