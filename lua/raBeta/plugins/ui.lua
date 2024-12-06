@@ -3,14 +3,6 @@ local keymap = require('raBeta.utils.custom').keymap
 
 return {
     {
-        'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-        config = function()
-            require('render-markdown').setup({ enabled = false, })
-            keymap('n', '<leader>rm', '<cmd>RenderMarkdown toggle<CR>', '[R]ender [M]arkdown')
-        end,
-    },
-    {
         'Shatur/neovim-ayu',
         lazy = false,
         priority = 1000,
@@ -68,23 +60,6 @@ return {
         opts = {},
         dependencies = {
             { 'MunifTanjim/nui.nvim', lazy = true },
-            {
-                'rcarriga/nvim-notify',
-                keys = {
-                    {
-                        '<leader>un',
-                        function()
-                            require('notify').dismiss { silent = true, pending = true }
-                        end,
-                        desc = 'Dismiss all Notifications',
-                    },
-                },
-                opts = {
-                    timeout = 3500,
-                    background_colour = '#000000',
-                    render = 'compact',
-                },
-            },
         },
         config = function()
             require('noice').setup {

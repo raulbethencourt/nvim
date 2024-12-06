@@ -2,6 +2,84 @@ local keymap = require('raBeta.utils.custom').keymap
 
 return {
     {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        ---@type snacks.Config
+        opts = {
+            bigfile = { enabled = true },
+            dashboard = {
+                enabled = true,
+                width = 80,
+                preset = {
+                    header = [[
+                  _    ___           __
+      _________ | |  / (_)___ ___  / /
+    / ___/ __ `/ | / / / __ `__ \/ /
+  / /  / /_/ /| |/ / / / / / / /_/
+/_/   \__,_/ |___/_/_/ /_/ /_(_)]],
+                },
+                sections = {
+                    { section = "header" },
+                    { section = "keys", gap = 1, padding = 1 },
+                    { icon = " ", title = "Recent Files", section = "recent_files", gap = 0, padding = 1 },
+                    { icon = " ", title = "Projects", section = "projects", gap = 0, padding = 1 },
+                    { section = "startup" },
+                },
+            },
+            notifier = {
+                enabled = true,
+                timeout = 5000,
+            },
+            quickfile = { enabled = false },
+            statuscolumn = { enabled = true },
+            ---@diagnostic disable-next-line: missing-fields
+            words = { enabled = true },
+            styles = {
+                ---@diagnostic disable-next-line: missing-fields
+                notification = {
+                    ---@diagnostic disable-next-line: missing-fields
+                    wo = { wrap = true }
+                }
+            }
+        },
+        keys = {
+            { "<leader>on", function() Snacks.notifier.show_history() end, desc = "Notification History" },
+            { "<leader>oN", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
+            { "<leader>zb", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },
+            { "<leader>oR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
+            { "<c-t>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
+        },
+        init = function()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "VeryLazy",
+                callback = function()
+                    -- Setup some globals for debugging (lazy-loaded)
+                    _G.dd = function(...)
+                        Snacks.debug.inspect(...)
+                    end
+                    _G.bt = function()
+                        Snacks.debug.backtrace()
+                    end
+                    vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+                    -- Create some toggle mappings
+                    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>os")
+                    Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>ow")
+                    Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>or")
+                    Snacks.toggle.diagnostics():map("<leader>od")
+                    Snacks.toggle.line_number():map("<leader>os")
+                    Snacks.toggle.option("conceallevel",
+                        { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>oc")
+                    Snacks.toggle.treesitter():map("<leader>oT")
+                    Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map(
+                        "<leader>ob")
+                    Snacks.toggle.inlay_hints():map("<leader>oh")
+                end,
+            })
+        end,
+    },
+    {
         'stevearc/oil.nvim',
         opts = {},
         -- Optional dependencies
