@@ -37,12 +37,12 @@ require('telescope').setup {
         mappings = {
             n = {
                 ['q'] = require('telescope.actions').close,
-                ['<M-p>'] = action_layout.toggle_preview,
+                ['<C-p>'] = action_layout.toggle_preview,
             },
             i = {
                 ['<C-u>'] = false,
                 ['<C-d>'] = false,
-                ['<M-p>'] = action_layout.toggle_preview,
+                ['<C-p>'] = action_layout.toggle_preview,
             },
         },
     },
