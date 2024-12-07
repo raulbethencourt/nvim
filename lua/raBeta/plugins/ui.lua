@@ -1,4 +1,5 @@
 local icons = require 'icons'
+local keymap = require('raBeta.utils.custom').keymap
 
 return {
     {
