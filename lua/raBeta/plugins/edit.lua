@@ -1,4 +1,4 @@
-local keymap = require('raBeta.utils.custom').keymap
+local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {

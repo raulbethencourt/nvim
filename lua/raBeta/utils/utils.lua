@@ -31,11 +31,11 @@ end
 ---@param cmd? string?
 ---@param opts? {win?:integer}
 ---
-M.launchCmdFloatWin = function(cmd, opts)
+M.launchCmdInFloatWin = function(cmd, opts)
     opts = opts or {}
 
     -- Create window to open term
-    local win = M.win(opts)
+    local win = require('raBeta.utils.utils').win(opts)
 
     -- Change to the window that is floating to ensure termopen uses correct size
     vim.api.nvim_set_current_win(win)
@@ -43,8 +43,10 @@ M.launchCmdFloatWin = function(cmd, opts)
     -- Launch cmd in term
     vim.fn.termopen(cmd, {
         on_exit = function(_, _, _)
-            if vim.api.nvim_win_is_valid(win) then
-                vim.api.nvim_win_close(win, true)
+            if opts.close_term == true then
+                if vim.api.nvim_win_is_valid(win) then
+                    vim.api.nvim_win_close(win, true)
+                end
             end
         end
     })

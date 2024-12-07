@@ -1,4 +1,4 @@
-local keymap = require('raBeta.utils.custom').keymap
+local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
@@ -9,7 +9,7 @@ return {
         opts = {
             bigfile = { enabled = true },
             dashboard = {
-                enabled = true,
+                enabled = false,
                 width = 80,
                 preset = {
                     header = [[
@@ -48,7 +48,7 @@ return {
             { "<leader>oN", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
             { "<leader>zb", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },
             { "<leader>oR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
-            { "<c-t>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
+            -- { "<c-t>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
         },
         init = function()
             vim.api.nvim_create_autocmd("User", {

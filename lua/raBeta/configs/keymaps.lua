@@ -1,7 +1,7 @@
 M = {}
 
-local keymap = require("raBeta.utils.custom").keymap
-local launchCmdFloatWin = require("raBeta.utils.custom").launchCmdFloatWin
+local utils = require("raBeta.utils.utils")
+local keymap = utils.keymap
 
 -- NOTE: stop space normal
 keymap({ 'n', 'v' }, '<Space>', '<Nop>')
@@ -30,10 +30,23 @@ keymap('n', "<leader>pc", "<cmd>Lazy clean<CR>", 'Lazy [C]lean')
 
 -- NOTE: External commandes
 keymap('n', '<leader>cp', function()
-    launchCmdFloatWin(
-        'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)'
+    utils.launchCmdInFloatWin(
+        'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)',
+        { close_term = true }
     )
 end, '[C]md [P]hp manual')
+
+keymap('n', '<leader>gl', function()
+    utils.launchCmdInFloatWin(
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
+        { close_term = false }
+    )
+end, '[C]md [L]og')
+
+keymap('n', '<leader>ci', function()
+    local cmd = vim.fn.input("Write your cmd : ", "", "file")
+    utils.launchCmdInFloatWin(cmd, { close_term = false })
+end, '[C]md [I]nput')
 
 -- NOTE: Gnereral
 keymap('n', '<leader>ze', ':messages<cr>', 'Messages')
