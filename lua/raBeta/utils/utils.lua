@@ -1,10 +1,10 @@
 M = {}
 
----Open a floating window with php docs
----@param cmd string
+---Return a floating window
 ---@param opts? {win?:integer}
+---@return window
 ---
-M.launchCmdFloatWin = function(cmd, opts)
+M.win = function(opts)
     opts = opts or {}
 
     -- Create an immutable scratch buffer that is wiped once hidden
@@ -24,6 +24,18 @@ M.launchCmdFloatWin = function(cmd, opts)
         col = math.ceil((vim.o.columns - width) / 2),
         border = 'rounded'
     })
+    return win
+end
+
+---Lounch cmd in popup window
+---@param cmd? string?
+---@param opts? {win?:integer}
+---
+M.launchCmdFloatWin = function(cmd, opts)
+    opts = opts or {}
+
+    -- Create window to open term
+    local win = M.win(opts)
 
     -- Change to the window that is floating to ensure termopen uses correct size
     vim.api.nvim_set_current_win(win)
@@ -42,7 +54,7 @@ M.launchCmdFloatWin = function(cmd, opts)
 end
 
 ---Creates alias for keymaps
----@param mode string|string[] 
+---@param mode string|string[]
 ---@param keys string
 ---@param func string|function
 ---@param desc? string?
