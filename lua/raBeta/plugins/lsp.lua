@@ -5,6 +5,7 @@ return {
         'kosayoda/nvim-lightbulb',
         event = 'LspAttach',
         config = function()
+            ---@diagnostic disable-next-line: missing-fields
             require('nvim-lightbulb').setup {
                 autocmd = { enabled = true },
                 sign = {
@@ -28,9 +29,17 @@ return {
         dependencies = {
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
+            {
+                "folke/lazydev.nvim",
+                ft = "lua",
+                opts = {
+                    library = {
+                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                    },
+                },
+            },
             'WhoIsSethDaniel/mason-tool-installer.nvim',
-            'folke/neodev.nvim',
-            { 'j-hui/fidget.nvim', opts = {} },
+            { 'j-hui/fidget.nvim' },
         },
     },
     {

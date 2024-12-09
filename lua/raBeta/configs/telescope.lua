@@ -3,6 +3,37 @@ local icons = require 'icons'
 
 require('telescope').setup {
     defaults = {
+        layout_config = {
+            bottom_pane = {
+                height = 25,
+                preview_cutoff = 120,
+                prompt_position = "top"
+            },
+            center = {
+                height = 0.4,
+                preview_cutoff = 40,
+                prompt_position = "top",
+                width = 0.5
+            },
+            cursor = {
+                height = 0.9,
+                preview_cutoff = 40,
+                width = 0.8
+            },
+            horizontal = {
+                preview_width = 0.55,
+                height = 0.9,
+                preview_cutoff = 120,
+                prompt_position = "bottom",
+                width = 0.9
+            },
+            vertical = {
+                height = 0.9,
+                preview_cutoff = 40,
+                prompt_position = "bottom",
+                width = 0.8
+            }
+        },
         vimgrep_arguments = {
             'rg',
             '-L',
@@ -70,39 +101,11 @@ require('telescope').setup {
                 width = 0.3,
             },
         },
-        find_files = {
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
-        },
-        oldfiles = {
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
-        },
-        grep_string = {
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
-        },
-        live_grep = {
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
-        },
     },
     extensions = {
         live_grep_args = {
             auto_quoting = true,
             layout_strategy = 'horizontal_no_titles',
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
         },
         ['ui-select'] = {
             require('telescope.themes').get_dropdown {
@@ -116,10 +119,6 @@ require('telescope').setup {
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
             case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
-            layout_config = {
-                preview_width = 0.55,
-                width = 0.9,
-            },
         },
     },
 }
@@ -166,6 +165,9 @@ keymap('n', '<leader><space>', function()
     })
 end, { desc = 'Buffers' })
 
+keymap('n', '<C-s>', require('telescope.builtin').spell_suggest, { desc = '[S]pell [S]uggest' })
+
+keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", { desc = '[S]earch command hist[O]ry' })
 keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     { desc = '[S]earch [L]ive Grep Args' })
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", { desc = '[S]earch command hist[O]ry' })

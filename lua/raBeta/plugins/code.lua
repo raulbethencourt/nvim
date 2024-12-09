@@ -10,22 +10,6 @@ return {
             bigfile = { enabled = true },
             dashboard = {
                 enabled = false,
-                width = 80,
-                preset = {
-                    header = [[
-                  _    ___           __
-      _________ | |  / (_)___ ___  / /
-    / ___/ __ `/ | / / / __ `__ \/ /
-  / /  / /_/ /| |/ / / / / / / /_/
-/_/   \__,_/ |___/_/_/ /_/ /_(_)]],
-                },
-                sections = {
-                    { section = "header" },
-                    { section = "keys", gap = 1, padding = 1 },
-                    { icon = " ", title = "Recent Files", section = "recent_files", gap = 0, padding = 1 },
-                    { icon = " ", title = "Projects", section = "projects", gap = 0, padding = 1 },
-                    { section = "startup" },
-                },
             },
             notifier = {
                 enabled = true,
@@ -48,7 +32,6 @@ return {
             { "<leader>oN", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
             { "<leader>zb", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },
             { "<leader>oR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
-            -- { "<c-t>",      function() Snacks.terminal() end,              desc = "Toggle Terminal" },
         },
         init = function()
             vim.api.nvim_create_autocmd("User", {
@@ -64,7 +47,7 @@ return {
                     vim.print = _G.dd -- Override print to use snacks for `:=` command
 
                     -- Create some toggle mappings
-                    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>os")
+                    Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>op")
                     Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>ow")
                     Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>or")
                     Snacks.toggle.diagnostics():map("<leader>od")
@@ -133,8 +116,6 @@ return {
                     col = 1,
                 }
             }
-            keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', '[G]itsigns [B]lame line')
-            keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', '[G]itsigns [D]iff this')
         end,
     },
     {
@@ -209,15 +190,12 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         event = 'VeryLazy',
-        branch = '0.1.x',
+        tag = '0.1.8',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-                cond = function()
-                    return vim.fn.executable 'make' == 1
-                end,
+                build = 'make'
             },
             {
                 'nvim-telescope/telescope-live-grep-args.nvim',

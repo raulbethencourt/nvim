@@ -28,6 +28,18 @@ keymap('n', "<leader>pi", '<cmd>Lazy install<CR>', 'Lazy [I]nstall')
 keymap('n', "<leader>pu", "<cmd>Lazy update<CR>", 'Lazy [U]update')
 keymap('n', "<leader>pc", "<cmd>Lazy clean<CR>", 'Lazy [C]lean')
 
+-- NOTE: Git
+keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', '[G]it [S]tatus')
+keymap('n', '<leader>gr', '<cmd>Telescope git_branches<CR>', '[G]it b[R]anches')
+keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', '[G]itsigns [B]lame line')
+keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', '[G]itsigns [D]iff this')
+keymap('n', '<leader>gl', function()
+    utils.launchCmdInFloatWin(
+        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
+        { close_term = false }
+    )
+end, '[G]it [L]ogs')
+
 -- NOTE: External commandes
 keymap('n', '<leader>cp', function()
     utils.launchCmdInFloatWin(
@@ -36,12 +48,6 @@ keymap('n', '<leader>cp', function()
     )
 end, '[C]md [P]hp manual')
 
-keymap('n', '<leader>gl', function()
-    utils.launchCmdInFloatWin(
-        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
-        { close_term = false }
-    )
-end, '[C]md [L]og')
 
 keymap('n', '<leader>ci', function()
     local cmd = vim.fn.input("Write your cmd : ", "", "file")
