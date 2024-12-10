@@ -1,3 +1,5 @@
+local keymap = require("raBeta.utils.utils").keymap
+
 return {
     'mfussenegger/nvim-dap',
     dependencies = {
@@ -28,24 +30,20 @@ return {
 
         -- NOTE: keymaps
         -- dapui.elements.stacks
-        vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
-        vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: Step Into' })
-        vim.keymap.set('n', '<s-F11>', dap.step_out, { desc = 'Debug: Step Out' })
-        vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
-        vim.keymap.set('n', '<s-F10>', dap.step_back, { desc = 'Debug: Step Back' })
-        vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = '[D]ebug Toggle [B]reakpoint' })
-        vim.keymap.set('n', '<leader>dc', dap.clear_breakpoints, { desc = '[D]ebug [C]lear Breakpoints' })
-        vim.keymap.set('n', '<leader>dB', function()
+        keymap('n', '<F5>', dap.continue, 'Debug: Start/Continue')
+        keymap('n', '<F11>', dap.step_into, 'Debug: Stepnto')
+        keymap('n', '<s-F11>', dap.step_out, 'Debug: Step Out')
+        keymap('n', '<F10>', dap.step_over, 'Debug: Step Over')
+        keymap('n', '<s-F10>', dap.step_back, 'Debug: Step Back')
+        keymap('n', '<leader>db', dap.toggle_breakpoint, '[D]ebug Toggle [B]reakpoint')
+        keymap('n', '<leader>dc', dap.clear_breakpoints, '[D]ebug [C]lear Breakpoints')
+        keymap('n', '<leader>dB', function()
             dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end, { desc = '[D]ebug Set [B]reakpoint' })
-        vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = '[D]ebug [T]oggle Ui' })
-        vim.keymap.set({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>',
-            { desc = '[D]ebug [E]xpression evaluation' })
-        vim.keymap.set('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>',
-            { desc = '[D]ebug [F]loating element' })
-        vim.keymap.set('n', '<leader>ds', '<Cmd>DapDisconnect<CR>',
-            { desc = '[D]ebug [S]top' })
-        -- vim.keymap.set('n', '<leader>dd', require('dapui.elements.stacks').open, { desc = '[D]ebug go to [D]efinition' })
+        end, '[D]ebug Set [B]reakpoint')
+        keymap('n', '<leader>dt', dapui.toggle, '[D]ebug [T]oggle Ui')
+        keymap({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>', '[D]ebug [E]xpression evaluation')
+        keymap('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>', '[D]ebug [F]loating element')
+        keymap('n', '<leader>ds', '<Cmd>DapDisconnect<CR>', '[D]ebug [S]top')
 
         ---@diagnostic disable-next-line: missing-fields
         dapui.setup {
