@@ -1,5 +1,6 @@
 require 'raBeta.configs.lsp.languages.php'
 require 'raBeta.configs.lsp.languages.bash'
+require 'raBeta.configs.lsp.languages.lua'
 
 -- NOTE: stop saving lsp logs, change to 'debug' to see them
 vim.lsp.set_log_level 'off'

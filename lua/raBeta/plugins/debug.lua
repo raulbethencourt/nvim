@@ -7,7 +7,8 @@ return {
         'williamboman/mason.nvim',
         'theHamsta/nvim-dap-virtual-text',
         'jay-babu/mason-nvim-dap.nvim',
-        "nvim-neotest/nvim-nio"
+        "nvim-neotest/nvim-nio",
+        'jbyuki/one-small-step-for-vimkind'
     },
     config = function()
         local dap = require 'dap'
@@ -28,10 +29,9 @@ return {
             },
         }
 
-        -- NOTE: keymaps
-        -- dapui.elements.stacks
+        -- NOTE: keymaps for dap
         keymap('n', '<F5>', dap.continue, 'Debug: Start/Continue')
-        keymap('n', '<F11>', dap.step_into, 'Debug: Stepnto')
+        keymap('n', '<F11>', dap.step_into, 'Debug: Step Into')
         keymap('n', '<s-F11>', dap.step_out, 'Debug: Step Out')
         keymap('n', '<F10>', dap.step_over, 'Debug: Step Over')
         keymap('n', '<s-F10>', dap.step_back, 'Debug: Step Back')
@@ -41,9 +41,23 @@ return {
             dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end, '[D]ebug Set [B]reakpoint')
         keymap('n', '<leader>dt', dapui.toggle, '[D]ebug [T]oggle Ui')
-        keymap({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>', '[D]ebug [E]xpression evaluation')
-        keymap('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>', '[D]ebug [F]loating element')
-        keymap('n', '<leader>ds', '<Cmd>DapDisconnect<CR>', '[D]ebug [S]top')
+        keymap({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>',
+            '[D]ebug [E]xpression evaluation')
+        keymap('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>',
+            '[D]ebug [F]loating element')
+        keymap('n', '<leader>ds', '<Cmd>DapDisconnect<CR>',
+            '[D]ebug [S]top')
+        keymap('n', '<leader>dl', function()
+            require "osv".launch({ port = 8086 })
+        end, '[D]ebug [L]ua')
+        keymap('n', '<leader>dw', function()
+            local widgets = require "dap.ui.widgets"
+            widgets.hover()
+        end, '[D]ebug hover')
+        keymap('n', '<leader>dF', function()
+            local widgets = require "dap.ui.widgets"
+            widgets.centered_float(widgets.frames)
+        end, '[D]ebug centered [F]loat')
 
         ---@diagnostic disable-next-line: missing-fields
         dapui.setup {

@@ -67,7 +67,7 @@ require('telescope').setup {
         buffer_previewer_maker = require('telescope.previewers').buffer_previewer_maker,
         mappings = {
             n = {
-                ['q'] = require('telescope.actions').close,
+                ['<C-c>'] = require('telescope.actions').close,
                 ['<C-p>'] = action_layout.toggle_preview,
             },
             i = {
@@ -176,8 +176,8 @@ keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles,
     { desc = '[S]earch [R]ecently opened files' })
 keymap('n', '<leader>sg', require('telescope').extensions.menufacture.live_grep, { desc = '[S]earch live [G]rep' })
 keymap('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-keymap('n', '<leader>si', require('telescope.builtin').registers, { desc = '[S]earch reg[I]sters' })
-keymap('n', '<leader>sw', require('telescope').extensions.menufacture.grep_string, { desc = '[S]earch reg[I]sters' })
+keymap('n', '<leader>sR', require('telescope.builtin').registers, { desc = '[S]earch [Registers' })
+keymap('n', '<leader>sw', require('telescope').extensions.menufacture.grep_string, { desc = '[S]earch [W]ord' })
 keymap('v', '<leader>sv', require('telescope-live-grep-args.shortcuts').grep_visual_selection,
     { desc = '[S]earch [V]isual selection' })
 keymap('n', '<leader>sc', require('telescope.builtin').colorscheme, { desc = '[S]earch [C]olorscheme' })

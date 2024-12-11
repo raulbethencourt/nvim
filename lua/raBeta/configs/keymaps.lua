@@ -29,8 +29,8 @@ keymap('n', "<leader>pu", "<cmd>Lazy update<CR>", 'Lazy [U]update')
 keymap('n', "<leader>pc", "<cmd>Lazy clean<CR>", 'Lazy [C]lean')
 
 -- NOTE: Git
-keymap('n', '<leader>gs', '<cmd>Telescope git_status<CR>', '[G]it [S]tatus')
-keymap('n', '<leader>gr', '<cmd>Telescope git_branches<CR>', '[G]it b[R]anches')
+keymap('n', '<leader>gs', require('telescope.builtin').git_status, '[G]it [S]tatus')
+keymap('n', '<leader>gr', require('telescope.builtin').git_branches, '[G]it b[R]anches')
 keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', '[G]itsigns [B]lame line')
 keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', '[G]itsigns [D]iff this')
 keymap('n', '<leader>gl', function()
