@@ -5,17 +5,20 @@ require('telescope').setup {
     defaults = {
         layout_config = {
             bottom_pane = {
-                height = 25,
+                preview_width = 0.55,
+                height = 0.7,
                 preview_cutoff = 120,
                 prompt_position = "top"
             },
             center = {
+                preview_width = 0.55,
                 height = 0.4,
                 preview_cutoff = 40,
                 prompt_position = "top",
                 width = 0.5
             },
             cursor = {
+                preview_width = 0.55,
                 height = 0.9,
                 preview_cutoff = 40,
                 width = 0.8
@@ -28,6 +31,7 @@ require('telescope').setup {
                 width = 0.9
             },
             vertical = {
+                preview_width = 0.55,
                 height = 0.9,
                 preview_cutoff = 40,
                 prompt_position = "bottom",
@@ -69,36 +73,52 @@ require('telescope').setup {
             n = {
                 ['<C-c>'] = require('telescope.actions').close,
                 ['<C-p>'] = action_layout.toggle_preview,
+                ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
+                ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
             },
             i = {
-                ['<C-u>'] = false,
-                ['<C-d>'] = false,
+                ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
+                ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
                 ['<C-p>'] = action_layout.toggle_preview,
             },
         },
     },
     pickers = {
         colorscheme = {
-            layout_strategy = 'horizontal_no_titles',
+            theme = "dropdown",
+            layout_strategy = 'vertical_no_titles',
+            layout_config = {
+                height = 0.6,
+            },
+        },
+        man_pages = {
+            theme = "ivy",
+            layout_config = {
+                height = 0.6,
+            },
+        },
+        registers = {
+            theme = "ivy",
+            layout_config = {
+                height = 0.6,
+            },
+        },
+        help_tags = {
+            theme = "ivy",
+            layout_config = {
+                height = 0.6,
+            },
         },
         command_history = {
-            layout_strategy = 'horizontal_no_titles',
+            theme = "ivy",
+            layout_config = {
+                height = 0.6,
+            },
         },
         keymaps = {
-            layout_strategy = 'horizontal_no_titles',
-        },
-        buffers = {
-            sort_lastused = true,
-            sort_mru = true,
-            show_all_buffers = true,
-            previewer = false,
-            initial_mode = 'insert',
-            layout_strategy = 'vertical_no_titles',
-            prompt_title = false,
+            theme = "ivy",
             layout_config = {
-                height = 0.2,
-                prompt_position = 'bottom',
-                width = 0.3,
+                height = 0.6,
             },
         },
     },
@@ -154,9 +174,13 @@ local keymap = vim.keymap.set
 
 keymap('n', '<leader><space>', function()
     require('telescope.builtin').buffers(require('telescope.themes').get_dropdown {
-        winblend = 0,
+        sort_lastused = true,
+        sort_mru = true,
+        show_all_buffers = true,
         previewer = false,
-        layout_strategy = 'vertical',
+        initial_mode = 'insert',
+        layout_strategy = 'vertical_no_titles',
+        prompt_title = false,
         layout_config = {
             height = 0.2,
             prompt_position = 'bottom',
