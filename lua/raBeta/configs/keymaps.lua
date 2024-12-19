@@ -40,17 +40,15 @@ keymap('n', '<leader>gl', function()
     )
 end, '[G]it [L]ogs')
 
--- NOTE: External commandes
+-- NOTE: Terminal & external commandes
 keymap('n', '<leader>cp', function()
     utils.launchCmdInFloatWin(
         'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)',
         { close_term = true }
     )
 end, '[C]md [P]hp manual')
-
-
 keymap('n', '<leader>ci', function()
-    local cmd = vim.fn.input("Write your cmd : ", "", "file")
+    local cmd = vim.fn.input("Write your cmd : ")
     utils.launchCmdInFloatWin(cmd, { close_term = false })
 end, '[C]md [I]nput')
 
