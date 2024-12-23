@@ -17,26 +17,27 @@
 =====================================================================
 =================================================================--]]
 
+-- NOTE: install lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    if vim.v.shell_error ~= 0 then
+        vim.api.nvim_echo({
+            { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+            { out,                            "WarningMsg" },
+            { "\nPress any key to exit..." },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
+end
+vim.opt.rtp:prepend(lazypath)
+
 -- NOTE: need to set leader and termguicolors before lazy
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.termguicolors = true
-
--- NOTE: install lazy
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
----@diagnostic disable-next-line: undefined-field
-if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system {
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable',
-        lazypath,
-    }
-end
----@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
 
 -- NOTE: vscode nvim settings
 if vim.g.vscode then
@@ -57,7 +58,10 @@ end
 local env_name = vim.g.vscode and 'vscode' or 'raBeta'
 
 require('lazy').setup({
-    { import = env_name .. '.plugins' },
+    spec = {
+        import = env_name .. '.plugins'
+    },
+    checker = { enabled = true },
 }, {})
 
 require(env_name .. '.configs')
