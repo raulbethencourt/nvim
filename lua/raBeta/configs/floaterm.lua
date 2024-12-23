@@ -19,4 +19,4 @@ end
 
 -- Create flating terminal
 vim.api.nvim_create_user_command("Floaterm", toggleTerminal, {})
-utils.keymap({ 'n', 't' }, '<C-t>', '<cmd>Floaterm<CR>', '[F]loaterm')
+utils.keymap({ 'n', 't' }, '<space>ot', '<cmd>Floaterm<CR>', '[F]loaterm')
