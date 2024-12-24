@@ -19,20 +19,21 @@ keymap('n', '<F7>', function()
 end, 'Toggle Hidde Statusline')
 
 -- NOTE: TAB in general mode will move to text buffer
-keymap('n', '<TAB>', '<cmd>bnext<CR>', 'Bnext')
-keymap('n', '<S-TAB>', '<cmd>bprev<CR>', 'Bprev')
+keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
+keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
+keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
 
 -- NOTE: Lazy
-keymap('n', "<leader>ps", '<cmd>Lazy sync<CR>', 'Lazy [S]ync')
-keymap('n', "<leader>pi", '<cmd>Lazy install<CR>', 'Lazy [I]nstall')
-keymap('n', "<leader>pu", "<cmd>Lazy update<CR>", 'Lazy [U]update')
-keymap('n', "<leader>pc", "<cmd>Lazy clean<CR>", 'Lazy [C]lean')
+keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
+keymap('n', "<leader>pi", '<cmd>Lazy install<cr>', 'Lazy [I]nstall')
+keymap('n', "<leader>pu", "<cmd>Lazy update<cr>", 'Lazy [U]update')
+keymap('n', "<leader>pc", "<cmd>Lazy clean<cr>", 'Lazy [C]lean')
 
 -- NOTE: Git
 keymap('n', '<leader>gs', require('telescope.builtin').git_status, '[G]it [S]tatus')
 keymap('n', '<leader>gr', require('telescope.builtin').git_branches, '[G]it b[R]anches')
-keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', '[G]itsigns [B]lame line')
-keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', '[G]itsigns [D]iff this')
+keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<cr>', '[G]itsigns [B]lame line')
+keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<cr>', '[G]itsigns [D]iff this')
 keymap('n', '<leader>gl', function()
     utils.launchCmdInFloatWin(
         "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
@@ -56,29 +57,29 @@ end, '[C]md [I]nput')
 keymap('n', '<leader>ze', ':messages<cr>', 'Messages')
 keymap('n', '<leader>zf', ':lua print(vim.api.nvim_buf_get_name(0))<cr>', 'Full path')
 keymap('n', '<leader>zi', '<C-w>|', 'Maximize')
-keymap('n', '<leader>zn', ':nohlsearch<CR>', '[N]o highlights')
+keymap('n', '<leader>zn', ':nohlsearch<cr>', '[N]o highlights')
 keymap('n', '<leader>zo', '<C-w>=', 'Equilify')
 keymap('n', '<leader>zp', ':lua print(unpack(vim.api.nvim_win_get_cursor(0)))<cr>', 'Cursor [P]osition')
-keymap('v', '<leader>zs', [[:'<,'>!awk '{s+=$1} END {print s}'<CR>]], 'Visual [S]um')
-keymap('v', '<leader>zm', [[:'<,'>!awk '{s*=$1} END {print s}'<CR>]], 'Visual [M]ultiplication')
+keymap('v', '<leader>zs', [[:'<,'>!awk '{s+=$1} END {print s}'<cr>]], 'Visual [S]um')
+keymap('v', '<leader>zm', [[:'<,'>!awk '{s*=$1} END {print s}'<cr>]], 'Visual [M]ultiplication')
 
-keymap('n', '<leader>v', '<cmd>vsplit<CR>', '[V]split')
-keymap('n', '<leader>h', '<cmd>split<CR>', 'Split')
+keymap('n', '<leader>v', '<cmd>vsplit<cr>', '[V]split')
+keymap('n', '<leader>h', '<cmd>split<cr>', 'Split')
 
 keymap('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)', 'Comments')
 keymap('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)', 'Comments')
 
-keymap('n', '<C-Up>', ':resize +2<CR>')
-keymap('n', '<C-Down>', ':resize -2<CR>')
-keymap('n', '<C-Left>', ':vertical resize +2<CR>')
+keymap('n', '<C-Up>', ':resize +2<cr>')
+keymap('n', '<C-Down>', ':resize -2<cr>')
+keymap('n', '<C-Left>', ':vertical resize +2<cr>')
 keymap('n', '<C-Right>', ':vertical resize -2<CR>')
 
 keymap('v', '<', '<gv')
 keymap('v', '>', '>gv')
-keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
-keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
-keymap('v', '<A-j>', ":m '>+1<CR>gv-gv")
-keymap('v', '<A-k>', ":m '<-2<CR>gv-gv")
+keymap('i', '<A-j>', '<Esc>:m .+1<cr>==gi')
+keymap('i', '<A-k>', '<Esc>:m .-2<cr>==gi')
+keymap('v', '<A-j>', ":m '>+1<cr>gv-gv")
+keymap('v', '<A-k>', ":m '<-2<cr>gv-gv")
 keymap('v', 'p', '"_dP')
 keymap('x', '<leader>p', [["_dP]])
 keymap('n', '<C-d>', '<C-d>zz')
@@ -99,6 +100,6 @@ M.show_documentation = function()
         vim.lsp.buf.hover()
     end
 end
-keymap('n', 'K', ":lua require('raBeta.configs.keymaps').show_documentation()<CR>")
+keymap('n', 'K', ":lua require('raBeta.configs.keymaps').show_documentation()<cr>")
 
 return M

@@ -24,13 +24,13 @@ M.createFloatingWin = function(opts)
 
     ---@diagnostic disable-next-line: param-type-mismatch
     local win = vim.api.nvim_open_win(buf, true, {
-        style = "minimal",
+        style = opts.style or "minimal",
         relative = "editor",
         width = width,
         height = height,
         row = row,
         col = col,
-        border = 'rounded'
+        border = opts.border or 'rounded'
     })
     return { buf = buf, win = win }
 end
@@ -44,7 +44,7 @@ M.launchCmdInFloatWin = function(cmd, opts)
     opts = opts or {}
 
     -- Create window to open term
-    local win = require('raBeta.utils.utils').createFloatingWin(opts)
+    local win = require('raBeta.utils.utils').createFloatingWin(opts.win or opts)
 
     -- Change to the window that is floating to ensure termopen uses correct size
     vim.api.nvim_set_current_win(win.win)

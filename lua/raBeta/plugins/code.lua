@@ -28,10 +28,18 @@ return {
             }
         },
         keys = {
-            { "<leader>on", function() Snacks.notifier.show_history() end, desc = "Notification History" },
-            { "<leader>oN", function() Snacks.notifier.hide() end,         desc = "Dismiss All Notifications" },
-            { "<leader>zb", function() Snacks.bufdelete() end,             desc = "Delete Buffer" },
-            { "<leader>oR", function() Snacks.rename.rename_file() end,    desc = "Rename File" },
+            { "<leader>on", function() Snacks.notifier.show_history() end, desc = "[N]otification History" },
+            { "<leader>oN", function() Snacks.notifier.hide() end,         desc = "Dismiss All [N]otifications" },
+            { "<leader>zb", function() Snacks.bufdelete() end,             desc = "Delete [B]uffer" },
+            {
+                "<leader>zv",
+                function()
+                    Snacks.bufdelete()
+                    vim.cmd('q')
+                end,
+                desc = "Bufdelete and quit"
+            },
+            { "<leader>oR", function() Snacks.rename.rename_file() end, desc = "[R]ename File" },
         },
         init = function()
             vim.api.nvim_create_autocmd("User", {
