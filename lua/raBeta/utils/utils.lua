@@ -4,7 +4,7 @@ M = {}
 ---@param opts? {[any]?:integer}
 ---@return [any]
 ---
-M.createFloatingWin = function(opts)
+M.create_floting_win = function(opts)
     opts = opts or {}
 
     -- Create an immutable scratch buffer that is wiped once hidden
@@ -40,11 +40,11 @@ end
 ---@param opts? {win?:integer}
 ---@return nil
 ---
-M.launchCmdInFloatWin = function(cmd, opts)
+M.launch_cmd_in_floating_win = function(cmd, opts)
     opts = opts or {}
 
     -- Create window to open term
-    local win = require('raBeta.utils.utils').createFloatingWin(opts.win or opts)
+    local win = require('raBeta.utils.utils').create_floting_win(opts.win or opts)
 
     -- Change to the window that is floating to ensure termopen uses correct size
     vim.api.nvim_set_current_win(win.win)
@@ -78,6 +78,19 @@ M.keymap = function(mode, keys, func, desc)
     end
 
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
+end
+
+---Formats visual selection only
+---@return nil
+---
+M.visual_format = function()
+    vim.lsp.buf.format({
+        async = true,
+        range = {
+            ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+            ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+        }
+    })
 end
 
 return M

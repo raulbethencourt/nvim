@@ -8,7 +8,7 @@ local state = {
 
 local toggleTerminal = function()
     if not vim.api.nvim_win_is_valid(state.floating.win) then
-        state.floating = utils.createFloatingWin { buf = state.floating.buf }
+        state.floating = utils.create_floting_win { buf = state.floating.buf }
         if vim.bo[state.floating.buf].buftype ~= "terminal" then
             vim.cmd.term()
         end

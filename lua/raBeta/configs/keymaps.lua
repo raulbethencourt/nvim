@@ -35,7 +35,7 @@ keymap('n', '<leader>gr', require('telescope.builtin').git_branches, '[G]it b[R]
 keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<cr>', '[G]itsigns [B]lame line')
 keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<cr>', '[G]itsigns [D]iff this')
 keymap('n', '<leader>gl', function()
-    utils.launchCmdInFloatWin(
+    utils.launch_cmd_in_floating_win(
         "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
         { close_term = false }
     )
@@ -43,14 +43,14 @@ end, '[G]it [L]ogs')
 
 -- NOTE: Terminal & external commandes
 keymap('n', '<leader>cp', function()
-    utils.launchCmdInFloatWin(
+    utils.launch_cmd_in_floating_win(
         'lynx $(find "$HOME/Documents/manuals/php-chunked-xhtml/" | fzf --height=100 --bind=tab:up --bind=btab:down --bind=ctrl-g:first)',
         { close_term = true }
     )
 end, '[C]md [P]hp manual')
 keymap('n', '<leader>ci', function()
     local cmd = vim.fn.input("Write your cmd : ")
-    utils.launchCmdInFloatWin(cmd, { close_term = false })
+    utils.launch_cmd_in_floating_win(cmd, { close_term = false })
 end, '[C]md [I]nput')
 
 -- NOTE: Gnereral

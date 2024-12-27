@@ -5,6 +5,7 @@ require 'raBeta.configs.lsp.languages.lua'
 -- NOTE: stop saving lsp logs, change to 'debug' to see them
 vim.lsp.set_log_level 'off'
 local on_attach = function(_, bufnr)
+    -- TODO: refactor this code
     local keymap = function(keys, func, desc)
         if desc then
             desc = 'LSP: ' .. desc
@@ -24,6 +25,8 @@ local on_attach = function(_, bufnr)
     keymap('<leader>lf', function()
         vim.lsp.buf.format { async = true }
     end, '[L]sp [F]ormat')
+    vim.keymap.set('v', '<leader>lf', require("raBeta.utils.utils").visual_format,
+        { buffer = bufnr, desc = "Visual [F]ormat" })
 
     keymap('<leader>lD', '<cmd>Telescope diagnostics<CR>', '[L]sp Telescope Workspace [D]iagnostics')
 
