@@ -7,10 +7,8 @@ return {
         lazy = false,
         ---@type snacks.Config
         opts = {
-            bigfile = { enabled = false },
-            dashboard = {
-                enabled = false,
-            },
+            bigfile = { enabled = true },
+            dashboard = { enabled = false },
             notifier = {
                 enabled = true,
                 timeout = 5000,
