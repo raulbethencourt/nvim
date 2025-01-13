@@ -2,6 +2,46 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
+        "vhyrro/luarocks.nvim",
+        priority = 1001,
+        opts = {
+            rocks = { "magick" },
+        },
+    },
+    {
+        "3rd/image.nvim",
+        dependencies = {
+            "luarocks.nvim",
+            {
+                "HakonHarnes/img-clip.nvim",
+                event = "VeryLazy",
+                opts = {},
+                keys = {
+                    { "<leader>xi", "<cmd>PasteImage<cr>", desc = "Paste [I]mage from system clipboard" },
+                },
+            }
+        },
+        opts = {
+            backend = "ueberzug",
+            processor = "magick_rock", -- or "magick_cli"
+            integrations = {
+                markdown = {
+                    enabled = true,
+                    download_remote_images = true,
+                    only_render_image_at_cursor = true,
+                },
+                neorg = { enabled = false },
+                typst = { enabled = false }
+            },
+        }
+    },
+    {
+        "lukas-reineke/headlines.nvim",
+        dependencies = "nvim-treesitter/nvim-treesitter",
+        config = true
+    },
+    { 'bullets-vim/bullets.vim' },
+    {
         "epwalsh/obsidian.nvim",
         version = "*", -- recommended, use latest release instead of latest commit
         lazy = true,
