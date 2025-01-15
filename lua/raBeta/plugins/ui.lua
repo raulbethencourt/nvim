@@ -38,6 +38,24 @@ return {
         opts = {},
         dependencies = {
             { 'MunifTanjim/nui.nvim', lazy = true },
+            {
+                'rcarriga/nvim-notify',
+                keys = {
+                    {
+                        '<leader>un',
+                        function()
+                            require('notify').dismiss { silent = true, pending = true }
+                        end,
+                        desc = 'Dismiss all Notifications',
+                    },
+                },
+                opts = {
+                    timeout = 3500,
+                    background_colour = '#000000',
+                    render = 'wrapped-compact',
+                    stages = "fade",
+                },
+            },
         },
         config = function()
             require('noice').setup {
