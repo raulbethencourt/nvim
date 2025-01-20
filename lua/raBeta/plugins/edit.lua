@@ -2,40 +2,17 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
-        "vhyrro/luarocks.nvim",
-        priority = 1001,
-        opts = {
-            rocks = { "magick" },
-        },
-    },
-    {
-        "3rd/image.nvim",
-        dependencies = {
-            "luarocks.nvim",
-            {
-                "HakonHarnes/img-clip.nvim",
-                event = "VeryLazy",
-                opts = {},
-                keys = {
-                    { "<leader>xi", "<cmd>PasteImage<cr>", desc = "Paste [I]mage from system clipboard" },
-                },
-            }
-        },
-        opts = {
-            backend = "ueberzug",
-            processor = "magick_rock", -- or "magick_cli"
-            integrations = {
-                markdown = {
-                    enabled = true,
-                    download_remote_images = true,
-                    only_render_image_at_cursor = true,
-                    floating_windows = true
-                },
-                neorg = { enabled = false },
-                typst = { enabled = false },
-            },
-            tmux_show_only_in_active_window = true
-        }
+        'echasnovski/mini.nvim',
+        version = false,
+        config = function()
+            require('mini.ai').setup()
+            require('mini.comment').setup()
+            require('mini.operators').setup()
+            require('mini.surround').setup()
+            require('mini.splitjoin').setup()
+            require('mini.files').setup()
+            require('mini.notify').setup()
+        end,
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
@@ -47,7 +24,6 @@ return {
             keymap('n', '<leader>r', '<cmd>RenderMarkdown toggle<CR>', '[R]ender markdown toggle')
         end,
     },
-    { 'bullets-vim/bullets.vim' },
     {
         "epwalsh/obsidian.nvim",
         version = "*", -- recommended, use latest release instead of latest commit
@@ -76,20 +52,6 @@ return {
             keymap('n', '<leader>oo', '<cmd>ObsidianOpen<CR>', '[O]bsidian [O]pen')
             keymap('n', '<leader>oe', '<cmd>ObsidianTemplate<CR>', '[O]bsidian t[E]mplate')
         end
-    },
-    {
-        'folke/todo-comments.nvim',
-        event = 'BufRead',
-        otps = {},
-    },
-    {
-        'kylechui/nvim-surround',
-        config = true,
-    },
-    {
-        'numToStr/Comment.nvim',
-        opts = true,
-        lazy = false,
     },
     {
         'max397574/better-escape.nvim',

@@ -23,6 +23,8 @@ keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
 keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
 
+keymap('n', '<space>e', ':lua MiniFiles.open()<cr>', '[E]xplorer')
+
 -- NOTE: Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
 keymap('n', "<leader>pi", '<cmd>Lazy install<cr>', 'Lazy [I]nstall')

@@ -1,5 +1,3 @@
-local keymap = require('raBeta.utils.utils').keymap
-
 return {
     {
         'kosayoda/nvim-lightbulb',
@@ -39,25 +37,50 @@ return {
                 },
             },
             'WhoIsSethDaniel/mason-tool-installer.nvim',
-            { 'j-hui/fidget.nvim' },
         },
     },
     {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-            'rafamadriz/friendly-snippets',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-path',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
-            'hrsh7th/cmp-vsnip',
+        'saghen/blink.cmp',
+        dependencies = 'rafamadriz/friendly-snippets',
+        version = '*',
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.Config
+        opts = {
+            keymap = {
+                preset = 'default',
+                ['<S-tab>'] = { 'select_prev', 'fallback' },
+                ['<tab>'] = { 'select_next', 'fallback' },
+            },
+            appearance = {
+                use_nvim_cmp_as_default = true,
+                nerd_font_variant = 'mono'
+            },
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+            completion = {
+                menu = {
+                    border = 'rounded',
+                    draw = {
+                        treesitter = { 'lsp' },
+                        columns = {
+                            {
+                                "label",
+                                "label_description",
+                                gap = 1
+                            },
+                            {
+                                "kind_icon",
+                                "kind"
+                            }
+                        }
+                    }
+                },
+                documentation = { window = { border = 'rounded' } },
+            },
+            signature = { window = { border = 'rounded' } },
         },
-        config = function()
-            require 'raBeta.configs.lsp.cmp'
-        end,
+        opts_extend = { "sources.default" }
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -69,26 +92,6 @@ return {
         build = ':TSUpdate',
         config = function()
             require 'raBeta.configs.treesitter'
-        end,
-    },
-    {
-        'saecki/crates.nvim',
-        event = { 'BufRead Cargo.toml' },
-        opts = {
-            src = {
-                cmp = { enabled = true },
-            },
-        },
-        config = function()
-            require('crates').setup {
-                null_ls = {
-                    enabled = true,
-                    name = 'crates.nvim',
-                },
-                popup = {
-                    border = 'rounded',
-                },
-            }
         end,
     },
     {

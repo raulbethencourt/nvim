@@ -2,62 +2,6 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
-        'stevearc/oil.nvim',
-        opts = {},
-        -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require('oil').setup {
-                skip_confirm_for_simple_edits = true,
-                keymaps = {
-                    ['<C-h>'] = false,
-                    ['<C-l>'] = false,
-                    ['<C-d>'] = "actions.preview_scroll_down",
-                    ['<C-u>'] = "actions.preview_scroll_up",
-                    ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-                    ["<esc>"] = "actions.close",
-                },
-                view_options = {
-                    show_hidden = true,
-                },
-                float = {
-                    padding = 5,
-                    max_width = 0,
-                    max_height = 0,
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
-                preview_win = {
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
-                progress = {
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
-            }
-            keymap('n', '<leader>e', require('oil').toggle_float,
-                '[O]il [T]oggle float')
-        end,
-    },
-    {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup {
-                preview_config = {
-                    border = 'rounded',
-                    style = 'minimal',
-                    relative = 'cursor',
-                    row = 1,
-                    col = 1,
-                }
-            }
-        end,
-    },
-    {
         'ThePrimeagen/harpoon',
         branch = 'harpoon2',
         dependencies = { 'nvim-lua/plenary.nvim' },
@@ -147,58 +91,5 @@ return {
         config = function()
             require 'raBeta.configs.telescope'
         end,
-    },
-    {
-        'folke/flash.nvim',
-        event = 'VeryLazy',
-        opts = {
-            modes = {
-                search = {
-                    enabled = true,
-                }
-            }
-        },
-        keys = {
-            {
-                's',
-                mode = { 'n', 'x', 'o' },
-                function()
-                    require('flash').jump()
-                end,
-                desc = 'Flash',
-            },
-            {
-                'S',
-                mode = { 'n', 'o', 'x' },
-                function()
-                    require('flash').treesitter()
-                end,
-                desc = 'Flash Treesitter',
-            },
-            {
-                'r',
-                mode = 'o',
-                function()
-                    require('flash').remote()
-                end,
-                desc = 'Remote Flash',
-            },
-            {
-                'R',
-                mode = { 'o', 'x' },
-                function()
-                    require('flash').treesitter_search()
-                end,
-                desc = 'Treesitter Search',
-            },
-            {
-                '<c-s>',
-                mode = { 'c' },
-                function()
-                    require('flash').toggle()
-                end,
-                desc = 'Toggle Flash Search',
-            },
-        },
     },
 }
