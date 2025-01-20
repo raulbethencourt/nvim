@@ -149,6 +149,11 @@ require('telescope').setup {
         },
     },
     extensions = {
+        menufacture = {
+            mappings = {
+                main_menu = { [{ 'i', 'n' }] = '<C-a>' },
+            },
+        },
         live_grep_args = {
             auto_quoting = true,
             layout_strategy = 'horizontal_no_titles',

@@ -23,7 +23,7 @@ return {
         },
         opts = {
             backend = "ueberzug",
-            processor = "magick_rock", -- or "magick_cli"
+            processor = "magick_rock",
             integrations = {
                 markdown = {
                     enabled = true,
@@ -47,7 +47,6 @@ return {
             keymap('n', '<leader>r', '<cmd>RenderMarkdown toggle<CR>', '[R]ender markdown toggle')
         end,
     },
-    { 'bullets-vim/bullets.vim' },
     {
         "epwalsh/obsidian.nvim",
         version = "*", -- recommended, use latest release instead of latest commit

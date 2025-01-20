@@ -22,6 +22,21 @@ end, 'Toggle Hidde Statusline')
 keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
 keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
+keymap('n', '<leader>ts', function()
+    if vim.o.spell == true then
+        vim.o.spell = false
+    else
+        vim.o.spell = true
+    end
+end, 'toggle [S]pell')
+keymap('n', '<leader>zb', ':bp<bar>sp<bar>bn<bar>bd!<cr>', '[B]uffer delete')
+keymap('n', '<leader>zv', function()
+    vim.cmd([[bp
+    sp
+    bn
+    bd!
+    q]])
+end, '[B]uffer delete')
 
 -- NOTE: Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
