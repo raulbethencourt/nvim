@@ -21,22 +21,19 @@ return {
             require('mini.splitjoin').setup()
             require('mini.notify').setup({
                 window = {
-                    config = {
-                        style = 'minimal',
-                        border = 'rounded'
-                    },
+                    config = { style = 'minimal', border = 'rounded' },
                 }
             })
         end,
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
+        dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
         config = function()
             require('obsidian').get_client().opts.ui.enable = false
             vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_get_namespaces()['ObsidianUI'], 0, -1)
             require('render-markdown').setup({})
-            keymap('n', '<leader>r', '<cmd>RenderMarkdown toggle<CR>', '[R]ender markdown toggle')
+            keymap('n', '<leader>tr', '<cmd>RenderMarkdown toggle<CR>', '[T]oggle [R]ender markdown')
         end,
     },
     {
