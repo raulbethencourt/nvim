@@ -49,12 +49,6 @@ keymap('n', '<leader>gs', require('telescope.builtin').git_status, '[G]it [S]tat
 keymap('n', '<leader>gr', require('telescope.builtin').git_branches, '[G]it b[R]anches')
 keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<cr>', '[G]itsigns [B]lame line')
 keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<cr>', '[G]itsigns [D]iff this')
-keymap('n', '<leader>gl', function()
-    utils.launch_cmd_in_floating_win(
-        "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short",
-        { close_term = false }
-    )
-end, '[G]it [L]ogs')
 
 -- NOTE: Terminal & external commandes
 keymap('n', '<leader>cp', function()
