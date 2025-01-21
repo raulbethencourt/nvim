@@ -22,8 +22,22 @@ end, 'Toggle Hidde Statusline')
 keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
 keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
+keymap('n', '<leader>ts', function()
+    vim.o.spell = not vim.o.spell
+end, 'toggle [S]pell')
+keymap('n', '<leader>tr', function()
+    vim.o.relativenumber = not vim.o.relativenumber
+end, 'toggle [R]elativenumber')
 
-keymap('n', '<space>e', ':lua MiniFiles.open()<cr>', '[E]xplorer')
+
+keymap('n', '<leader>zb', ':bp<bar>sp<bar>bn<bar>bd!<cr>', '[B]uffer delete')
+keymap('n', '<leader>zv', function()
+    vim.cmd([[bp
+    sp
+    bn
+    bd!
+    q]])
+end, '[B]uffer delete')
 
 -- NOTE: Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
@@ -67,9 +81,6 @@ keymap('v', '<leader>zm', [[:'<,'>!awk '{s*=$1} END {print s}'<cr>]], 'Visual [M
 
 keymap('n', '<leader>v', '<cmd>vsplit<cr>', '[V]split')
 keymap('n', '<leader>h', '<cmd>split<cr>', 'Split')
-
-keymap('v', '<leader>/', '<Plug>(comment_toggle_linewise_visual)', 'Comments')
-keymap('n', '<leader>/', '<Plug>(comment_toggle_linewise_current)', 'Comments')
 
 keymap('n', '<C-Up>', ':resize +2<cr>')
 keymap('n', '<C-Down>', ':resize -2<cr>')

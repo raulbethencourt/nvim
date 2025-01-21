@@ -6,12 +6,27 @@ return {
         version = false,
         config = function()
             require('mini.ai').setup()
-            require('mini.comment').setup()
+            require('mini.move').setup()
+            require('mini.comment').setup({
+                mappings = {
+                    comment = '<space>/',
+                    comment_line = '<space>//',
+                    comment_visual = '<space>/',
+                    textobject = '<space>/',
+                },
+
+            })
             require('mini.operators').setup()
             require('mini.surround').setup()
             require('mini.splitjoin').setup()
-            require('mini.files').setup()
-            require('mini.notify').setup()
+            require('mini.notify').setup({
+                window = {
+                    config = {
+                        style = 'minimal',
+                        border = 'rounded'
+                    },
+                }
+            })
         end,
     },
     {

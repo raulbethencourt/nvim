@@ -179,7 +179,6 @@ require('telescope').load_extension 'menufacture'
 keymap('n', '<leader><space>', require('telescope.builtin').buffers, 'Buffers')
 keymap('n', '<C-s>', require('telescope.builtin').spell_suggest, '[S]pell [S]uggest')
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", '[S]earch command hist[O]ry')
-keymap('n', '<leader>sn', "<cmd>Telescope notify<cr>", '[S]earch [N]otify')
 keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     '[S]earch [L]ive Grep Args')
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", '[S]earch command hist[O]ry')

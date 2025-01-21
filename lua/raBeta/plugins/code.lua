@@ -2,6 +2,48 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
+        'stevearc/oil.nvim',
+        opts = {},
+        -- Optional dependencies
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        config = function()
+            require('oil').setup {
+                skip_confirm_for_simple_edits = true,
+                keymaps = {
+                    ['<C-h>'] = false,
+                    ['<C-l>'] = false,
+                    ['<C-d>'] = "actions.preview_scroll_down",
+                    ['<C-u>'] = "actions.preview_scroll_up",
+                    ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+                    ["<esc>"] = "actions.close",
+                },
+                view_options = {
+                    show_hidden = true,
+                },
+                float = {
+                    padding = 5,
+                    max_width = 0,
+                    max_height = 0,
+                    win_options = {
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                    },
+                },
+                preview_win = {
+                    win_options = {
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                    },
+                },
+                progress = {
+                    win_options = {
+                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                    },
+                },
+            }
+            keymap('n', '<leader>e', require('oil').toggle_float,
+                '[O]il [T]oggle float')
+        end,
+    },
+    {
         'ThePrimeagen/harpoon',
         branch = 'harpoon2',
         dependencies = { 'nvim-lua/plenary.nvim' },
