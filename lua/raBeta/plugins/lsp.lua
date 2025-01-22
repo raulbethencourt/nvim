@@ -50,6 +50,8 @@ return {
                 preset = 'default',
                 ['<S-tab>'] = { 'select_prev', 'fallback' },
                 ['<tab>'] = { 'select_next', 'fallback' },
+                ['<C-c>'] = { 'cancel', 'fallback' },
+                ['<C-i>'] = { 'select_and_accept', 'fallback' },
             },
             appearance = {
                 use_nvim_cmp_as_default = true,
