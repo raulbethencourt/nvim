@@ -62,10 +62,17 @@ keymap('v', '<leader>zm', [[:'<,'>!awk '{s*=$1} END {print s}'<cr>]], 'Visual [M
 keymap('n', '<leader>v', '<cmd>vsplit<cr>', '[V]split')
 keymap('n', '<leader>h', '<cmd>split<cr>', 'Split')
 
+-- resize windows
 keymap('n', '<C-Up>', ':resize +2<cr>')
 keymap('n', '<C-Down>', ':resize -2<cr>')
 keymap('n', '<C-Left>', ':vertical resize +2<cr>')
 keymap('n', '<C-Right>', ':vertical resize -2<CR>')
+
+-- move text up & down
+keymap('i', '<A-j>', '<Esc>:m .+1<cr>==gi')
+keymap('i', '<A-k>', '<Esc>:m .-2<cr>==gi')
+keymap('v', '<A-j>', ":m '>+1<cr>gv-gv")
+keymap('v', '<A-k>', ":m '<-2<cr>gv-gv")
 
 keymap('v', '<', '<gv')
 keymap('v', '>', '>gv')

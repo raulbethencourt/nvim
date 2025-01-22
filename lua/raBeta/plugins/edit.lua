@@ -6,6 +6,8 @@ return {
         version = false,
         config = function()
             require('mini.ai').setup()
+            require('mini.operators').setup()
+            require('mini.surround').setup()
             require('mini.comment').setup({
                 mappings = {
                     comment = '<space>/',
@@ -15,17 +17,7 @@ return {
                 },
 
             })
-            -- require('mini.jump').setup()
-            -- require('mini.jump2d').setup()
-            require('mini.move').setup()
-            require('mini.operators').setup()
-            require('mini.surround').setup()
             require('mini.splitjoin').setup()
-            require('mini.notify').setup({
-                window = {
-                    config = { style = 'minimal', border = 'rounded' },
-                }
-            })
         end,
     },
     {

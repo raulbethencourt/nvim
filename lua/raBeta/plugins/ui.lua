@@ -1,5 +1,9 @@
 return {
     {
+        "j-hui/fidget.nvim",
+        opts = {},
+    },
+    {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
