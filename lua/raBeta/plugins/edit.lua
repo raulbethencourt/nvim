@@ -6,7 +6,6 @@ return {
         version = false,
         config = function()
             require('mini.ai').setup()
-            require('mini.move').setup()
             require('mini.comment').setup({
                 mappings = {
                     comment = '<space>/',
@@ -16,6 +15,9 @@ return {
                 },
 
             })
+            -- require('mini.jump').setup()
+            -- require('mini.jump2d').setup()
+            require('mini.move').setup()
             require('mini.operators').setup()
             require('mini.surround').setup()
             require('mini.splitjoin').setup()
@@ -54,11 +56,20 @@ return {
                         path = "~/vaults",
                     },
                 },
+                ---@diagnostic disable-next-line: missing-fields
+                mappings = {
+                    ["<space>os"] = {
+                        action = function()
+                            return require("obsidian").util.smart_action()
+                        end,
+                        opts = { buffer = true, expr = true, desc = "[O]bsidian [S]mart action" },
+                    }
+                }
             })
             keymap('n', '<leader>oh', '<cmd>ObsidianToggleCheckbox<CR>', '[O]bsidian toggle c[H]eckbox')
-            keymap('n', '<leader>os', '<cmd>ObsidianQuickSwitch<CR>', '[O]bsidian quick [S]witch')
             keymap('n', '<leader>ob', '<cmd>ObsidianBacklinks<CR>', '[O]bsidian [B]ack links')
             keymap('n', '<leader>ot', '<cmd>ObsidianTags<CR>', '[O]bsidian [T]ags')
+            keymap('n', '<leader>od', '<cmd>ObsidianToday<CR>', '[O]bsidian to[D]ay')
             keymap('n', '<leader>oi', '<cmd>ObsidianPasteImg<CR>', '[O]bsidian paste [I]mage')
             keymap('n', '<leader>ow', '<cmd>ObsidianWorkspace<CR>', '[O]bsidian [W]orkspace')
             keymap('n', '<leader>oo', '<cmd>ObsidianOpen<CR>', '[O]bsidian [O]pen')

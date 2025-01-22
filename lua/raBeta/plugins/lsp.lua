@@ -67,6 +67,7 @@ return {
             },
             completion = {
                 menu = {
+                    auto_show = true,
                     border = 'rounded',
                     draw = {
                         treesitter = { 'lsp' },
@@ -83,7 +84,10 @@ return {
                         }
                     }
                 },
-                documentation = { window = { border = 'rounded' } },
+                documentation = {
+                    auto_show = true,
+                    window = { border = 'rounded' }
+                },
             },
             signature = { window = { border = 'rounded' } },
         },
