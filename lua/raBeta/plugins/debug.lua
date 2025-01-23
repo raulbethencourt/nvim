@@ -8,7 +8,7 @@ return {
         'theHamsta/nvim-dap-virtual-text',
         'jay-babu/mason-nvim-dap.nvim',
         "nvim-neotest/nvim-nio",
-        'jbyuki/one-small-step-for-vimkind'
+        -- 'jbyuki/one-small-step-for-vimkind'
     },
     config = function()
         local dap = require 'dap'

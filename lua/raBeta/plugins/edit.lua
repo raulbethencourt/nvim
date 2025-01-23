@@ -6,8 +6,6 @@ return {
         version = false,
         config = function()
             require('mini.ai').setup()
-            require('mini.operators').setup()
-            require('mini.surround').setup()
             require('mini.comment').setup({
                 mappings = {
                     comment = '<space>/',
@@ -17,7 +15,9 @@ return {
                 },
 
             })
+            require('mini.operators').setup()
             require('mini.splitjoin').setup()
+            require('mini.surround').setup()
         end,
     },
     {
@@ -26,8 +26,10 @@ return {
         config = function()
             require('obsidian').get_client().opts.ui.enable = false
             vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_get_namespaces()['ObsidianUI'], 0, -1)
-            require('render-markdown').setup({})
-            keymap('n', '<leader>tr', '<cmd>RenderMarkdown toggle<CR>', '[T]oggle [R]ender markdown')
+            require('render-markdown').setup({
+                enabled = false,
+            })
+            keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle render []arkdown')
         end,
     },
     {

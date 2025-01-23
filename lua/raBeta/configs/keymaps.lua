@@ -30,6 +30,9 @@ end, 'toggle [R]elativenumber')
 keymap('n', '<leader>tl', function()
     vim.o.ls = vim.o.ls == 0 and 2 or 0
 end, 'toggle status[L]ine')
+keymap('n', '<leader>tc', function()
+    vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
+end, 'toggle [C]ommand height')
 
 -- Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
