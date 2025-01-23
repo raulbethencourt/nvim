@@ -15,7 +15,16 @@ return {
                 },
 
             })
-            require('mini.operators').setup()
+            require('mini.operators').setup({
+                exchange = {
+                    prefix = 'ge',
+                    reindent_linewise = true,
+                },
+                replace = {
+                    prefix = 'gp',
+                    reindent_linewise = true,
+                },
+            })
             require('mini.splitjoin').setup()
             require('mini.surround').setup()
         end,
