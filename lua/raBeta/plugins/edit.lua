@@ -38,7 +38,7 @@ return {
             require('render-markdown').setup({
                 enabled = false,
             })
-            keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle render []arkdown')
+            keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle render [M]arkdown')
         end,
     },
     {
