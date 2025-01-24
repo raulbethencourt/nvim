@@ -37,62 +37,34 @@ return {
                 },
             },
             'WhoIsSethDaniel/mason-tool-installer.nvim',
+            { 'j-hui/fidget.nvim' },
         },
     },
     {
-        'saghen/blink.cmp',
-        dependencies = 'rafamadriz/friendly-snippets',
-        version = '*',
-        ---@module 'blink.cmp'
-        ---@type blink.cmp.Config
-        opts = {
-            keymap = {
-                preset = 'default',
-                ['<S-tab>'] = { 'select_prev', 'fallback' },
-                ['<tab>'] = { 'select_next', 'fallback' },
-                ['<C-c>'] = { 'cancel', 'fallback' },
-            },
-            appearance = {
-                use_nvim_cmp_as_default = true,
-                nerd_font_variant = 'mono'
-            },
-            sources = {
-                default = { 'lsp', 'path', 'snippets', 'buffer', 'markdown' },
-                providers = {
-                    markdown = {
-                        name = 'RenderMarkdown',
-                        module = 'render-markdown.integ.blink',
-                        fallbacks = { 'lsp' },
-                    },
-                }
-            },
-            completion = {
-                menu = {
-                    auto_show = true,
-                    border = 'rounded',
-                    draw = {
-                        treesitter = { 'lsp' },
-                        columns = {
-                            {
-                                "label",
-                                "label_description",
-                                gap = 1
-                            },
-                            {
-                                "kind_icon",
-                                "kind"
-                            }
-                        }
-                    }
-                },
-                documentation = {
-                    auto_show = true,
-                    window = { border = 'rounded' }
-                },
-            },
-            signature = { window = { border = 'rounded' } },
+        'ray-x/lsp_signature.nvim',
+        event = 'BufRead',
+        config = function()
+            require('lsp_signature').setup()
+        end,
+    },
+    {
+        'hrsh7th/nvim-cmp',
+        dependencies = {
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua',
+            'rafamadriz/friendly-snippets',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-nvim-lsp-signature-help',
+            'hrsh7th/cmp-vsnip',
+            'onsails/lspkind.nvim',
         },
-        opts_extend = { "sources.default" }
+        config = function()
+            require('raBeta.configs.lsp.cmp')
+        end,
     },
     {
         'nvim-treesitter/nvim-treesitter',
@@ -104,13 +76,6 @@ return {
         build = ':TSUpdate',
         config = function()
             require 'raBeta.configs.treesitter'
-        end,
-    },
-    {
-        'ray-x/lsp_signature.nvim',
-        event = 'BufRead',
-        config = function()
-            require('lsp_signature').setup()
         end,
     },
 }

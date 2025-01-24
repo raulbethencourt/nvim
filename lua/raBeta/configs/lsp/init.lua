@@ -197,8 +197,7 @@ vim.diagnostic.config {
 }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('blink.cmp').get_lsp_capabilities(capabilities)
-
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
 local function rust_opts(name)
