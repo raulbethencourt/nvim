@@ -60,6 +60,10 @@ return {
                     },
                 },
                 ---@diagnostic disable-next-line: missing-fields
+                attachments = {
+                    img_folder = "assets",
+                },
+                ---@diagnostic disable-next-line: missing-fields
                 mappings = {
                     ["<space>os"] = {
                         action = function()
