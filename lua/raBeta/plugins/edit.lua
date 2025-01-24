@@ -61,7 +61,12 @@ return {
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 attachments = {
-                    img_folder = "assets",
+                    img_folder = "assets"
+                },
+                ---@diagnostic disable-next-line: missing-fields
+                daily_notes = {
+                    folder = "~/vaults/daily",
+                    template = "~/vaults/templates/daily_template.md"
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 mappings = {
