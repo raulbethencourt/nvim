@@ -65,8 +65,14 @@ return {
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 daily_notes = {
-                    folder = "~/vaults/daily",
-                    template = "~/vaults/templates/daily_template.md"
+                    folder = "daily",
+                    template = "daily_template"
+                },
+                ---@diagnostic disable-next-line: missing-fields
+                templates = {
+                    folder = "templates",
+                    -- A map for custom variables, the key should be the variable and the value a function
+                    substitutions = {},
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 mappings = {
