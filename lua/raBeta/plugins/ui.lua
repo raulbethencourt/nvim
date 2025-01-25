@@ -2,7 +2,19 @@ return {
     {
         "j-hui/fidget.nvim",
         opts = {
-            notification = { override_vim_notify = true }
+            notification = {
+                override_vim_notify = true,
+                view = { group_separator_hl = "Normal", },
+                window = {
+                    normal_hl = "Normal",
+                    border = "rounded",
+                    align = "top",
+                    relative = "editor",
+                    x_padding = 3,
+                    y_padding = 1,
+                },
+            },
+
         },
     },
     {
