@@ -201,24 +201,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
 
-local function rust_opts(name)
-    local plugin = require('lazy.core.config').plugins[name]
-    if not plugin then
-        return {}
-    end
-    local Plugin = require 'lazy.core.plugin'
-    return Plugin.values(plugin, 'opts', false)
-end
-
-mason_lspconfig.setup {
-    ensure_installed = vim.tbl_keys(servers),
-    rust_analyzer = function(_, opts)
-        local rust_tools_opts = rust_opts 'rust-tools.nvim'
-        require('rust-tools').setup(vim.tbl_deep_extend('force', rust_tools_opts or {}, { server = opts }))
-        return true
-    end,
-}
-
 mason_lspconfig.setup_handlers {
     function(server_name)
         require('lspconfig')[server_name].setup {
