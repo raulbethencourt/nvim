@@ -2,6 +2,28 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
+        'rest-nvim/rest.nvim',
+        config = function()
+            vim.g.rest_nvim = {}
+            keymap('n', '<leader>rr', "<cmd>Rest run<cr>", '[R]est [R]un')
+            keymap('n', '<leader>re', function()
+                require("telescope").extensions.rest.select_env()
+            end, '[R]est select [E]env')
+        end
+    },
+    {
+        "kndndrj/nvim-dbee",
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+        },
+        build = function()
+            require("dbee").install()
+        end,
+        config = function()
+            require("dbee").setup( --[[optional config]])
+        end,
+    },
+    {
         'stevearc/oil.nvim',
         opts = {},
         -- Optional dependencies
