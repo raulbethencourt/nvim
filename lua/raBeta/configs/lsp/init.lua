@@ -128,28 +128,41 @@ local servers = {
         },
     },
     -- htmx = { filetypes = { 'html', 'twig', 'php' } },
-    intelephense = {
-        cmd = { 'intelephense', '--stdio' },
-        filetypes = { 'php' },
+    phpactor = {
         init_options = {
-            licenceKey = get_intelephense_license(),
-            storagePath = '/home/rabeta/.intelephense',
-            clearCache = false,
-            files = {
-                maxSize = 5000000,
-            },
-            phpMemoryLimit = '4096M',
-        },
-        diagnostics = {
-            enable = true,
-        },
-        format = {
-            enable = false,
-        },
-        flags = {
-            debounce_text_changes = 150,
-        },
+            ["language_server.diagnostics_on_update"] = false,
+            ["language_server.diagnostics_on_open"] = false,
+            ["language_server.diagnostics_on_save"] = false,
+            ["language_server_phpstan.enabled"] = false,
+            ["language_server_psalm.enabled"] = false,
+            ["language_server_php_cs_fixer.enabled"] = false,
+            ["language_server_completion.trim_leading_dollar"] = true,
+            ["symfony.enabled"] = true,
+            ["completion_worse.completor.docblock.enabled"] = true,
+        }
     },
+    -- intelephense = {
+    --     cmd = { 'intelephense', '--stdio' },
+    --     filetypes = { 'php' },
+    --     init_options = {
+    --         licenceKey = get_intelephense_license(),
+    --         storagePath = '/home/rabeta/.intelephense',
+    --         clearCache = false,
+    --         files = {
+    --             maxSize = 5000000,
+    --         },
+    --         phpMemoryLimit = '4096M',
+    --     },
+    --     diagnostics = {
+    --         enable = true,
+    --     },
+    --     format = {
+    --         enable = false,
+    --     },
+    --     flags = {
+    --         debounce_text_changes = 150,
+    --     },
+    -- },
     zls = {
         format = {
             enable = true,
