@@ -77,7 +77,6 @@ end
 vim.filetype.add {
     extension = {
         zsh = 'zsh',
-        http = 'http',
     },
 }
 

@@ -112,7 +112,6 @@ cmp.setup {
         { name = 'path' },
         { name = 'buffer' },
         { name = 'render-markdown' },
-        { name = 'cmp-dbee' },
         {
             name = 'nvim_lua',
             keyword_length = 2,

@@ -15,7 +15,6 @@ require('nvim-treesitter.configs').setup {
         'vim',
         'php',
         'html',
-        'http',
         'css',
         'sql',
         'json',

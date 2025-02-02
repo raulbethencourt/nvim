@@ -61,14 +61,6 @@ return {
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-vsnip',
             'onsails/lspkind.nvim',
-            {
-                "MattiasMTS/cmp-dbee",
-                dependencies = {
-                    { "kndndrj/nvim-dbee" }
-                },
-                ft = "sql", -- optional but good to have
-                opts = {},  -- needed
-            },
         },
         config = function()
             require('raBeta.configs.lsp.cmp')

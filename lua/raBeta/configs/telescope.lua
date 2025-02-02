@@ -179,7 +179,6 @@ require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'live_grep_args'
 require('telescope').load_extension 'ui-select'
 require('telescope').load_extension 'menufacture'
-require("telescope").load_extension 'rest'
 
 -- NOTE: Keymaps
 keymap('n', '<leader><space>', require('telescope.builtin').buffers, 'Buffers')
