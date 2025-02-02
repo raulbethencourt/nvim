@@ -81,6 +81,10 @@ vim.filetype.add {
     },
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local mason_lspconfig = require 'mason-lspconfig'
+
 -- Get intelephense licence
 local get_intelephense_license = function()
     local f = assert(io.open(os.getenv 'HOME' .. '/intelephense/licence.txt', 'rb'))
@@ -129,6 +133,9 @@ local servers = {
     },
     -- htmx = { filetypes = { 'html', 'twig', 'php' } },
     phpactor = {
+        cmd = { 'phpactor', 'language-server' },
+        filetypes = { 'php' },
+        root_dir = mason_lspconfig.util.root_pattern('.git', '.phpactor.json', '.phpactor.yml'),
         init_options = {
             ["language_server.diagnostics_on_update"] = false,
             ["language_server.diagnostics_on_open"] = false,
@@ -209,10 +216,6 @@ vim.diagnostic.config {
         },
     },
 }
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local mason_lspconfig = require 'mason-lspconfig'
 
 mason_lspconfig.setup_handlers {
     function(server_name)
