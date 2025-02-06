@@ -65,12 +65,12 @@ return {
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 daily_notes = {
-                    folder = "daily",
+                    folder = "Daily",
                     template = "daily_template"
                 },
                 ---@diagnostic disable-next-line: missing-fields
                 templates = {
-                    folder = "templates",
+                    folder = "Templates",
                     -- A map for custom variables, the key should be the variable and the value a function
                     substitutions = {},
                 },
