@@ -1,3 +1,5 @@
+local icons = require("icons")
+
 return {
   {
     "folke/snacks.nvim",
@@ -16,4 +18,23 @@ return {
   { "akinsho/bufferline.nvim", enabled = false },
   { "nvim-lualine/lualine.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      -- options for vim.diagnostic.config()
+      ---@type vim.diagnostic.Opts
+      diagnostics = {
+        underline = true,
+        update_in_insert = true,
+        virtual_text = false,
+        severity_sort = false,
+        float = {
+          border = "rounded",
+          source = true,
+          header = "",
+          prefix = "",
+        }
+      }
+    }
+  }
 }

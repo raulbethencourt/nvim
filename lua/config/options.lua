@@ -1,3 +1,12 @@
+-- NOTE: stop saving lsp logs, change to 'debug' to see them
+vim.lsp.set_log_level 'off'
+
+vim.filetype.add {
+    extension = {
+        zsh = 'zsh',
+    },
+}
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.g.autoformat = false
