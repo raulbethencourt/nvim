@@ -8,6 +8,10 @@ return {
     end,
   },
   {
+    "max397574/better-escape.nvim",
+    config = true,
+  },
+  {
     "aserowy/tmux.nvim",
     config = true,
   },
@@ -24,18 +28,6 @@ return {
           hl = "LightBulbSign",
         },
       })
-    end,
-  },
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
-    config = function()
-      require("obsidian").get_client().opts.ui.enable = false
-      vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_get_namespaces()["ObsidianUI"], 0, -1)
-      require("render-markdown").setup({
-        enabled = false,
-      })
-      keymap("n", "<leader>tm", "<cmd>RenderMarkdown toggle<CR>", "toggle render [M]arkdown")
     end,
   },
   {
@@ -77,38 +69,6 @@ return {
         },
       })
       keymap("n", "<leader>e", require("oil").toggle_float, "[O]il [T]oggle float")
-    end,
-  },
-  {
-    "folke/snacks.nvim",
-    opts = {
-      indent = { enabled = false },
-      input = { enabled = true },
-      notifier = { enabled = true },
-      scope = { enabled = true },
-      scroll = { enabled = false },
-      statuscolumn = { enabled = false }, -- we set this in options.lua
-      toggle = { map = LazyVim.safe_keymap_set },
-      words = { enabled = true },
-    },
-  },
-  { "MagicDuck/grug-far.nvim", enabled = false },
-  { "akinsho/bufferline.nvim", enabled = false },
-  { "nvim-lualine/lualine.nvim", enabled = false },
-  { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-  {
-    "sainnhe/gruvbox-material",
-    lazy = false,
-    priority = 1000,
-    enabled = true,
-    config = function()
-      vim.g.gruvbox_material_background = "hard"
-      vim.g.gruvbox_material_better_performance = true
-      vim.g.gruvbox_material_transparent_background = 2
-      vim.g.gruvbox_material_cursor = "green"
-      vim.g.gruvbox_material_ui_contrast = "low"
-      vim.g.gruvbox_material_float_style = "dim"
-      vim.cmd([[colorscheme gruvbox-material]])
     end,
   },
   {
@@ -163,9 +123,5 @@ return {
       keymap("n", "<leader>oo", "<cmd>ObsidianOpen<CR>", "[O]bsidian [O]pen")
       keymap("n", "<leader>oe", "<cmd>ObsidianTemplate<CR>", "[O]bsidian t[E]mplate")
     end,
-  },
-  {
-    "max397574/better-escape.nvim",
-    config = true,
   },
 }
