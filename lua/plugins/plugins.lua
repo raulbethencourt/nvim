@@ -1,17 +1,4 @@
----Creates alias for keymaps
----@param mode string|string[]
----@param keys string
----@param func string|function
----@param desc? string?
----@return nil
----
-local keymap = function(mode, keys, func, desc)
-  if not desc or string.len(desc) == 0 then
-    desc = "keymap"
-  end
-
-  vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
-end
+local keymap = require("config.utils").keymap
 
 return {
   {
