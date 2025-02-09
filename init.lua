@@ -17,6 +17,11 @@
 =====================================================================
 =================================================================--]]
 
+-- NOTE: need to set leader and termguicolors before lazy
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.opt.termguicolors = true
+
 -- NOTE: install lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -33,11 +38,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     end
 end
 vim.opt.rtp:prepend(lazypath)
-
--- NOTE: need to set leader and termguicolors before lazy
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-vim.opt.termguicolors = true
 
 -- NOTE: vscode nvim settings
 if vim.g.vscode then

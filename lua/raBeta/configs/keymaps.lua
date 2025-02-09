@@ -4,7 +4,6 @@ local keymap = utils.keymap
 -- stop space normal
 keymap({ 'n', 'v' }, '<Space>', '<Nop>')
 
-
 -- TAB in general mode will move to text buffer
 keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
