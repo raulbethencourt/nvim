@@ -1,20 +1,5 @@
 return {
     {
-        'kosayoda/nvim-lightbulb',
-        event = 'LspAttach',
-        config = function()
-            ---@diagnostic disable-next-line: missing-fields
-            require('nvim-lightbulb').setup {
-                autocmd = { enabled = true },
-                sign = {
-                    enabled = true,
-                    text = require('icons').diagnostics.BoldHint,
-                    hl = 'LightBulbSign',
-                },
-            }
-        end,
-    },
-    {
         'nvimtools/none-ls.nvim',
         event = 'VeryLazy',
         dependencies = { 'nvim-lua/plenary.nvim' },

@@ -2,10 +2,30 @@ local keymap = require('raBeta.utils.utils').keymap
 
 return {
     {
-        'echasnovski/mini.nvim',
+        'echasnovski/mini.ai',
         version = false,
         config = function()
             require('mini.ai').setup()
+        end
+    },
+    {
+        'echasnovski/mini.splitjoin',
+        version = false,
+        config = function()
+            require('mini.splitjoin').setup()
+        end
+    },
+    {
+        'echasnovski/mini.surround',
+        version = false,
+        config = function()
+            require('mini.surround').setup()
+        end
+    },
+    {
+        'echasnovski/mini.comment',
+        version = false,
+        config = function()
             require('mini.comment').setup({
                 mappings = {
                     comment = '<space>/',
@@ -15,6 +35,12 @@ return {
                 },
 
             })
+        end
+    },
+    {
+        'echasnovski/mini.operators',
+        version = false,
+        config = function()
             require('mini.operators').setup({
                 exchange = {
                     prefix = 'ge',
@@ -25,12 +51,11 @@ return {
                     reindent_linewise = true,
                 },
             })
-            require('mini.splitjoin').setup()
-            require('mini.surround').setup()
-        end,
+        end
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
+        event = 'VeryLazy',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' },
         config = function()
             require('obsidian').get_client().opts.ui.enable = false
@@ -43,8 +68,8 @@ return {
     },
     {
         "epwalsh/obsidian.nvim",
+        event = 'VeryLazy',
         version = "*", -- recommended, use latest release instead of latest commit
-        lazy = true,
         ft = "markdown",
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -96,6 +121,7 @@ return {
     },
     {
         'max397574/better-escape.nvim',
+        event = 'VeryLazy',
         config = true,
     },
 }

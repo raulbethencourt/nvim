@@ -45,6 +45,7 @@ return {
     },
     {
         'ThePrimeagen/harpoon',
+        event = 'VeryLazy',
         branch = 'harpoon2',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
@@ -91,6 +92,7 @@ return {
     },
     {
         'mbbill/undotree',
+        event = 'VeryLazy',
         config = function()
             keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', 'Toggle [U]ndoTree')
         end

@@ -1,5 +1,3 @@
-M = {}
-
 local utils = require("raBeta.utils.utils")
 local keymap = utils.keymap
 
@@ -100,5 +98,3 @@ M.show_documentation = function()
     end
 end
 keymap('n', 'K', ":lua require('raBeta.configs.keymaps').show_documentation()<cr>")
-
-return M
