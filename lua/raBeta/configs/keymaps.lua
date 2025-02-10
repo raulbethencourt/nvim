@@ -31,6 +31,9 @@ keymap('n', '<leader>tc', function()
     vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
 end, 'toggle [C]ommand height')
 
+-- Render Markdown
+keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle render [M]arkdown')
+
 -- Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
 keymap('n', "<leader>pi", '<cmd>Lazy install<cr>', 'Lazy [I]nstall')
