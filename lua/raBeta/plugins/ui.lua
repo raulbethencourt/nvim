@@ -1,5 +1,3 @@
-local keymap = require('raBeta.utils.utils').keymap
-
 return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
