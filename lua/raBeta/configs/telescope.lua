@@ -8,6 +8,17 @@ local mappings = {
     ['<C-u>'] = require('telescope.actions').preview_scrolling_up,
     ['<C-d>'] = require('telescope.actions').preview_scrolling_down,
     ['<C-p>'] = action_layout.toggle_preview,
+    ["<C-h>"] = function(prompt_bufnr)
+        local opts = {}
+        local finders = require "telescope.finders"
+        local make_entry = require "telescope.make_entry"
+        local action_state = require "telescope.actions.state"
+        local cmd = { "fd", "--type", "f", "--hidden", "--no-ignore" }
+        local current_picker = action_state.get_current_picker(prompt_bufnr)
+
+        opts.entry_maker = make_entry.gen_from_file(opts)
+        current_picker:refresh(finders.new_oneshot_job(cmd, opts), {})
+    end
 }
 
 require('telescope').setup {
@@ -149,11 +160,6 @@ require('telescope').setup {
         },
     },
     extensions = {
-        menufacture = {
-            mappings = {
-                main_menu = { [{ 'i', 'n' }] = '<C-a>' },
-            },
-        },
         live_grep_args = {
             auto_quoting = true,
             layout_strategy = 'horizontal_no_titles',
@@ -178,22 +184,23 @@ require('telescope').setup {
 require('telescope').load_extension 'fzf'
 require('telescope').load_extension 'live_grep_args'
 require('telescope').load_extension 'ui-select'
-require('telescope').load_extension 'menufacture'
 
 -- NOTE: Keymaps
+keymap('n', '<leader>s.', function()
+    require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') })
+end, '[S]earch File in path')
 keymap('n', '<leader><space>', require('telescope.builtin').buffers, 'Buffers')
 keymap('n', '<C-s>', require('telescope.builtin').spell_suggest, '[S]pell [S]uggest')
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", '[S]earch command hist[O]ry')
 keymap('n', '<leader>sl', "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     '[S]earch [L]ive Grep Args')
 keymap('n', '<leader>so', "<cmd>Telescope command_history<cr>", '[S]earch command hist[O]ry')
-keymap('n', '<leader>sf', require('telescope').extensions.menufacture.find_files, '[S]earch [F]iles')
-keymap('n', '<leader>sr', require('telescope').extensions.menufacture.oldfiles,
+keymap('n', '<leader>sf', require('telescope.builtin').find_files, '[S]earch [F]iles')
+keymap('n', '<leader>sr', require('telescope.builtin').oldfiles,
     '[S]earch [R]ecently opened files')
-keymap('n', '<leader>sg', require('telescope').extensions.menufacture.live_grep, '[S]earch live [G]rep')
 keymap('n', '<leader>sh', require('telescope.builtin').help_tags, '[S]earch [H]elp')
 keymap('n', '<leader>sR', require('telescope.builtin').registers, '[S]earch [Registers')
-keymap('n', '<leader>sw', require('telescope').extensions.menufacture.grep_string, '[S]earch [W]ord')
+keymap('n', '<leader>sw', require('telescope-live-grep-args.shortcuts').grep_word_under_cursor, '[S]earch [W]ord')
 keymap('v', '<leader>sv', require('telescope-live-grep-args.shortcuts').grep_visual_selection,
     '[S]earch [V]isual selection')
 keymap('n', '<leader>sc', require('telescope.builtin').colorscheme, '[S]earch [C]olorscheme')
@@ -202,4 +209,3 @@ keymap('n', '<leader>sm', function()
     require('telescope.builtin').man_pages { sections = { 'ALL' } }
 end, '[S]earch [M]an pages')
 keymap('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, '[S]earch in current [B]uffer')
-keymap('n', '<leader>st', '<cmd>todotelescope<cr>', '[s]search [t]odo')

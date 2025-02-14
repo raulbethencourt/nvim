@@ -129,7 +129,6 @@ return {
                 version = '^1.0.0',
             },
             'nvim-telescope/telescope-ui-select.nvim',
-            'molecule-man/telescope-menufacture',
             'nvim-tree/nvim-web-devicons',
         },
         config = function()
