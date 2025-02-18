@@ -1,5 +1,5 @@
-local icons = require("icons")
 local keymap = require("raBeta.utils.utils").keymap
+local icons = require("icons")
 local telescope = require("telescope")
 local action_layout = require("telescope.actions.layout")
 local lga_actions = require("telescope-live-grep-args.actions")
@@ -19,6 +19,8 @@ local mappings = {
     ['<C-u>'] = actions.preview_scrolling_up,
     ['<C-d>'] = actions.preview_scrolling_down,
     ['<C-p>'] = action_layout.toggle_preview,
+}
+local find_files_mappings = {
     ["<C-h>"] = function(prompt_bufnr)
         local opts = {}
         local action_state = actions_state
@@ -26,7 +28,7 @@ local mappings = {
         local current_picker = action_state.get_current_picker(prompt_bufnr)
 
         opts.entry_maker = make_entry.gen_from_file(opts)
-       current_picker:refresh(finders.new_oneshot_job(cmd, opts), {})
+        current_picker:refresh(finders.new_oneshot_job(cmd, opts), {})
     end
 }
 
@@ -104,6 +106,12 @@ telescope.setup {
         },
     },
     pickers = {
+        find_files = {
+            mappings = {
+                i = find_files_mappings,
+                n = find_files_mappings
+            }
+        },
         buffers = {
             theme = "dropdown",
             sort_lastused = true,
