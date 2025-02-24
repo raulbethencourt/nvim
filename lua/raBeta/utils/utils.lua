@@ -36,7 +36,7 @@ M.create_floting_win = function(opts)
 end
 
 ---Lounch cmd in popup window
----@param cmd? string?
+---@param cmd string|string[]
 ---@param opts? {win?:integer}
 ---@return nil
 ---
@@ -50,7 +50,8 @@ M.launch_cmd_in_floating_win = function(cmd, opts)
     vim.api.nvim_set_current_win(win.win)
 
     -- Launch cmd in term
-    vim.fn.termopen(cmd, {
+    vim.fn.jobstart(cmd, {
+        term = true,
         on_exit = function(_, _, _)
             ---@diagnostic disable-next-line: undefined-field
             if opts.close_term == true then
