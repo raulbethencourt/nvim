@@ -11,31 +11,6 @@ return {
                 temperature = 0,
                 max_tokens = 8192,
             },
-            windows = {
-                position = "right", -- the position of the sidebar
-                wrap = true, -- similar to vim.o.wrap
-                width = 30, -- default % based on available width
-                sidebar_header = {
-                    enabled = true, -- true, false to enable/disable the header
-                    align = "center", -- left, center, right for title
-                    rounded = true,
-                },
-                input = {
-                    prefix = "> ",
-                    height = 8, -- Height of the input window in vertical layout
-                },
-                edit = {
-                    border = "rounded",
-                    start_insert = true, -- Start insert mode when opening the edit window
-                },
-                ask = {
-                    floating = false, -- Open the 'AvanteAsk' prompt in a floating window
-                    start_insert = true, -- Start insert mode when opening the ask window
-                    border = "rounded",
-                    ---@type "ours" | "theirs"
-                    focus_on_apply = "ours", -- which diff to focus after applying
-                },
-            },
         },
         build = "make",
         dependencies = {
@@ -53,19 +28,35 @@ return {
                 event = "InsertEnter",
                 config = function()
                     require("copilot").setup({
-                        panel = { enabled = false },
-                        suggestion = { enabled = false },
-                        filetypes = {
-                            markdown = true,
-                            gitcommit = true,
-                            gitrebase = true,
-                            help = true,
-                            text = true,
-                            norg = true,
-                            rmd = true,
-                            org = true,
-                            vimwiki = true,
-                            Avante = true,
+                        panel = {
+                            enabled = true,
+                            auto_refresh = false,
+                            keymap = {
+                                jump_prev = "[[",
+                                jump_next = "]]",
+                                accept = "<CR>",
+                                refresh = "gr",
+                                open = "<M-CR>"
+                            },
+                            layout = {
+                                position = "right", -- | top | left | right | horizontal | vertical
+                                ratio = 0.4
+                            },
+                        },
+                        suggestion = {
+                            enabled = true,
+                            auto_trigger = true,
+                            hide_during_completion = false,
+                            debounce = 75,
+                            trigger_on_accept = true,
+                            keymap = {
+                                accept = "<M-l>",
+                                accept_word = false,
+                                accept_line = false,
+                                next = "<M-]>",
+                                prev = "<M-[>",
+                                dismiss = "<C-]>",
+                            },
                         },
                     })
                 end,
@@ -158,23 +149,23 @@ return {
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-vsnip',
             'onsails/lspkind.nvim',
-            {
-                "zbirenbaum/copilot-cmp",
-                dependencies = { "zbirenbaum/copilot.lua" },
-                config = function()
-                    require("copilot_cmp").setup({
-                        method = "getCompletionsCycling",
-                        formatters = {
-                            insert_text = function(entry, vim_item)
-                                return entry.completion_item.insertText
-                            end,
-                            label = function(entry, vim_item)
-                                return entry.completion_item.label
-                            end,
-                        },
-                    })
-                end,
-            },
+            -- {
+            -- "zbirenbaum/copilot-cmp",
+            -- dependencies = { "zbirenbaum/copilot.lua" },
+            -- config = function()
+            --     require("copilot_cmp").setup({
+            --         method = "getCompletionsCycling",
+            --         formatters = {
+            --             insert_text = function(entry, vim_item)
+            --                 return entry.completion_item.insertText
+            --             end,
+            --             label = function(entry, vim_item)
+            --                 return entry.completion_item.label
+            --             end,
+            --         },
+            --     })
+            -- end,
+            -- },
         },
         config = function()
             require('raBeta.configs.lsp.cmp')
