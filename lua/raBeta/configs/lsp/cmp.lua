@@ -23,12 +23,12 @@ end, { silent = true })
 local cmp = require 'cmp'
 
 -- Copilot
-cmp.event:on("menu_opened", function()
-    vim.b.copilot_suggestion_hidden = true
-end)
-cmp.event:on("menu_closed", function()
-    vim.b.copilot_suggestion_hidden = false
-end)
+-- cmp.event:on("menu_opened", function()
+--     vim.b.copilot_suggestion_hidden = true
+-- end)
+-- cmp.event:on("menu_closed", function()
+--     vim.b.copilot_suggestion_hidden = false
+-- end)
 
 -- `/` cmdline setup.
 cmp.setup.cmdline('/', {
@@ -74,7 +74,7 @@ cmp.setup {
             },
             ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-            -- symbol_map = { Copilot = "" },
+            symbol_map = { Copilot = "" },
             before = function(entry, vim_item)
                 return vim_item
             end
@@ -115,10 +115,10 @@ cmp.setup {
         end, { 'i', 's' }),
     },
     sources = {
-        -- {
-        --     name = 'copilot',
-        --     group_index = 2
-        -- },
+        {
+            name = 'copilot',
+            group_index = 2
+        },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },

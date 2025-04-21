@@ -11,6 +11,12 @@ return {
                 temperature = 0,
                 max_tokens = 8192,
             },
+            windows = {
+                width = 40, -- default % based on available width
+                sidebar_header = {
+                    enabled = false,
+                },
+            },
         },
         build = "make",
         dependencies = {
@@ -18,63 +24,35 @@ return {
             "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-            "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
-            "ibhagwan/fzf-lua",              -- for file_selector provider fzf
-            "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
+            "nvim-telescope/telescope.nvim",
+            "hrsh7th/nvim-cmp",
+            "nvim-tree/nvim-web-devicons",
             {
                 "zbirenbaum/copilot.lua",
                 cmd = "Copilot",
                 event = "InsertEnter",
                 config = function()
                     require("copilot").setup({
+                        copilot_model = "cloude-3.5-sonnet",
                         panel = {
-                            enabled = true,
-                            auto_refresh = false,
-                            keymap = {
-                                jump_prev = "[[",
-                                jump_next = "]]",
-                                accept = "<CR>",
-                                refresh = "gr",
-                                open = "<M-CR>"
-                            },
-                            layout = {
-                                position = "right", -- | top | left | right | horizontal | vertical
-                                ratio = 0.4
-                            },
+                            enabled = false,
                         },
                         suggestion = {
-                            enabled = true,
-                            auto_trigger = true,
-                            hide_during_completion = false,
-                            debounce = 75,
-                            trigger_on_accept = true,
-                            keymap = {
-                                accept = "<M-l>",
-                                accept_word = false,
-                                accept_line = false,
-                                next = "<M-]>",
-                                prev = "<M-[>",
-                                dismiss = "<C-]>",
-                            },
+                            enabled = false,
                         },
                     })
                 end,
             },
             {
-                -- support for image pasting
                 "HakonHarnes/img-clip.nvim",
                 event = "VeryLazy",
                 opts = {
-                    -- recommended settings
                     default = {
                         embed_image_as_base64 = false,
                         prompt_for_file_name = false,
                         drag_and_drop = {
                             insert_mode = true,
                         },
-                        -- required for Windows users
-                        use_absolute_path = true,
                     },
                 },
             },
@@ -149,23 +127,23 @@ return {
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-vsnip',
             'onsails/lspkind.nvim',
-            -- {
-            -- "zbirenbaum/copilot-cmp",
-            -- dependencies = { "zbirenbaum/copilot.lua" },
-            -- config = function()
-            --     require("copilot_cmp").setup({
-            --         method = "getCompletionsCycling",
-            --         formatters = {
-            --             insert_text = function(entry, vim_item)
-            --                 return entry.completion_item.insertText
-            --             end,
-            --             label = function(entry, vim_item)
-            --                 return entry.completion_item.label
-            --             end,
-            --         },
-            --     })
-            -- end,
-            -- },
+            {
+                "zbirenbaum/copilot-cmp",
+                dependencies = { "zbirenbaum/copilot.lua" },
+                config = function()
+                    require("copilot_cmp").setup({
+                        method = "getCompletionsCycling",
+                        formatters = {
+                            insert_text = function(entry, vim_item)
+                                return entry.completion_item.insertText
+                            end,
+                            label = function(entry, vim_item)
+                                return entry.completion_item.label
+                            end,
+                        },
+                    })
+                end,
+            },
         },
         config = function()
             require('raBeta.configs.lsp.cmp')
