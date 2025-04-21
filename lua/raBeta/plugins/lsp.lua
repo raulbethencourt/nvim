@@ -4,8 +4,38 @@ return {
         event = "VeryLazy",
         version = false, -- Never set this value to "*"! Never!
         opts = {
-            -- add any opts here
-            -- for example
+            auto_suggestions_provider = "copilot",
+            provider = "copilot",
+            copilot = {
+                model = "claude-3.5-sonnet",
+                temperature = 0,
+                max_tokens = 8192,
+            },
+            windows = {
+                position = "right", -- the position of the sidebar
+                wrap = true, -- similar to vim.o.wrap
+                width = 30, -- default % based on available width
+                sidebar_header = {
+                    enabled = true, -- true, false to enable/disable the header
+                    align = "center", -- left, center, right for title
+                    rounded = true,
+                },
+                input = {
+                    prefix = "> ",
+                    height = 8, -- Height of the input window in vertical layout
+                },
+                edit = {
+                    border = "rounded",
+                    start_insert = true, -- Start insert mode when opening the edit window
+                },
+                ask = {
+                    floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+                    start_insert = true, -- Start insert mode when opening the ask window
+                    border = "rounded",
+                    ---@type "ours" | "theirs"
+                    focus_on_apply = "ours", -- which diff to focus after applying
+                },
+            },
         },
         build = "make",
         dependencies = {
@@ -13,8 +43,6 @@ return {
             "stevearc/dressing.nvim",
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
-            --- The below dependencies are optional,
-            "echasnovski/mini.pick",         -- for file_selector provider mini.pick
             "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
             "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
             "ibhagwan/fzf-lua",              -- for file_selector provider fzf
