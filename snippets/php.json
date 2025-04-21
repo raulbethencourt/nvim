@@ -61,10 +61,8 @@
     "Bns load relationship": {
         "prefix": "bnsblr",
         "body": [
-            "if (\\$bean->load_relationship('${1:relation}'))",
-            "{",
-            "   \\$${2:variable} = \\$bean->${1:relation}->${3:fn}();",
-            "}"
+            "if (\\$${1:bean}->load_relationship('${2:relation}'))",
+            "   \\$${3:variable} = \\$${1:bean}->${2:relation}->${4:fn}();"
         ],
         "description": "load relationship to get ids."
     },
@@ -85,12 +83,12 @@
     },
     "BnsWebservice var_dump and find": {
         "prefix": "vdwf",
-        "body": ["exit('${1:Hello World} !! =====>>');"],
+        "body": ["die('${1:Hello World} !! =====>>');"],
         "description": "Var_dump for the bnsWebService to find position."
     },
     "BnsWebservice var_dump": {
         "prefix": "vdwf",
-        "body": ["exit($${1:varibale});"],
+        "body": ["die($${1:varibale});"],
         "description": "Var_dump for the bnsWebService."
     },
     "Var_dump and exit": {

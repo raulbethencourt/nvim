@@ -66,6 +66,32 @@ M.launch_cmd_in_floating_win = function(cmd, opts)
     vim.cmd.startinsert()
 end
 
+---Launch cmd in popup window using dependencies cmds
+---@param cmd string|string[]
+---@param dependencies {[any]:string}
+---@return nil
+---
+M.launch_cmd_with_dependencies = function(cmd, dependencies)
+    ---@diagnostic disable-next-line: unused-local
+    for i, dependencie in pairs(dependencies) do
+        local dependencie_response = vim.fn.system(dependencie)
+
+        if dependencie_response:match("command not found") then
+            vim.notify(
+                vim.fn.toupper(dependencie) .. " is not installed. You need to install it to make keymap works.",
+                4
+            )
+            return
+        end
+    end
+
+    M.launch_cmd_in_floating_win(
+        cmd,
+        { close_term = true }
+    )
+end
+
+
 ---Creates alias for keymaps
 ---@param mode string|string[]
 ---@param keys string

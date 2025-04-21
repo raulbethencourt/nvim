@@ -1,51 +1,69 @@
-local keymap = require('raBeta.utils.utils').keymap
+local keymap = function(mode, keys, func, desc)
+    if desc then
+        desc = desc
+    end
+
+    vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
+end
 
 return {
+    -- {
+    --     'stevearc/oil.nvim',
+    --     opts = {},
+    --     -- Optional dependencies
+    --     dependencies = { "nvim-tree/nvim-web-devicons" },
+    --     config = function()
+    --         require('oil').setup {
+    --             skip_confirm_for_simple_edits = true,
+    --             keymaps = {
+    --                 ['<C-h>'] = false,
+    --                 ['<C-l>'] = false,
+    --             },
+    --             view_options = {
+    --                 show_hidden = true,
+    --             },
+    --             float = {
+    --                 padding = 2,
+    --                 max_width = 200,
+    --                 max_height = 55,
+    --                 border = "rounded",
+    --                 win_options = {
+    --                     winblend = 0,
+    --                 },
+    --             },
+    --             preview = {
+    --                 win_options = {
+    --                     winblend = 0,
+    --                 },
+    --             },
+    --             progress = {
+    --                 win_options = {
+    --                     winblend = 0,
+    --                 },
+    --             },
+    --         }
+    --         -- keymap('n', '<leader>e', require('oil').toggle_float,
+    --             -- '[O]il [T]oggle float')
+    --     end,
+    -- },
     {
-        'stevearc/oil.nvim',
-        opts = {},
-        -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        'lewis6991/gitsigns.nvim',
         config = function()
-            require('oil').setup {
-                skip_confirm_for_simple_edits = true,
-                keymaps = {
-                    ['<C-h>'] = false,
-                    ['<C-l>'] = false,
-                    ['<C-d>'] = "actions.preview_scroll_down",
-                    ['<C-u>'] = "actions.preview_scroll_up",
-                    ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-                    ["<esc>"] = "actions.close",
-                },
-                view_options = {
-                    show_hidden = true,
-                },
-                float = {
-                    padding = 5,
-                    max_width = 0,
-                    max_height = 0,
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
-                preview_win = {
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
-                progress = {
-                    win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
-                    },
-                },
+            require('gitsigns').setup {
+                preview_config = {
+                    border = 'rounded',
+                    style = 'minimal',
+                    relative = 'cursor',
+                    row = 1,
+                    col = 1,
+                }
             }
-            keymap('n', '<leader>e', require('oil').toggle_float,
-                '[O]il [T]oggle float')
+            keymap('n', '<leader>gb', '<cmd>Gitsigns blame_line<CR>', '[G]itsigns [B]lame line')
+            keymap('n', '<leader>gd', '<cmd>Gitsigns diffthis<CR>', '[G]itsigns [D]iff this')
         end,
     },
     {
         'ThePrimeagen/harpoon',
-        event = 'VeryLazy',
         branch = 'harpoon2',
         dependencies = { 'nvim-lua/plenary.nvim' },
         config = function()
@@ -92,7 +110,6 @@ return {
     },
     {
         'mbbill/undotree',
-        event = 'VeryLazy',
         config = function()
             keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', 'Toggle [U]ndoTree')
         end
@@ -117,12 +134,15 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         event = 'VeryLazy',
-        tag = '0.1.8',
+        branch = '0.1.x',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make'
+                build = 'make',
+                cond = function()
+                    return vim.fn.executable 'make' == 1
+                end,
             },
             {
                 'nvim-telescope/telescope-live-grep-args.nvim',
@@ -130,9 +150,63 @@ return {
             },
             'nvim-telescope/telescope-ui-select.nvim',
             'nvim-tree/nvim-web-devicons',
+            "nvim-telescope/telescope-file-browser.nvim",
         },
         config = function()
             require 'raBeta.configs.telescope'
         end,
-    }
+    },
+    {
+        'folke/flash.nvim',
+        event = 'VeryLazy',
+        opts = {
+            modes = {
+                search = {
+                    enabled = true,
+                }
+            }
+        },
+        keys = {
+            {
+                's',
+                mode = { 'n', 'x', 'o' },
+                function()
+                    require('flash').jump()
+                end,
+                desc = 'Flash',
+            },
+            {
+                'S',
+                mode = { 'n', 'o', 'x' },
+                function()
+                    require('flash').treesitter()
+                end,
+                desc = 'Flash Treesitter',
+            },
+            {
+                'r',
+                mode = 'o',
+                function()
+                    require('flash').remote()
+                end,
+                desc = 'Remote Flash',
+            },
+            {
+                'R',
+                mode = { 'o', 'x' },
+                function()
+                    require('flash').treesitter_search()
+                end,
+                desc = 'Treesitter Search',
+            },
+            {
+                '<c-s>',
+                mode = { 'c' },
+                function()
+                    require('flash').toggle()
+                end,
+                desc = 'Toggle Flash Search',
+            },
+        },
+    },
 }

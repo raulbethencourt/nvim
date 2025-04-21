@@ -38,8 +38,8 @@ local options = {
     foldexpr = '',                                   -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
     hidden = true,                                   -- required to keep multiple buffers and open multiple buffers
     undodir = os.getenv 'HOME' .. '/.vim/undodir',   -- where to save undo histories
-    spell = false,                                    -- trigger spellcheck
-    spelllang = 'en,fr',                             -- language of spellcheck
+    spell = false,                                   -- trigger spellcheck
+    spelllang = 'en',                                -- language of spellcheck
     background = 'dark',                             -- triggers dark colorscheme
     shell = 'zsh',
     timeout = true,
@@ -47,7 +47,6 @@ local options = {
     ruler = false,
     equalalways = true,
     fixeol = false,
-    textwidth = 100,
     guicursor = table.concat({
         'n-v-c:block-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',
         'i-ci:ver25-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',

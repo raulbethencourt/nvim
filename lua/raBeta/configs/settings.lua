@@ -32,21 +32,23 @@ local options = {
     signcolumn = 'yes',                              -- always show the sign column, otherwise it would shift the text each time
     wrap = false,                                    -- display lines as one long line
     scrolloff = 8,                                   -- is one of my fav
-    sidescrolloff = 8,
     colorcolumn = '99999',                           -- fixes indentline for now
     foldmethod = 'manual',                           -- folding set to "expr" for treesitter based folding
     foldexpr = '',                                   -- set to "nvim_treesitter#foldexpr()" for treesitter based folding
     hidden = true,                                   -- required to keep multiple buffers and open multiple buffers
     undodir = os.getenv 'HOME' .. '/.vim/undodir',   -- where to save undo histories
     spell = false,                                   -- trigger spellcheck
-    spelllang = 'en',                                -- language of spellcheck
+    spelllang = 'en,fr',                             -- language of spellcheck
     background = 'dark',                             -- triggers dark colorscheme
+    laststatus = 3,                                  -- views can only be fully collapsed with the global statusline
+    sidescrolloff = 8,
     shell = 'zsh',
     timeout = true,
     timeoutlen = 500,
     ruler = false,
     equalalways = true,
     fixeol = false,
+    textwidth = 100,
     guicursor = table.concat({
         'n-v-c:block-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',
         'i-ci:ver25-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',
