@@ -1,5 +1,3 @@
-local keymap = require("raBeta.utils.utils").keymap
-
 return {
     'mfussenegger/nvim-dap',
     dependencies = {
@@ -7,7 +5,7 @@ return {
         'williamboman/mason.nvim',
         'theHamsta/nvim-dap-virtual-text',
         'jay-babu/mason-nvim-dap.nvim',
-        "nvim-neotest/nvim-nio",
+        "nvim-neotest/nvim-nio"
     },
     config = function()
         local dap = require 'dap'
@@ -28,35 +26,26 @@ return {
             },
         }
 
-        -- NOTE: keymaps for dap
-        keymap('n', '<F5>', dap.continue, 'Debug: Start/Continue')
-        keymap('n', '<F11>', dap.step_into, 'Debug: Step Into')
-        keymap('n', '<s-F11>', dap.step_out, 'Debug: Step Out')
-        keymap('n', '<F10>', dap.step_over, 'Debug: Step Over')
-        keymap('n', '<s-F10>', dap.step_back, 'Debug: Step Back')
-        keymap('n', '<leader>db', dap.toggle_breakpoint, '[D]ebug Toggle [B]reakpoint')
-        keymap('n', '<leader>dc', dap.clear_breakpoints, '[D]ebug [C]lear Breakpoints')
-        keymap('n', '<leader>dB', function()
+        -- NOTE: keymaps
+        -- dapui.elements.stacks
+        vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+        vim.keymap.set('n', '<F11>', dap.step_into, { desc = 'Debug: Step Into' })
+        vim.keymap.set('n', '<s-F11>', dap.step_out, { desc = 'Debug: Step Out' })
+        vim.keymap.set('n', '<F10>', dap.step_over, { desc = 'Debug: Step Over' })
+        vim.keymap.set('n', '<s-F10>', dap.step_back, { desc = 'Debug: Step Back' })
+        vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint, { desc = '[D]ebug Toggle [B]reakpoint' })
+        vim.keymap.set('n', '<leader>dc', dap.clear_breakpoints, { desc = '[D]ebug [C]lear Breakpoints' })
+        vim.keymap.set('n', '<leader>dB', function()
             dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-        end, '[D]ebug Set [B]reakpoint')
-        keymap('n', '<leader>dt', dapui.toggle, '[D]ebug [T]oggle Ui')
-        keymap({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>',
-            '[D]ebug [E]xpression evaluation')
-        keymap('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>',
-            '[D]ebug [F]loating element')
-        keymap('n', '<leader>ds', '<Cmd>DapDisconnect<CR>',
-            '[D]ebug [S]top')
-        keymap('n', '<leader>dl', function()
-            require "osv".launch({ port = 8086 })
-        end, '[D]ebug [L]ua')
-        keymap('n', '<leader>dw', function()
-            local widgets = require "dap.ui.widgets"
-            widgets.hover()
-        end, '[D]ebug hover')
-        keymap('n', '<leader>dF', function()
-            local widgets = require "dap.ui.widgets"
-            widgets.centered_float(widgets.frames)
-        end, '[D]ebug centered [F]loat')
+        end, { desc = '[D]ebug Set [B]reakpoint' })
+        vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = '[D]ebug [T]oggle Ui' })
+        vim.keymap.set({ 'v', 'n' }, '<leader>de', '<Cmd>lua require("dapui").eval()<CR>',
+            { desc = '[D]ebug [E]xpression evaluation' })
+        vim.keymap.set('n', '<leader>df', '<Cmd>lua require("dapui").float_element()<CR>',
+            { desc = '[D]ebug [F]loating element' })
+        vim.keymap.set('n', '<leader>ds', '<Cmd>DapDisconnect<CR>',
+            { desc = '[D]ebug [S]top' })
+        -- vim.keymap.set('n', '<leader>dd', require('dapui.elements.stacks').open, { desc = '[D]ebug go to [D]efinition' })
 
         ---@diagnostic disable-next-line: missing-fields
         dapui.setup {
@@ -66,9 +55,9 @@ return {
             layouts = {
                 {
                     elements = {
-                        { id = 'watches',     size = 0.25 },
-                        { id = 'scopes',      size = 0.45 },
+                        { id = 'watches',     size = 0.35 },
                         { id = 'stacks',      size = 0.20 },
+                        { id = 'scopes',      size = 0.35 },
                         { id = 'breakpoints', size = 0.10 },
                     },
                     size = 0.33,

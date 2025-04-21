@@ -1,11 +1,9 @@
 require 'raBeta.configs.lsp.languages.php'
 require 'raBeta.configs.lsp.languages.bash'
-require 'raBeta.configs.lsp.languages.lua'
 
 -- NOTE: stop saving lsp logs, change to 'debug' to see them
 vim.lsp.set_log_level 'off'
 local on_attach = function(_, bufnr)
-    -- TODO: refactor this code
     local keymap = function(keys, func, desc)
         if desc then
             desc = 'LSP: ' .. desc
@@ -14,26 +12,17 @@ local on_attach = function(_, bufnr)
         vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
     end
 
-    keymap('<C-k>', function()
-        require('lsp_signature').toggle_float_win()
-    end, 'toggle signature')
-    keymap('K', function()
-        vim.lsp.buf.hover({
-            border = "rounded",
-        })
-    end, 'toggle signature')
     keymap('gr', '<cmd>Telescope lsp_references<CR>', '[G]oto [R]eferences')
     keymap('gd', '<cmd>Telescope lsp_definitions<CR>', '[G]oto [D]definition')
     keymap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
     keymap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+    keymap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
     keymap('gl', '<cmd>lua vim.diagnostic.open_float()<CR>', '[G]oto [L]ine diagnostics')
     keymap('<leader>ld', vim.lsp.buf.type_definition, '[L]sp Type [D]efinition')
 
     keymap('<leader>lf', function()
         vim.lsp.buf.format { async = true }
     end, '[L]sp [F]ormat')
-    vim.keymap.set('v', '<leader>lf', require("raBeta.utils.utils").visual_format,
-        { buffer = bufnr, desc = "Visual [F]ormat" })
 
     keymap('<leader>lD', '<cmd>Telescope diagnostics<CR>', '[L]sp Telescope Workspace [D]iagnostics')
 
@@ -87,10 +76,6 @@ vim.filetype.add {
     },
 }
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local mason_lspconfig = require 'mason-lspconfig'
-
 -- Get intelephense licence
 local get_intelephense_license = function()
     local f = assert(io.open(os.getenv 'HOME' .. '/intelephense/licence.txt', 'rb'))
@@ -117,6 +102,30 @@ local servers = {
         filetypes = { 'sh', 'zsh', 'bash' },
     },
     clangd = {},
+    rust_analyzer = {
+        settings = {
+            ['rust-analyzer'] = {
+                cargo = {
+                    allFeatures = true,
+                    loadOutDirsFromCheck = true,
+                    runBuildScripts = true,
+                },
+                checkOnSave = {
+                    allFeatures = true,
+                    command = 'clippy',
+                    extraArgs = { '--no-deps' },
+                },
+                procMacro = {
+                    enable = true,
+                    ignored = {
+                        ['async-trait'] = { 'async_trait' },
+                        ['napi-derive'] = { 'napi' },
+                        ['async-recursion'] = { 'async_recursion' },
+                    },
+                },
+            },
+        },
+    },
     taplo = {},
     marksman = {},
     html = { filetypes = { 'html', 'twig', 'hbs' } },
@@ -137,7 +146,7 @@ local servers = {
             },
         },
     },
-    htmx = { filetypes = { 'html', 'twig', 'php' } },
+    -- htmx = { filetypes = { 'html', 'twig', 'php' } },
     intelephense = {
         cmd = { 'intelephense', '--stdio' },
         filetypes = { 'php' },
@@ -169,7 +178,6 @@ local servers = {
         },
     },
     sqls = {},
-    ts_ls = {},
 }
 
 local icons = require 'icons'
@@ -205,6 +213,31 @@ vim.diagnostic.config {
             [vim.diagnostic.severity.INFO] = 'InfoMsg',
         },
     },
+}
+
+require('neodev').setup()
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+local mason_lspconfig = require 'mason-lspconfig'
+
+local function rust_opts(name)
+    local plugin = require('lazy.core.config').plugins[name]
+    if not plugin then
+        return {}
+    end
+    local Plugin = require 'lazy.core.plugin'
+    return Plugin.values(plugin, 'opts', false)
+end
+
+mason_lspconfig.setup {
+    ensure_installed = vim.tbl_keys(servers),
+    rust_analyzer = function(_, opts)
+        local rust_tools_opts = rust_opts 'rust-tools.nvim'
+        require('rust-tools').setup(vim.tbl_deep_extend('force', rust_tools_opts or {}, { server = opts }))
+        return true
+    end,
 }
 
 mason_lspconfig.setup_handlers {

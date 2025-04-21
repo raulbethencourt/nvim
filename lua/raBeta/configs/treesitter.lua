@@ -64,5 +64,20 @@ require('nvim-treesitter.configs').setup {
                 ['[]'] = '@class.outer',
             },
         },
+        swap = {
+            enable = true,
+            swap_next = {
+                ['<leader>ta'] = '@parameter.inner',
+            },
+            swap_previous = {
+                ['<leader>tA'] = '@parameter.inner',
+            },
+        },
     },
 }
+
+-- NOTE: Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>te', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>tq', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
