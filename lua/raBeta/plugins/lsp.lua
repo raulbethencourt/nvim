@@ -2,7 +2,7 @@ return {
     {
         "yetone/avante.nvim",
         event = "VeryLazy",
-        version = false, -- Never set this value to "*"! Never!
+        version = false,
         opts = {
             auto_suggestions_provider = "copilot",
             provider = "copilot",
@@ -11,8 +11,11 @@ return {
                 temperature = 0,
                 max_tokens = 8192,
             },
+            behaviour = {
+                enable_claude_text_editor_tool_mode = true,
+            },
             windows = {
-                width = 40, -- default % based on available width
+                width = 40,
                 sidebar_header = {
                     enabled = false,
                 },

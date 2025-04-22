@@ -22,15 +22,6 @@ end, { silent = true })
 
 local cmp = require 'cmp'
 
--- Copilot
--- cmp.event:on("menu_opened", function()
---     vim.b.copilot_suggestion_hidden = true
--- end)
--- cmp.event:on("menu_closed", function()
---     vim.b.copilot_suggestion_hidden = false
--- end)
-
--- `/` cmdline setup.
 cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
@@ -115,10 +106,7 @@ cmp.setup {
         end, { 'i', 's' }),
     },
     sources = {
-        {
-            name = 'copilot',
-            group_index = 2
-        },
+        { name = 'copilot' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
