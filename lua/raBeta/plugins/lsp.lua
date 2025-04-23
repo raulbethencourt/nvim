@@ -66,13 +66,9 @@ return {
                 opts = {
                     max_length = 99999,
                     preview = {
-                        enable = false,
-                        icon_provider = "devicons", -- "mini" or "devicons"
+                        icon_provider = "devicons",
                         filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
                         buf_ignore = {},
-                    },
-                    markdown = {
-                        enable = false,
                     },
                 },
             },

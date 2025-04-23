@@ -31,6 +31,16 @@ keymap('n', '<leader>tc', function()
     vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
 end, 'toggle [C]ommand height')
 keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
+keymap('n', '<leader>tc', function()
+    local status = require("copilot.client").is_disabled()
+    if status then
+        vim.cmd("Copilot enable")
+        vim.notify("Copilot activé", vim.log.levels.INFO)
+    else
+        vim.cmd("Copilot disable")
+        vim.notify("Copilot désactivé", vim.log.levels.INFO)
+    end
+end, 'toggle [C]opilot')
 
 -- Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
