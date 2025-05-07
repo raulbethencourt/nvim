@@ -1,4 +1,9 @@
 {
+    "disregard": {
+        "prefix": "disregard",
+        "body": ["/** @disregard ${1:code} ${2:description} */;"],
+        "description": "Intelephens linter disable"
+    },
     "namespace": {
         "prefix": "namespace",
         "body": ["namespace ${1:path};"],

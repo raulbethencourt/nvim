@@ -35,10 +35,10 @@ keymap('n', '<leader>tc', function()
     local status = require("copilot.client").is_disabled()
     if status then
         vim.cmd("Copilot enable")
-        vim.notify("Copilot activé", vim.log.levels.INFO)
+        vim.notify("Copilot enable", vim.log.levels.INFO)
     else
         vim.cmd("Copilot disable")
-        vim.notify("Copilot désactivé", vim.log.levels.INFO)
+        vim.notify("Copilot disable", vim.log.levels.INFO)
     end
 end, 'toggle [C]opilot')
 
@@ -51,6 +51,11 @@ keymap('n', "<leader>pc", "<cmd>Lazy clean<cr>", 'Lazy [C]lean')
 -- NOTE: code to debug table
 -- print(vim.inspect())
 -- vim.notify(vim.inspect())
+
+-- CodeCompanion
+keymap({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", "CodeCompanionActions")
+keymap({ "n", "v" }, "<LocalLeader>aa", "<cmd>CodeCompanionChat Toggle<cr>", "CodeCompanionChat")
+keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>")
 
 -- Git
 keymap('n', '<leader>gl', function()
