@@ -27,7 +27,7 @@ end, 'toggle [R]elativenumber')
 keymap('n', '<leader>tl', function()
     vim.o.ls = vim.o.ls == 0 and 2 or 0
 end, 'toggle status[L]ine')
-keymap('n', '<leader>tc', function()
+keymap('n', '<leader>th', function()
     vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
 end, 'toggle [C]ommand height')
 keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
