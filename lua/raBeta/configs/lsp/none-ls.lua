@@ -12,6 +12,7 @@ nls.setup {
         nls.builtins.formatting.isort,
         nls.builtins.formatting.markdownlint,
         nls.builtins.formatting.pretty_php,
+        nls.builtins.formatting.stylua,
         nls.builtins.formatting.prettier.with {
             extra_args = { '--print-with=100', '--tab-width=4' },
             filetypes = {
