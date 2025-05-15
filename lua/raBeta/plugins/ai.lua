@@ -7,7 +7,44 @@ return {
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
             {
+                'OXY2DEV/markview.nvim',
+                lazy = false,
+                opts = {
+                    max_length = 99999,
+                    preview = {
+                        filetypes = {
+                            'md',
+                            'markdown',
+                            'norg',
+                            'rmd',
+                            'org',
+                            'vimwiki',
+                            'codecompanion',
+                            'mcphub',
+                        },
+                        ignore_buftypes = {},
+                        condition = function()
+                            local ft, bt = vim.bo.filetype, vim.bo.buftype
+
+                            if bt == 'nofile' and ft == 'codecompanion' then
+                                return true
+                            elseif bt == 'nofile' and ft == 'mcphub' then
+                                return true
+                            elseif bt == 'nofile' then
+                                return false
+                            else
+                                return true
+                            end
+                        end,
+                    },
+                },
+            },
+            { 'echasnovski/mini.diff', version = '*' },
+            {
                 'ravitemer/mcphub.nvim',
+                dependencies = {
+                    'nvim-lua/plenary.nvim',
+                },
                 cmd = 'MCPHub',
                 build = 'npm install -g mcp-hub@latest',
                 config = true,
@@ -30,13 +67,30 @@ return {
                     return require('codecompanion.adapters').extend('copilot', {
                         schema = {
                             model = {
-                                default = 'claude-3.7-sonnet',
+                                default = 'claude-3.5-sonnet',
                             },
                         },
                     })
                 end,
             },
             prompt_library = {
+                ['Debug Assistant'] = {
+                    strategy = 'chat',
+                    description = 'Help with debugging code',
+                    opts = {
+                        mapping = '<leader>aa',
+                        modes = { 'v' },
+                        auto_submit = true,
+                        stop_context_insertion = true,
+                        short_name = 'debug',
+                    },
+                    prompts = {
+                        {
+                            role = 'system',
+                            content = 'You are an expert debugger. Analyze the code and suggest potential issues and solutions.',
+                        },
+                    },
+                },
                 ['Symfony'] = {
                     strategy = 'chat',
                     description = 'Working in a Symfony application',
@@ -55,11 +109,12 @@ return {
                     strategy = 'chat',
                     description = 'Write documentation for me',
                     opts = {
-                        mapping = '<LocalLeader>ad',
+                        mapping = '<leader>ad',
                         modes = { 'v' },
                         index = 11,
                         is_slash_cmd = false,
                         auto_submit = true,
+                        stop_context_insertion = true,
                         short_name = 'docs',
                     },
                     prompts = {
@@ -90,7 +145,7 @@ return {
                     strategy = 'chat',
                     description = 'Get some special advice from an LLM',
                     opts = {
-                        mapping = '<LocalLeader>ae',
+                        mapping = '<leader>ae',
                         modes = { 'v' },
                         short_name = 'expert',
                         auto_submit = true,
@@ -160,9 +215,20 @@ return {
                         },
                     },
                     tools = {
+                        -- Add specific tool configurations
+                        linter = {
+                            enabled = true,
+                            auto_fix = true,
+                        },
+                        formatter = {
+                            enabled = true,
+                            auto_format = true,
+                        },
                         opts = {
                             auto_submit_success = true,
                             auto_submit_errors = true,
+                            auto_format = true,
+                            save_context = true,
                         },
                     },
                 },
@@ -172,8 +238,40 @@ return {
                 action_palette = {
                     provider = 'default',
                 },
-                chat = {},
+                chat = {
+                    auto_scroll = false,
+                    icons = {
+                        pinned_buffer = ' ',
+                        watched_buffer = '👀 ',
+                    },
+                    window = {
+                        layout = 'float', -- float|vertical|horizontal|buffer
+                        position = 'right', -- left|right|top|bottom
+                        border = 'rounded',
+                        height = 0.9,
+                        width = 0.60,
+                        relative = 'editor',
+                        full_height = true,
+                        title = '', -- Add this line to remove the title
+                        opts = {
+                            scrolloff = 8,
+                            conceallevel = 3,
+                            concealcursor = 'nc',
+                            breakindent = true,
+                            cursorcolumn = false,
+                            cursorline = false,
+                            foldcolumn = '0',
+                            linebreak = true,
+                            list = false,
+                            numberwidth = 1,
+                            signcolumn = 'no',
+                            spell = false,
+                            wrap = true,
+                        },
+                    },
+                },
                 diff = {
+                    enabled = true,
                     provider = 'mini_diff',
                 },
             },

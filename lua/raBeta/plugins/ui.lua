@@ -34,17 +34,4 @@ return {
             vim.cmd [[colorscheme gruvbox-material]]
         end,
     },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-        ft = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
-        opts = {
-            max_length = 99999,
-            preview = {
-                icon_provider = "devicons",
-                filetypes = { "markdown", "norg", "rmd", "org", "vimwiki", "Avante" },
-                buf_ignore = {},
-            },
-        },
-    },
 }

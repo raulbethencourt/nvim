@@ -52,10 +52,11 @@ keymap('n', "<leader>pc", "<cmd>Lazy clean<cr>", 'Lazy [C]lean')
 -- print(vim.inspect())
 -- vim.notify(vim.inspect())
 
--- CodeCompanion
+-- CodeCompanion & mcphub
 keymap({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", "CodeCompanionActions")
-keymap({ "n", "v" }, "<LocalLeader>aa", "<cmd>CodeCompanionChat Toggle<cr>", "CodeCompanionChat")
+keymap({ "n", "v" }, "<C-f>", "<cmd>CodeCompanionChat Toggle<cr>", "CodeCompanionChat")
 keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>")
+keymap('n', '<leader>th', '<cmd>MCPHub<CR>', 'toggle mcp[H]ub')
 
 -- Git
 keymap('n', '<leader>gl', function()
