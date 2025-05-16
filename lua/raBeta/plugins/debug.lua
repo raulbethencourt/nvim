@@ -71,7 +71,7 @@ return {
                         { id = 'stacks',      size = 0.20 },
                         { id = 'breakpoints', size = 0.10 },
                     },
-                    size = 0.33,
+                    size = 0.40,
                     position = 'right',
                 },
                 {
