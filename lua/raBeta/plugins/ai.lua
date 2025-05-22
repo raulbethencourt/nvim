@@ -26,20 +26,15 @@ return {
                         condition = function()
                             local ft, bt = vim.bo.filetype, vim.bo.buftype
 
-                            if bt == 'nofile' and ft == 'codecompanion' then
-                                return true
-                            elseif bt == 'nofile' and ft == 'mcphub' then
-                                return true
-                            elseif bt == 'nofile' then
+                            if bt == 'nofile' and ft ~= 'codecompanion' and ft ~= 'mcphub' then
                                 return false
-                            else
-                                return true
                             end
+
+                            return true
                         end,
                     },
                 },
             },
-            { 'echasnovski/mini.diff', version = '*' },
             {
                 'ravitemer/mcphub.nvim',
                 dependencies = {
@@ -73,13 +68,98 @@ return {
                     })
                 end,
             },
+            system_prompt = function(opts)
+                return [[You are an AI programming assistant named "Paco". You are currently plugged in to the Neovim text editor on a user's machine.
+
+Your core tasks include:
+- Answering general programming questions.
+- Explaining how the code in a Neovim buffer works.
+- Reviewing the selected code in a Neovim buffer.
+- Generating unit tests for the selected code if demanded.
+- Proposing fixes for problems in the selected code.
+- Scaffolding code for a new workspace.
+- Finding relevant code to the user's query.
+- Proposing fixes for test failures.
+- Answering questions about Neovim.
+- Running tools.
+
+You must:
+- Follow the user's requirements carefully and to the letter.
+- Keep your answers short and impersonal, especially if the user responds with context outside of your tasks.
+- Minimize other prose.
+- If you don't know the answer don't prose anithing.
+- Use Markdown formatting in your answers.
+- Include the programming language name at the start of the Markdown code blocks.
+- Avoid including line numbers in code blocks.
+- Avoid wrapping the whole response in triple backticks.
+- Only return code that's relevant to the task at hand. You may not need to return all of the code that the user has shared.
+- Use actual line breaks instead of '\n' in your response to begin new lines.
+- Use '\n' only when you want a literal backslash followed by a character 'n'.
+- All non-code responses must be in %s.
+
+When given a task:
+1. Think step-by-step and describe your plan for what to build in pseudocode, written out in great detail, unless asked not to do so.
+2. Output the code in a single code block, being careful to only return relevant code. Don't give the all file as response only the change you'll made and the lines and 
+the context where you'll add this code.
+3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
+4. You can only give one reply for each conversation turn.]]
+            end,
             prompt_library = {
+                ['Bash Script Assistant'] = {
+                    strategy = 'chat',
+                    description = 'Help with creating and improving bash scripts',
+                    opts = {
+                        -- modes = { 'n', 'v' },
+                        auto_submit = false,
+                        stop_context_insertion = true,
+                        short_name = 'bash',
+                    },
+                    prompts = {
+                        {
+                            role = 'system',
+                            content = [[You are BashMaster, an expert in shell scripting with deep knowledge of bash, sh, and POSIX compliance.
+                            
+You create your code with the presepts of the unix philosophie in mind.
+
+Your task is to help create efficient, secure, and robust bash scripts that follow modern best practices including:
+- Proper error handling with set -e, -u, -o pipefail
+- Input validation and sanitization
+- Security considerations (avoiding command injection, etc.)
+- Performance optimization for shell operations
+- Clarity and maintainability through modular design
+- Compatibility considerations across different environments
+
+When providing solutions:
+1. Emphasize portability and reliability
+2. Include helpful comments explaining non-obvious parts
+3. Provide proper error handling where appropriate
+4. Suggest alternative approaches when relevant
+5. Always follow shellcheck recommendations
+]],
+                        },
+                        {
+                            role = 'user',
+                            content = function(context)
+                                local text = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+
+                                if text and text ~= '' then
+                                    return 'I have the following bash script/code:\n\n```bash\n' .. text .. '\n```\n\n'
+                                else
+                                    return 'I need help with creating a bash script for the following task:\n\n'
+                                end
+                            end,
+                            opts = {
+                                contains_code = true,
+                            },
+                        },
+                    },
+                },
                 ['Debug Assistant'] = {
                     strategy = 'chat',
                     description = 'Help with debugging code',
                     opts = {
                         mapping = '<leader>aa',
-                        modes = { 'v' },
+                        modes = { 'n', 'v' },
                         auto_submit = true,
                         stop_context_insertion = true,
                         short_name = 'debug',
@@ -110,7 +190,7 @@ return {
                     description = 'Write documentation for me',
                     opts = {
                         mapping = '<leader>ad',
-                        modes = { 'v' },
+                        modes = { 'n', 'v' },
                         index = 11,
                         is_slash_cmd = false,
                         auto_submit = true,
@@ -146,7 +226,7 @@ return {
                     description = 'Get some special advice from an LLM',
                     opts = {
                         mapping = '<leader>ae',
-                        modes = { 'v' },
+                        modes = { 'n', 'v' },
                         short_name = 'expert',
                         auto_submit = true,
                         stop_context_insertion = true,
@@ -235,9 +315,6 @@ return {
                 inline = { adapter = 'copilot' },
             },
             display = {
-                action_palette = {
-                    provider = 'default',
-                },
                 chat = {
                     auto_scroll = false,
                     icons = {
@@ -245,34 +322,10 @@ return {
                         watched_buffer = '👀 ',
                     },
                     window = {
-                        layout = 'float', -- float|vertical|horizontal|buffer
-                        position = 'right', -- left|right|top|bottom
-                        border = 'rounded',
-                        height = 0.9,
-                        width = 0.60,
-                        relative = 'editor',
-                        full_height = true,
+                        layout = 'vertical', -- float|vertical|horizontal|buffer
+                        width = 0.40,
                         title = '', -- Add this line to remove the title
-                        opts = {
-                            scrolloff = 8,
-                            conceallevel = 3,
-                            concealcursor = 'nc',
-                            breakindent = true,
-                            cursorcolumn = false,
-                            cursorline = false,
-                            foldcolumn = '0',
-                            linebreak = true,
-                            list = false,
-                            numberwidth = 1,
-                            signcolumn = 'no',
-                            spell = false,
-                            wrap = true,
-                        },
                     },
-                },
-                diff = {
-                    enabled = true,
-                    provider = 'mini_diff',
                 },
             },
         },
