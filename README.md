@@ -1,2 +1,159 @@
 # nvim
+
+<!--toc:start-->
+- [nvim](#nvim)
+  - [Install Instructions](#install-instructions)
+  - [Plugins](#plugins)
+    - [ai](#ai)
+    - [colorscheme](#colorscheme)
+    - [comment](#comment)
+    - [completion](#completion)
+    - [debugging](#debugging)
+    - [editing-support](#editing-support)
+    - [file-explorer](#file-explorer)
+    - [fuzzy-finder](#fuzzy-finder)
+    - [icon](#icon)
+    - [keybinding](#keybinding)
+    - [lsp](#lsp)
+    - [lsp-installer](#lsp-installer)
+    - [markdown-and-latex](#markdown-and-latex)
+    - [marks](#marks)
+    - [motion](#motion)
+    - [note-taking](#note-taking)
+    - [nvim-dev](#nvim-dev)
+    - [plugin-manager](#plugin-manager)
+    - [snippet](#snippet)
+    - [syntax](#syntax)
+    - [tmux](#tmux)
+  - [Language Servers](#language-servers)
+<!--toc:end-->
+
 My neovim config
+
+<a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/plugins?style=flat" /></a>
+<a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/leaderkey?style=flat" /></a>
+<a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/plugin-manager?style=flat" /></a>
+
+## Install Instructions
+
+ > Install requires Neovim 0.9+. Always review the code before installing a configuration.
+
+Clone the repository and install the plugins:
+
+```sh
+git clone git@github.com:raulbethencourt/nvim ~/.config/raulbethencourt/nvim
+```
+
+Open Neovim with this config:
+
+```sh
+NVIM_APPNAME=raulbethencourt/nvim/ nvim
+```
+
+## Plugins
+
+### ai
+
+- [olimorris/codecompanion.nvim](https://dotfyle.com/plugins/olimorris/codecompanion.nvim)
+
+### colorscheme
+
+- [sainnhe/gruvbox-material](https://dotfyle.com/plugins/sainnhe/gruvbox-material)
+
+### comment
+
+- [echasnovski/mini.comment](https://dotfyle.com/plugins/echasnovski/mini.comment)
+
+### completion
+
+- [zbirenbaum/copilot.lua](https://dotfyle.com/plugins/zbirenbaum/copilot.lua)
+- [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
+
+### debugging
+
+- [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
+- [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
+- [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
+
+### editing-support
+
+- [echasnovski/mini.operators](https://dotfyle.com/plugins/echasnovski/mini.operators)
+- [echasnovski/mini.ai](https://dotfyle.com/plugins/echasnovski/mini.ai)
+- [echasnovski/mini.splitjoin](https://dotfyle.com/plugins/echasnovski/mini.splitjoin)
+
+### file-explorer
+
+- [stevearc/oil.nvim](https://dotfyle.com/plugins/stevearc/oil.nvim)
+
+### fuzzy-finder
+
+- [nvim-telescope/telescope.nvim](https://dotfyle.com/plugins/nvim-telescope/telescope.nvim)
+
+### icon
+
+- [nvim-tree/nvim-web-devicons](https://dotfyle.com/plugins/nvim-tree/nvim-web-devicons)
+
+### keybinding
+
+- [folke/which-key.nvim](https://dotfyle.com/plugins/folke/which-key.nvim)
+- [max397574/better-escape.nvim](https://dotfyle.com/plugins/max397574/better-escape.nvim)
+
+### lsp
+
+- [neovim/nvim-lspconfig](https://dotfyle.com/plugins/neovim/nvim-lspconfig)
+- [ray-x/lsp_signature.nvim](https://dotfyle.com/plugins/ray-x/lsp_signature.nvim)
+- [nvimtools/none-ls.nvim](https://dotfyle.com/plugins/nvimtools/none-ls.nvim)
+- [j-hui/fidget.nvim](https://dotfyle.com/plugins/j-hui/fidget.nvim)
+- [onsails/lspkind.nvim](https://dotfyle.com/plugins/onsails/lspkind.nvim)
+
+### lsp-installer
+
+- [williamboman/mason.nvim](https://dotfyle.com/plugins/williamboman/mason.nvim)
+
+### markdown-and-latex
+
+- [OXY2DEV/markview.nvim](https://dotfyle.com/plugins/OXY2DEV/markview.nvim)
+
+### marks
+
+- [ThePrimeagen/harpoon](https://dotfyle.com/plugins/ThePrimeagen/harpoon)
+
+### motion
+
+- [folke/flash.nvim](https://dotfyle.com/plugins/folke/flash.nvim)
+
+### note-taking
+
+- [epwalsh/obsidian.nvim](https://dotfyle.com/plugins/epwalsh/obsidian.nvim)
+
+### nvim-dev
+
+- [folke/lazydev.nvim](https://dotfyle.com/plugins/folke/lazydev.nvim)
+- [nvim-lua/plenary.nvim](https://dotfyle.com/plugins/nvim-lua/plenary.nvim)
+
+### plugin-manager
+
+- [folke/lazy.nvim](https://dotfyle.com/plugins/folke/lazy.nvim)
+
+### snippet
+
+- [rafamadriz/friendly-snippets](https://dotfyle.com/plugins/rafamadriz/friendly-snippets)
+- [L3MON4D3/LuaSnip](https://dotfyle.com/plugins/L3MON4D3/LuaSnip)
+
+### syntax
+
+- [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
+- [kylechui/nvim-surround](https://dotfyle.com/plugins/kylechui/nvim-surround)
+- [echasnovski/mini.surround](https://dotfyle.com/plugins/echasnovski/mini.surround)
+- [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
+
+### tmux
+
+- [aserowy/tmux.nvim](https://dotfyle.com/plugins/aserowy/tmux.nvim)
+
+## Language Servers
+
+- html
+- intelephense
+
+ This readme was generated by [Dotfyle](https://dotfyle.com)
