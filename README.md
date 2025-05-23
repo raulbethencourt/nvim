@@ -30,6 +30,8 @@
 
 My neovim config
 
+![image](https://github.com/user-attachments/assets/41432653-fcbc-40ff-b9f0-253a0e6f9d13)
+
 <a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/plugins?style=flat" /></a>
 <a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/leaderkey?style=flat" /></a>
 <a href="https://dotfyle.com/raulbethencourt/nvim"><img src="https://dotfyle.com/raulbethencourt/nvim/badges/plugin-manager?style=flat" /></a>
