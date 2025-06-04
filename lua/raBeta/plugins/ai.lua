@@ -62,7 +62,7 @@ return {
                     return require('codecompanion.adapters').extend('copilot', {
                         schema = {
                             model = {
-                                default = 'claude-3.7-sonnet',
+                                default = 'claude-3.5-sonnet',
                             },
                         },
                     })
@@ -144,9 +144,9 @@ When providing solutions:
 
                                 if text and text ~= '' then
                                     return 'I have the following bash script/code:\n\n```bash\n' .. text .. '\n```\n\n'
-                                else
-                                    return 'I need help with creating a bash script for the following task:\n\n'
                                 end
+
+                                return 'I need help with creating a bash script for the following task:\n\n'
                             end,
                             opts = {
                                 contains_code = true,
@@ -271,23 +271,7 @@ When providing solutions:
                     roles = {
                         user = 'raBeta',
                     },
-                    keymaps = {
-                        send = {
-                            modes = {
-                                i = { '<C-CR>', '<C-s>' },
-                            },
-                        },
-                    },
                     slash_commands = {
-                        ['buffer'] = {
-                            opts = {
-                                keymaps = {
-                                    modes = {
-                                        i = '<C-b>',
-                                    },
-                                },
-                            },
-                        },
                         ['help'] = {
                             opts = {
                                 max_lines = 1000,

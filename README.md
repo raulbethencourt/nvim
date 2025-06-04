@@ -145,7 +145,6 @@ NVIM_APPNAME=raulbethencourt/nvim/ nvim
 ### syntax
 
 - [nvim-treesitter/nvim-treesitter-textobjects](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter-textobjects)
-- [kylechui/nvim-surround](https://dotfyle.com/plugins/kylechui/nvim-surround)
 - [echasnovski/mini.surround](https://dotfyle.com/plugins/echasnovski/mini.surround)
 - [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
 

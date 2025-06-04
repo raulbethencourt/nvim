@@ -5,17 +5,17 @@ return {
         'stevearc/oil.nvim',
         opts = {},
         -- Optional dependencies
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
             require('oil').setup {
                 skip_confirm_for_simple_edits = true,
                 keymaps = {
                     ['<C-h>'] = false,
                     ['<C-l>'] = false,
-                    ['<C-d>'] = "actions.preview_scroll_down",
-                    ['<C-u>'] = "actions.preview_scroll_up",
-                    ["<C-v>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
-                    ["<esc>"] = "actions.close",
+                    ['<C-d>'] = 'actions.preview_scroll_down',
+                    ['<C-u>'] = 'actions.preview_scroll_up',
+                    ['<C-v>'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+                    ['<esc>'] = 'actions.close',
                 },
                 view_options = {
                     show_hidden = true,
@@ -25,22 +25,21 @@ return {
                     max_width = 0,
                     max_height = 0,
                     win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                        winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
                     },
                 },
                 preview_win = {
                     win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                        winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
                     },
                 },
                 progress = {
                     win_options = {
-                        winhl = "Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal",
+                        winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
                     },
                 },
             }
-            keymap('n', '<leader>e', require('oil').toggle_float,
-                '[O]il [T]oggle float')
+            keymap('n', '<leader>e', require('oil').toggle_float, '[O]il [T]oggle float')
         end,
     },
     {
@@ -95,19 +94,19 @@ return {
         event = 'VeryLazy',
         config = function()
             keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', 'Toggle [U]ndoTree')
-        end
+        end,
     },
     {
         'folke/which-key.nvim',
-        event = "VeryLazy",
+        event = 'VeryLazy',
         dependencies = {
             'nvim-tree/nvim-web-devicons',
         },
         opts = {
             win = {
                 border = 'rounded',
-                title = false
-            }
+                title = false,
+            },
         },
     },
     {
