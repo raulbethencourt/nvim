@@ -1,6 +1,7 @@
 require 'raBeta.configs.lsp.languages.php'
 require 'raBeta.configs.lsp.languages.bash'
 require 'raBeta.configs.lsp.languages.lua'
+require 'raBeta.configs.lsp.languages.js'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'

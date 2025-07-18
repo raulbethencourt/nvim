@@ -76,6 +76,7 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
+        priority = 950,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
             'gbprod/php-enhanced-treesitter.nvim',
