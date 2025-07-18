@@ -1,6 +1,7 @@
 require 'raBeta.configs.lsp.languages.php'
 require 'raBeta.configs.lsp.languages.bash'
 require 'raBeta.configs.lsp.languages.lua'
+require 'raBeta.configs.lsp.languages.js'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
@@ -33,10 +34,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 border = "rounded",
             })
         end, 'toggle signature')
-        -- keymap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        keymap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-        -- keymap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]definition')
-        keymap('gd', vim.lsp.buf.definition, '[G]oto [D]definition')
+        keymap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        -- keymap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+        keymap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]definition')
+        -- keymap('gd', vim.lsp.buf.definition, '[G]oto [D]definition')
         keymap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         keymap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
         keymap('gl', '<cmd>lua vim.diagnostic.open_float()<CR>', '[G]oto [L]ine diagnostics')

@@ -158,7 +158,7 @@ When providing solutions:
                     strategy = 'chat',
                     description = 'Help with debugging code',
                     opts = {
-                        mapping = '<leader>aa',
+                        mapping = '<space>aa',
                         modes = { 'n', 'v' },
                         auto_submit = true,
                         stop_context_insertion = true,
@@ -185,11 +185,25 @@ When providing solutions:
                         },
                     },
                 },
+                ['Sugar'] = {
+                    strategy = 'chat',
+                    description = 'Working in a Sugar application',
+                    prompts = {
+                        {
+                            role = 'system',
+                            content = "You are an expert SugarCrm programmer, the stack for this code is php8.2, mysql5.7 and sugarcrm 25 lts, don't give me answer out of that, I want you to make propositions for simple and modular code.",
+                        },
+                        {
+                            role = 'user',
+                            content = "I'm working in SugarCrm application, can you help me with...",
+                        },
+                    },
+                },
                 ['Docusaurus'] = {
                     strategy = 'chat',
                     description = 'Write documentation for me',
                     opts = {
-                        mapping = '<leader>ad',
+                        mapping = '<space>ad',
                         modes = { 'n', 'v' },
                         index = 11,
                         is_slash_cmd = false,
@@ -225,12 +239,12 @@ When providing solutions:
                     strategy = 'chat',
                     description = 'Get some special advice from an LLM',
                     opts = {
-                        mapping = '<leader>ae',
+                        mapping = '<space>ae',
                         modes = { 'n', 'v' },
                         short_name = 'expert',
-                        auto_submit = true,
+                        auto_submit = false,
                         stop_context_insertion = true,
-                        user_prompt = true,
+                        user_prompt = false,
                     },
                     prompts = {
                         {
@@ -322,9 +336,9 @@ When providing solutions:
                         watched_buffer = '👀 ',
                     },
                     window = {
-                        layout = 'vertical', -- float|vertical|horizontal|buffer
+                        layout = 'vertical',
                         width = 0.40,
-                        title = '', -- Add this line to remove the title
+                        title = '',
                     },
                 },
             },

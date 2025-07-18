@@ -16,11 +16,18 @@ dap.configurations.php = {
         pathMappings = { ['/var/www/html/'] = "${workspaceFolder}" },
     },
     {
-        name = 'Listen for devilbox Xdebug',
+        name = 'Listen for Portal devilbox Xdebug',
         type = 'php',
         request = 'launch',
         port = 9000,
-        pathMappings = { ['/shared/httpd/portal/portal'] = "${workspaceFolder}" },
+        pathMappings = { ['/shared/httpd/portal/portal/'] = "${workspaceFolder}" },
+    },
+    {
+        name = 'Listen for SuiteCrm devilbox Xdebug',
+        type = 'php',
+        request = 'launch',
+        port = 9000,
+        pathMappings = { ['/shared/httpd/suitecrm8/suitecrm8/'] = "${workspaceFolder}" },
     },
     {
         name = 'Debug dockerized currently open script',

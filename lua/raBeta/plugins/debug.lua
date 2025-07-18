@@ -8,6 +8,7 @@ return {
         'theHamsta/nvim-dap-virtual-text',
         'jay-babu/mason-nvim-dap.nvim',
         "nvim-neotest/nvim-nio",
+        "mxsdev/nvim-dap-vscode-js",
     },
     config = function()
         local dap = require 'dap'
@@ -25,6 +26,7 @@ return {
                 'codelldb',
                 'php-debug-adapter',
                 'bash-debug-adapter',
+                'js-debug-adapter',
             },
         }
 
