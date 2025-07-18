@@ -24,13 +24,13 @@ M.create_floting_win = function(opts)
 
     ---@diagnostic disable-next-line: param-type-mismatch
     local win = vim.api.nvim_open_win(buf, true, {
-        style = opts.style or "minimal",
-        relative = "editor",
+        style = opts.style or 'minimal',
+        relative = 'editor',
         width = width,
         height = height,
         row = row,
         col = col,
-        border = opts.border or 'rounded'
+        border = opts.border or 'rounded',
     })
     return { buf = buf, win = win }
 end
@@ -59,7 +59,7 @@ M.launch_cmd_in_floating_win = function(cmd, opts)
                     vim.api.nvim_win_close(win.win, true)
                 end
             end
-        end
+        end,
     })
 
     -- Start in terminal mode
@@ -76,21 +76,14 @@ M.launch_cmd_with_dependencies = function(cmd, dependencies)
     for i, dependencie in pairs(dependencies) do
         local dependencie_response = vim.fn.system(dependencie)
 
-        if dependencie_response:match("command not found") then
-            vim.notify(
-                vim.fn.toupper(dependencie) .. " is not installed. You need to install it to make keymap works.",
-                4
-            )
+        if dependencie_response:match 'command not found' then
+            vim.notify(vim.fn.toupper(dependencie) .. ' is not installed. You need to install it to make keymap works.', 4)
             return
         end
     end
 
-    M.launch_cmd_in_floating_win(
-        cmd,
-        { close_term = true }
-    )
+    M.launch_cmd_in_floating_win(cmd, { close_term = true })
 end
-
 
 ---Creates alias for keymaps
 ---@param mode string|string[]
@@ -101,7 +94,7 @@ end
 ---
 M.keymap = function(mode, keys, func, desc)
     if not desc or string.len(desc) == 0 then
-        desc = "keymap"
+        desc = 'keymap'
     end
 
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
@@ -111,13 +104,13 @@ end
 ---@return nil
 ---
 M.visual_format = function()
-    vim.lsp.buf.format({
+    vim.lsp.buf.format {
         async = true,
         range = {
-            ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
-            ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-        }
-    })
+            ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
+            ['end'] = vim.api.nvim_buf_get_mark(0, '>'),
+        },
+    }
 end
 
 return M
