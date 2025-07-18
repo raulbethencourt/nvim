@@ -103,9 +103,23 @@ return {
             'nvim-tree/nvim-web-devicons',
         },
         opts = {
+            preset = 'modern',
             win = {
+                width = 50,
+                height = { min = 4, max = 80 },
+                col = math.huge,
+                row = math.huge,
                 border = 'rounded',
                 title = false,
+            },
+        },
+        keys = {
+            {
+                '<leader>?',
+                function()
+                    require('which-key').show { global = false }
+                end,
+                desc = 'Buffer Local Keymaps (which-key)',
             },
         },
     },
@@ -115,12 +129,12 @@ return {
     },
     {
         'nvim-telescope/telescope.nvim',
-        branch = "master",
+        branch = 'master',
         dependencies = {
             'nvim-lua/plenary.nvim',
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make'
+                build = 'make',
             },
             {
                 'nvim-telescope/telescope-live-grep-args.nvim',
@@ -132,5 +146,5 @@ return {
         config = function()
             require 'raBeta.configs.telescope'
         end,
-    }
+    },
 }
