@@ -13,11 +13,11 @@ return {
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
             {
-                "folke/lazydev.nvim",
-                ft = "lua",
+                'folke/lazydev.nvim',
+                ft = 'lua',
                 opts = {
                     library = {
-                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
                     },
                 },
             },
@@ -29,12 +29,12 @@ return {
         'ray-x/lsp_signature.nvim',
         event = 'BufRead',
         config = function()
-            require('lsp_signature').setup({
+            require('lsp_signature').setup {
                 bind = true,
                 handler_opts = {
-                    border = "rounded"
-                }
-            })
+                    border = 'rounded',
+                },
+            }
         end,
     },
     {
@@ -52,12 +52,12 @@ return {
             'hrsh7th/cmp-vsnip',
             'onsails/lspkind.nvim',
             {
-                "zbirenbaum/copilot-cmp",
-                dependencies = { "zbirenbaum/copilot.lua" },
-                cmd = "Copilot",
+                'zbirenbaum/copilot-cmp',
+                dependencies = { 'zbirenbaum/copilot.lua' },
+                cmd = 'Copilot',
                 config = function()
-                    require("copilot_cmp").setup({
-                        method = "getCompletionsCycling",
+                    require('copilot_cmp').setup {
+                        method = 'getCompletionsCycling',
                         formatters = {
                             insert_text = function(entry, vim_item)
                                 return entry.completion_item.insertText
@@ -66,12 +66,12 @@ return {
                                 return entry.completion_item.label
                             end,
                         },
-                    })
+                    }
                 end,
             },
         },
         config = function()
-            require('raBeta.configs.lsp.cmp')
+            require 'raBeta.configs.lsp.cmp'
         end,
     },
     {

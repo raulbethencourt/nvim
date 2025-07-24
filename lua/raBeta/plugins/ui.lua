@@ -1,22 +1,34 @@
 return {
     {
-        "j-hui/fidget.nvim",
+        'uga-rosa/ccc.nvim',
+        config = function()
+            require('ccc').setup {
+                highlighter = {
+                    auto_enable = true,
+                    lsp = true,
+                },
+            }
+            vim.keymap.set('n', '<leader>cp', '<cmd>CccPick<CR>', { desc = '[C]cc [P]ick' })
+            vim.keymap.set('n', '<leader>cc', '<cmd>CccConvert<CR>', { desc = '[C]cc [C]onvert' })
+        end,
+    },
+    {
+        'j-hui/fidget.nvim',
         opts = {
             notification = {
                 override_vim_notify = true,
-                view = { group_separator_hl = "Normal", },
+                view = { group_separator_hl = 'Normal' },
                 window = {
-                    normal_hl = "Normal",
+                    normal_hl = 'Normal',
                     winblend = 0,
-                    border = "rounded",
-                    border_hl = "Normal",
-                    align = "top",
-                    relative = "editor",
+                    border = 'rounded',
+                    border_hl = 'Normal',
+                    align = 'top',
+                    relative = 'editor',
                     x_padding = 3,
                     y_padding = 1,
                 },
             },
-
         },
     },
     {
