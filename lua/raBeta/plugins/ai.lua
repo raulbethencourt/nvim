@@ -6,6 +6,7 @@ return {
             'j-hui/fidget.nvim',
             'nvim-lua/plenary.nvim',
             'nvim-treesitter/nvim-treesitter',
+            'zbirenbaum/copilot.lua',
             {
                 'OXY2DEV/markview.nvim',
                 lazy = false,
@@ -96,6 +97,7 @@ You must:
 - Use actual line breaks instead of '\n' in your response to begin new lines.
 - Use '\n' only when you want a literal backslash followed by a character 'n'.
 - All non-code responses must be in %s.
+- Never change files directly, only make propositions inside the chat window.
 
 When given a task:
 1. Think step-by-step and describe your plan for what to build in pseudocode, written out in great detail, unless asked not to do so.
@@ -196,6 +198,20 @@ When providing solutions:
                         {
                             role = 'user',
                             content = "I'm working in SugarCrm application, can you help me with...",
+                        },
+                    },
+                },
+                ['Suite'] = {
+                    strategy = 'chat',
+                    description = 'Working in a Suite application',
+                    prompts = {
+                        {
+                            role = 'system',
+                            content = "You are an expert SuiteCrm programmer, the stack for this code is php8.2, mysql5.7 and suitecrm 8, don't give me answer out of that, I want you to make propositions for simple and modular code.",
+                        },
+                        {
+                            role = 'user',
+                            content = "I'm working in SuiteCrm application, can you help me with...",
                         },
                     },
                 },

@@ -12,15 +12,6 @@ return {
         dependencies = {
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
-            {
-                'folke/lazydev.nvim',
-                ft = 'lua',
-                opts = {
-                    library = {
-                        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-                    },
-                },
-            },
             'WhoIsSethDaniel/mason-tool-installer.nvim',
             { 'j-hui/fidget.nvim' },
         },
@@ -50,25 +41,7 @@ return {
             'hrsh7th/cmp-cmdline',
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'hrsh7th/cmp-vsnip',
-            'onsails/lspkind.nvim',
-            {
-                'zbirenbaum/copilot-cmp',
-                dependencies = { 'zbirenbaum/copilot.lua' },
-                cmd = 'Copilot',
-                config = function()
-                    require('copilot_cmp').setup {
-                        method = 'getCompletionsCycling',
-                        formatters = {
-                            insert_text = function(entry, vim_item)
-                                return entry.completion_item.insertText
-                            end,
-                            label = function(entry, vim_item)
-                                return entry.completion_item.label
-                            end,
-                        },
-                    }
-                end,
-            },
+            'onsails/lspkind.nvim'
         },
         config = function()
             require 'raBeta.configs.lsp.cmp'

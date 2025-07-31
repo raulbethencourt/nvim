@@ -65,7 +65,6 @@ cmp.setup {
             },
             ellipsis_char = '...',    -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
             show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-            symbol_map = { Copilot = "" },
             before = function(entry, vim_item)
                 return vim_item
             end
@@ -106,11 +105,9 @@ cmp.setup {
         end, { 'i', 's' }),
     },
     sources = {
-        { name = 'copilot' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = "lazydev" },
         { name = 'path' },
         { name = 'buffer' },
         { name = 'render-markdown' },
