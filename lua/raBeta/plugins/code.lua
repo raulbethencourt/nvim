@@ -93,6 +93,8 @@ return {
         'mbbill/undotree',
         event = 'VeryLazy',
         config = function()
+            vim.g.undotree_DiffAutoOpen = false
+            vim.g.undotree_SetFocusWhenToggle = true
             keymap('n', '<leader>u', '<cmd>UndotreeToggle<CR>', 'Toggle [U]ndoTree')
         end,
     },

@@ -21,7 +21,6 @@ return {
                             'org',
                             'vimwiki',
                             'codecompanion',
-                            'mcphub',
                         },
                         ignore_buftypes = {},
                         condition = function()
@@ -36,28 +35,10 @@ return {
                     },
                 },
             },
-            {
-                'ravitemer/mcphub.nvim',
-                dependencies = {
-                    'nvim-lua/plenary.nvim',
-                },
-                cmd = 'MCPHub',
-                build = 'npm install -g mcp-hub@latest',
-                config = true,
-            },
         },
         opts = {
             log_level = 'INFO',
-            extensions = {
-                mcphub = {
-                    callback = 'mcphub.extensions.codecompanion',
-                    opts = {
-                        make_vars = true,
-                        make_slash_commands = true,
-                        show_result_in_chat = true,
-                    },
-                },
-            },
+            extensions = {},
             adapters = {
                 copilot = function()
                     return require('codecompanion.adapters').extend('copilot', {
