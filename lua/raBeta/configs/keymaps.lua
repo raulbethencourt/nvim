@@ -24,12 +24,10 @@ end, 'toggle [S]pell')
 keymap('n', '<leader>tr', function()
     vim.o.relativenumber = not vim.o.relativenumber
 end, 'toggle [R]elativenumber')
-keymap('n', '<leader>tl', function()
-    vim.o.ls = vim.o.ls == 0 and 2 or 0
-end, 'toggle status[L]ine')
 keymap('n', '<leader>tj', function()
     vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
-end, 'toggle command [H]eight')
+    vim.o.ls = vim.o.ls == 0 and 2 or 0
+end, 'toggle command [H]eight and show line')
 keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
 keymap('n', '<leader>tc', function()
     local status = require("copilot.client").is_disabled()
