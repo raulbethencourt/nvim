@@ -2,6 +2,7 @@ require 'raBeta.configs.lsp.languages.php'
 require 'raBeta.configs.lsp.languages.bash'
 require 'raBeta.configs.lsp.languages.lua'
 require 'raBeta.configs.lsp.languages.js'
+require 'raBeta.configs.lsp.languages.typescript'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local mason_lspconfig = require 'mason-lspconfig'
@@ -98,6 +99,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Servers configuration
 local servers = {
+    angularls = {},
     emmet_ls = {
         filetypes = { 'twig', 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
         init_options = {

@@ -17,6 +17,22 @@
             {
                 "language": "sh",
                 "path": "./sh.json"
+            },
+            {
+                "language": "typescript",
+                "path": "./angular/typescript.json"
+            },
+            {
+                "language": "javascript",
+                "path": "./angular/javascript.json"
+            },
+            {
+                "language": "jsonc",
+                "path": "./angular/jsonc.json"
+            },
+            {
+                "language": "html",
+                "path": "./angular/html.json"
             }
         ]
     }
