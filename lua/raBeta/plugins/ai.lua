@@ -40,18 +40,22 @@ return {
             log_level = 'INFO',
             extensions = {},
             adapters = {
-                copilot = function()
-                    return require('codecompanion.adapters').extend('copilot', {
-                        schema = {
-                            model = {
-                                default = 'claude-3.5-sonnet',
+                http = {
+                    copilot = function()
+                        return require('codecompanion.adapters').extend('copilot', {
+                            schema = {
+                                model = {
+                                    -- default = 'claude-sonnet-4',
+                                    default = 'claude-3.7-sonnet',
+                                },
                             },
-                        },
-                    })
-                end,
+                        })
+                    end,
+                },
             },
             system_prompt = function(opts)
-                return [[You are an AI programming assistant named "Paco". You are currently plugged in to the Neovim text editor on a user's machine.
+                local language = opts.language or "English"
+                return string.format([[You are an AI programming assistant named "Paco". You are currently plugged in to the Neovim text editor on a user's machine.
 
 Your core tasks include:
 - Answering general programming questions.
@@ -85,7 +89,7 @@ When given a task:
 2. Output the code in a single code block, being careful to only return relevant code. Don't give the all file as response only the change you'll made and the lines and 
 the context where you'll add this code.
 3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
-4. You can only give one reply for each conversation turn.]]
+4. You can only give one reply for each conversation turn.]], language)
             end,
             prompt_library = {
                 ['Bash Script Assistant'] = {

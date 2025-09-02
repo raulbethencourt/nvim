@@ -15,7 +15,7 @@ local get_intelephense_license = function()
 end
 
 -- NOTE: stop saving lsp logs, change to 'debug' to see them
-vim.lsp.set_log_level 'off'
+vim.lsp.log.set_level 'off'
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
         -- TODO: refactor this code
@@ -31,9 +31,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
             require('lsp_signature').toggle_float_win()
         end, 'toggle signature')
         keymap('K', function()
-            vim.lsp.buf.hover({
-                border = "rounded",
-            })
+            vim.lsp.buf.hover {
+                border = 'rounded',
+            }
         end, 'toggle signature')
         keymap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
         -- keymap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
@@ -47,8 +47,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap('<leader>lf', function()
             vim.lsp.buf.format { async = true }
         end, '[L]sp [F]ormat')
-        vim.keymap.set('v', '<leader>lf', require("raBeta.utils.utils").visual_format,
-            { buffer = args.buf, desc = "Visual [F]ormat" })
+        vim.keymap.set('v', '<leader>lf', require('raBeta.utils.utils').visual_format, { buffer = args.buf, desc = 'Visual [F]ormat' })
 
         keymap('<leader>lD', '<cmd>Telescope diagnostics<CR>', '[L]sp Telescope Workspace [D]iagnostics')
 
@@ -94,7 +93,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap('<leader>ll', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, '[L]sp [W]orkspace [L]ist Folders')
-    end
+    end,
 })
 
 -- Servers configuration
@@ -180,7 +179,7 @@ vim.filetype.add {
     },
 }
 vim.lsp.config('*', {
-    capabilities = capabilities
+    capabilities = capabilities,
 })
 
 -- Diagnostic configuration
