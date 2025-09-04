@@ -96,7 +96,9 @@ keymap('n', '<leader>ci', function()
 end, '[C]md [I]nput')
 
 -- General
-keymap('n', '<leader>ze', ':messages<cr>', 'Messages')
+keymap('n', '<leader>ze', function()
+    vim.cmd('messages | Fidget history')
+end, 'Messages and notifications')
 keymap('n', '<leader>zf', ':lua print(vim.api.nvim_buf_get_name(0))<cr>', 'Full path')
 keymap('n', '<leader>zi', '<C-w>|', 'Maximize')
 keymap('n', '<leader>zn', ':nohlsearch<cr>', '[N]o highlights')

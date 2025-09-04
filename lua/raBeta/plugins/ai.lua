@@ -1,112 +1,37 @@
 return {
     {
-        'olimorris/codecompanion.nvim',
+        'yetone/avante.nvim',
+        build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
         event = 'VeryLazy',
-        dependencies = {
-            'j-hui/fidget.nvim',
-            'nvim-lua/plenary.nvim',
-            'nvim-treesitter/nvim-treesitter',
-            'zbirenbaum/copilot.lua',
-            {
-                'OXY2DEV/markview.nvim',
-                lazy = false,
-                opts = {
-                    max_length = 99999,
-                    preview = {
-                        filetypes = {
-                            'md',
-                            'markdown',
-                            'norg',
-                            'rmd',
-                            'org',
-                            'vimwiki',
-                            'codecompanion',
-                        },
-                        ignore_buftypes = {},
-                        condition = function()
-                            local ft, bt = vim.bo.filetype, vim.bo.buftype
-
-                            if bt == 'nofile' and ft ~= 'codecompanion' and ft ~= 'mcphub' then
-                                return false
-                            end
-
-                            return true
-                        end,
-                    },
-                },
-            },
-        },
+        version = false,
         opts = {
-            log_level = 'INFO',
-            extensions = {},
-            adapters = {
-                http = {
-                    copilot = function()
-                        return require('codecompanion.adapters').extend('copilot', {
-                            schema = {
-                                model = {
-                                    -- default = 'claude-sonnet-4',
-                                    default = 'claude-3.7-sonnet',
-                                },
-                            },
-                        })
-                    end,
+            instructions_file = 'avante.md',
+            provider = 'copilot',
+            providers = {
+                copilot = {
+                    model = 'claude-sonnet-4',
+                    -- model = 'claude-5.7-sonnet',
                 },
             },
-            system_prompt = function(opts)
-                local language = opts.language or "English"
-                return string.format([[You are an AI programming assistant named "Paco". You are currently plugged in to the Neovim text editor on a user's machine.
+            behaviour = {
+                auto_apply_diff_after_generation = false, -- Disable automatic diff application
+                auto_suggestions = false, -- Disable auto suggestions
+                support_paste_from_clipboard = false,
+                auto_approve_tool_permissions = true,
+            },
+            windows = {
+                border = 'rounded',
+                width = 40,
+                height = 80,
+            },
+            shortcuts = {
+                {
+                    name = 'bash',
+                    description = 'Bash Script Assistant',
+                    details = 'Expert bash scripting with security and best practices',
+                    prompt = [[You are BashMaster, an expert in shell scripting with deep knowledge of bash, sh, and POSIX compliance.
 
-Your core tasks include:
-- Answering general programming questions.
-- Explaining how the code in a Neovim buffer works.
-- Reviewing the selected code in a Neovim buffer.
-- Generating unit tests for the selected code if demanded.
-- Proposing fixes for problems in the selected code.
-- Scaffolding code for a new workspace.
-- Finding relevant code to the user's query.
-- Proposing fixes for test failures.
-- Answering questions about Neovim.
-- Running tools.
-
-You must:
-- Follow the user's requirements carefully and to the letter.
-- Keep your answers short and impersonal, especially if the user responds with context outside of your tasks.
-- Minimize other prose.
-- If you don't know the answer don't prose anithing.
-- Use Markdown formatting in your answers.
-- Include the programming language name at the start of the Markdown code blocks.
-- Avoid including line numbers in code blocks.
-- Avoid wrapping the whole response in triple backticks.
-- Only return code that's relevant to the task at hand. You may not need to return all of the code that the user has shared.
-- Use actual line breaks instead of '\n' in your response to begin new lines.
-- Use '\n' only when you want a literal backslash followed by a character 'n'.
-- All non-code responses must be in %s.
-- Never change files directly, only make propositions inside the chat window.
-
-When given a task:
-1. Think step-by-step and describe your plan for what to build in pseudocode, written out in great detail, unless asked not to do so.
-2. Output the code in a single code block, being careful to only return relevant code. Don't give the all file as response only the change you'll made and the lines and 
-the context where you'll add this code.
-3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
-4. You can only give one reply for each conversation turn.]], language)
-            end,
-            prompt_library = {
-                ['Bash Script Assistant'] = {
-                    strategy = 'chat',
-                    description = 'Help with creating and improving bash scripts',
-                    opts = {
-                        -- modes = { 'n', 'v' },
-                        auto_submit = false,
-                        stop_context_insertion = true,
-                        short_name = 'bash',
-                    },
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = [[You are BashMaster, an expert in shell scripting with deep knowledge of bash, sh, and POSIX compliance.
-                            
-You create your code with the presepts of the unix philosophie in mind.
+You create your code with the precepts of the unix philosophy in mind.
 
 Your task is to help create efficient, secure, and robust bash scripts that follow modern best practices including:
 - Proper error handling with set -e, -u, -o pipefail
@@ -121,209 +46,170 @@ When providing solutions:
 2. Include helpful comments explaining non-obvious parts
 3. Provide proper error handling where appropriate
 4. Suggest alternative approaches when relevant
-5. Always follow shellcheck recommendations
-]],
-                        },
-                        {
-                            role = 'user',
-                            content = function(context)
-                                local text = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+5. Always follow shellcheck recommendations]],
+                },
+                {
+                    name = 'debug',
+                    description = 'Debug Assistant',
+                    details = 'Help debug code issues and suggest solutions',
+                    prompt = 'You are an expert debugger. Analyze the code and suggest potential issues and solutions. Focus on identifying bugs, performance issues, and providing clear explanations with actionable fixes.',
+                },
+                {
+                    name = 'symfony',
+                    description = 'Symfony Expert',
+                    details = 'Symfony 7.2 LTS development assistance',
+                    prompt = [[You are an expert Symfony programmer working with PHP 8.2, MySQL 8, and Symfony 7.2 LTS. 
 
-                                if text and text ~= '' then
-                                    return 'I have the following bash script/code:\n\n```bash\n' .. text .. '\n```\n\n'
-                                end
+Provide simple and modular code solutions following Symfony best practices:
+- Use proper dependency injection
+- Follow Symfony coding standards
+- Implement proper error handling
+- Use Doctrine best practices
+- Follow security guidelines
+- Write maintainable and testable code]],
+                },
+                {
+                    name = 'sugar',
+                    description = 'SugarCRM Expert',
+                    details = 'SugarCRM 25 LTS development assistance',
+                    prompt = [[You are an expert SugarCRM programmer working with PHP 8.2, MySQL 5.7, and SugarCRM 25 LTS.
 
-                                return 'I need help with creating a bash script for the following task:\n\n'
-                            end,
-                            opts = {
-                                contains_code = true,
-                            },
-                        },
-                    },
+Provide simple and modular code solutions following SugarCRM best practices:
+- Use proper SugarCRM architecture patterns
+- Follow SugarCRM coding standards
+- Implement proper customization strategies
+- Use SugarCRM APIs effectively
+- Focus on upgrade-safe customizations]],
                 },
-                ['Debug Assistant'] = {
-                    strategy = 'chat',
-                    description = 'Help with debugging code',
-                    opts = {
-                        mapping = '<space>aa',
-                        modes = { 'n', 'v' },
-                        auto_submit = true,
-                        stop_context_insertion = true,
-                        short_name = 'debug',
-                    },
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = 'You are an expert debugger. Analyze the code and suggest potential issues and solutions.',
-                        },
-                    },
-                },
-                ['Symfony'] = {
-                    strategy = 'chat',
-                    description = 'Working in a Symfony application',
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = "You are an expert Symfony programmer, the stack for this code is php8.2, mysql8 and symfony 7.2 lts, don't give me answer out of that, I want you to make propositions for simple and modular code.",
-                        },
-                        {
-                            role = 'user',
-                            content = "I'm working in symfony application, can you help me with...",
-                        },
-                    },
-                },
-                ['Sugar'] = {
-                    strategy = 'chat',
-                    description = 'Working in a Sugar application',
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = "You are an expert SugarCrm programmer, the stack for this code is php8.2, mysql5.7 and sugarcrm 25 lts, don't give me answer out of that, I want you to make propositions for simple and modular code.",
-                        },
-                        {
-                            role = 'user',
-                            content = "I'm working in SugarCrm application, can you help me with...",
-                        },
-                    },
-                },
-                ['Suite'] = {
-                    strategy = 'chat',
-                    description = 'Working in a Suite application',
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = "You are an expert SuiteCrm programmer, the stack for this code is php8.2, mysql5.7 and suitecrm 8, don't give me answer out of that, I want you to make propositions for simple and modular code.",
-                        },
-                        {
-                            role = 'user',
-                            content = "I'm working in SuiteCrm application, can you help me with...",
-                        },
-                    },
-                },
-                ['Docusaurus'] = {
-                    strategy = 'chat',
-                    description = 'Write documentation for me',
-                    opts = {
-                        mapping = '<space>ad',
-                        modes = { 'n', 'v' },
-                        index = 11,
-                        is_slash_cmd = false,
-                        auto_submit = true,
-                        stop_context_insertion = true,
-                        short_name = 'docs',
-                    },
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = function(context)
-                                return 'I want you to act as a senior ' .. context.filetype .. ' developer.'
-                            end,
-                        },
-                        {
-                            role = 'user',
-                            content = function(context)
-                                local text = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+                {
+                    name = 'suite',
+                    description = 'SuiteCRM Expert',
+                    details = 'SuiteCRM 8 development assistance',
+                    prompt = [[You are an expert SuiteCRM programmer working with PHP 8.2, MySQL 5.7, and SuiteCRM 8.
 
-                                return 'I have the following code:\n\n```'
-                                    .. context.filetype
-                                    .. '\n'
-                                    .. text
-                                    .. '\n```\n\n I need to make documentation for my code'
-                            end,
-                            opts = {
-                                contains_code = true,
-                            },
-                        },
-                    },
+Provide simple and modular code solutions following SuiteCRM best practices:
+- Use proper SuiteCRM architecture patterns
+- Follow SuiteCRM coding standards
+- Implement proper customization strategies
+- Use SuiteCRM APIs effectively
+- Focus on maintainable customizations]],
                 },
-                ['Code Expert'] = {
-                    strategy = 'chat',
-                    description = 'Get some special advice from an LLM',
-                    opts = {
-                        mapping = '<space>ae',
-                        modes = { 'n', 'v' },
-                        short_name = 'expert',
-                        auto_submit = false,
-                        stop_context_insertion = true,
-                        user_prompt = false,
-                    },
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = function(context)
-                                return 'I want you to act as a senior '
-                                    .. context.filetype
-                                    .. ' developer. I will ask you specific questions and I want you to return concise explanations and codeblock examples.'
-                            end,
-                        },
-                        {
-                            role = 'user',
-                            content = function(context)
-                                local text = require('codecompanion.helpers.actions').get_code(context.start_line, context.end_line)
+                {
+                    name = 'docs',
+                    description = 'Documentation Assistant',
+                    details = 'Generate comprehensive documentation',
+                    prompt = 'Generate comprehensive documentation for the provided code. Include purpose, parameters, return values, usage examples, and any important notes. Format using clear headings and code blocks.',
+                },
+                {
+                    name = 'expert',
+                    description = 'Code Expert Analysis',
+                    details = 'Get expert analysis and advice',
+                    prompt = 'Act as a senior developer expert. Provide concise explanations and practical code examples. Focus on best practices, potential improvements, and answering specific technical questions with actionable advice.',
+                },
+                {
+                    name = 'review',
+                    description = 'Code Review',
+                    details = 'Thorough code review with improvements',
+                    prompt = 'Perform a thorough code review. Check for: security issues, performance optimizations, code clarity, adherence to best practices, potential bugs, and maintainability concerns. Provide specific suggestions for improvement.',
+                },
+            },
+        },
 
-                                return 'I have the following code:\n\n```' .. context.filetype .. '\n' .. text .. '\n```\n\n'
-                            end,
-                            opts = {
-                                contains_code = true,
-                            },
-                        },
-                    },
-                },
-                ['Code Review'] = {
-                    strategy = 'chat',
-                    description = 'Review code for improvements',
-                    prompts = {
-                        {
-                            role = 'system',
-                            content = 'Perform a thorough code review. Check for: security issues, performance optimizations, code clarity, and adherence to best practices.',
+        system_prompt = function(opts)
+            local language = opts.language or 'English'
+            return string.format(
+                [[You are an AI programming assistant named "Paco". You are currently plugged in to the Neovim text editor on a user's machine.
+
+    Your core tasks include:
+    - Answering general programming questions.
+    - Answering always in english.
+    - Explaining how the code in a Neovim buffer works.
+    - Reviewing the selected code in a Neovim buffer.
+    - Generating unit tests for the selected code if demanded.
+    - Proposing fixes for problems in the selected code.
+    - Scaffolding code for a new workspace.
+    - Finding relevant code to the user's query.
+    - Proposing fixes for test failures.
+    - Answering questions about Neovim.
+    - Running tools.
+
+    You must:
+    - Never change files directly, only make propositions inside the chat window.
+    - Follow the user's requirements carefully and to the letter.
+    - Keep your answers short and impersonal, especially if the user responds with context outside of your tasks.
+    - Minimize other prose.
+    - If you don't know the answer don't prose anithing.
+    - Use Markdown formatting in your answers.
+    - Include the programming language name at the start of the Markdown code blocks.
+    - Avoid including line numbers in code blocks.
+    - Avoid wrapping the whole response in triple backticks.
+    - Only return code that's relevant to the task at hand. You may not need to return all of the code that the user has shared.
+    - Use actual line breaks instead of '\n' in your response to begin new lines.
+    - Use '\n' only when you want a literal backslash followed by a character 'n'.
+    - All non-code responses must be in %s.
+
+    When given a task:
+    1. Think step-by-step and describe your plan for what to build in pseudocode, written out in great detail, unless asked not to do so.
+    2. Output the code in a single code block, being careful to only return relevant code. Don't give the all file as response only the change you'll made and the lines and
+    the context where you'll add this code.
+    3. You should always generate short suggestions for the next user turns that are relevant to the conversation.
+    4. You can only give one reply for each conversation turn.]],
+                language
+            )
+        end,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'MunifTanjim/nui.nvim',
+            'echasnovski/mini.pick',
+            'nvim-telescope/telescope.nvim',
+            'hrsh7th/nvim-cmp',
+            'stevearc/dressing.nvim',
+            'nvim-tree/nvim-web-devicons',
+            'zbirenbaum/copilot.lua',
+            {
+                'HakonHarnes/img-clip.nvim',
+                event = 'VeryLazy',
+                opts = {
+                    default = {
+                        embed_image_as_base64 = false,
+                        prompt_for_file_name = false,
+                        drag_and_drop = {
+                            insert_mode = true,
                         },
                     },
                 },
             },
-            strategies = {
-                chat = {
-                    adapter = 'copilot',
-                    roles = {
-                        user = 'raBeta',
+            {
+                'OXY2DEV/markview.nvim',
+                lazy = false,
+                ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
+                opts = {
+                    max_length = 99999,
+                    code_blocks = {
+                        style = 'language',
+                        hl = 'markview_code_block',
                     },
-                    slash_commands = {
-                        ['help'] = {
-                            opts = {
-                                max_lines = 1000,
-                            },
+                    preview = {
+                        filetypes = {
+                            'md',
+                            'markdown',
+                            'norg',
+                            'rmd',
+                            'org',
+                            'vimwiki',
+                            'codecompanion',
+                            'Avante',
                         },
-                    },
-                    tools = {
-                        -- Add specific tool configurations
-                        linter = {
-                            enabled = true,
-                            auto_fix = true,
-                        },
-                        formatter = {
-                            enabled = true,
-                            auto_format = true,
-                        },
-                        opts = {
-                            auto_submit_success = true,
-                            auto_submit_errors = true,
-                            auto_format = true,
-                            save_context = true,
-                        },
-                    },
-                },
-                inline = { adapter = 'copilot' },
-            },
-            display = {
-                chat = {
-                    auto_scroll = false,
-                    icons = {
-                        pinned_buffer = ' ',
-                        watched_buffer = '👀 ',
-                    },
-                    window = {
-                        layout = 'vertical',
-                        width = 0.40,
-                        title = '',
+                        ignore_buftypes = {},
+                        condition = function()
+                            local ft, bt = vim.bo.filetype, vim.bo.buftype
+
+                            if bt == 'nofile' and ft ~= 'codecompanion' and ft ~= 'mcphub' then
+                                return false
+                            end
+
+                            return true
+                        end,
                     },
                 },
             },
