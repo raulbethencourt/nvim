@@ -17,7 +17,7 @@ return {
                 auto_apply_diff_after_generation = false, -- Disable automatic diff application
                 auto_suggestions = false, -- Disable auto suggestions
                 support_paste_from_clipboard = false,
-                auto_approve_tool_permissions = true,
+                auto_approve_tool_permissions = false,
             },
             windows = {
                 border = 'rounded',
@@ -114,7 +114,6 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                 },
             },
         },
-
         system_prompt = function(opts)
             local language = opts.language or 'English'
             return string.format(
@@ -134,7 +133,7 @@ Provide simple and modular code solutions following SuiteCRM best practices:
     - Running tools.
 
     You must:
-    - Never change files directly, only make propositions inside the chat window.
+    - Never change files directly.
     - Follow the user's requirements carefully and to the letter.
     - Keep your answers short and impersonal, especially if the user responds with context outside of your tasks.
     - Minimize other prose.
