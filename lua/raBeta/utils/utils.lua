@@ -1,5 +1,9 @@
 M = {}
 
+-- NOTE: code to debug table
+-- print(vim.inspect())
+-- vim.notify(vim.inspect())
+
 ---Return a floating window
 ---@param opts? {[any]?:integer}
 ---@return [any]

@@ -46,15 +46,6 @@ keymap('n', "<leader>pi", '<cmd>Lazy install<cr>', 'Lazy [I]nstall')
 keymap('n', "<leader>pu", "<cmd>Lazy update<cr>", 'Lazy [U]update')
 keymap('n', "<leader>pc", "<cmd>Lazy clean<cr>", 'Lazy [C]lean')
 
--- NOTE: code to debug table
--- print(vim.inspect())
--- vim.notify(vim.inspect())
-
--- CodeCompanion & mcphub
-keymap({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanionActions<cr>", "CodeCompanionActions")
-keymap({ "n", "v" }, "<C-f>", "<cmd>CodeCompanionChat Toggle<cr>", "CodeCompanionChat")
-keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>")
-keymap('n', '<leader>th', '<cmd>MCPHub<CR>', 'toggle mcp[H]ub')
 
 -- Git
 keymap('n', '<leader>gl', function()
