@@ -5,12 +5,15 @@ return {
         event = 'VeryLazy',
         version = false,
         opts = {
+            selection = {
+                hint_display = 'none',
+            },
             instructions_file = 'avante.md',
             provider = 'copilot',
             providers = {
                 copilot = {
-                    model = 'claude-sonnet-4',
-                    -- model = 'claude-5.7-sonnet',
+                    -- model = 'claude-sonnet-4',
+                    model = 'claude-3.7-sonnet',
                 },
             },
             behaviour = {
@@ -186,7 +189,7 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                     max_length = 99999,
                     code_blocks = {
                         style = 'language',
-                        hl = 'markview_code_block',
+                        border_hl = 'markview_code_block',
                     },
                     preview = {
                         filetypes = {
