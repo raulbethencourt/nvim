@@ -98,13 +98,13 @@
     },
     "Var_dump and exit": {
         "prefix": "vdp",
-        "body": ["echo'<pre>';var_dump($${1:varibale});echo'</pre>';exit;"],
+        "body": ["die(var_dump($${1:varibale}));"],
         "description": "Var_dump and exit wih pre tag."
     },
     "Var_dump and find": {
         "prefix": "vdf",
         "body": [
-            "echo'<pre>';var_dump('${1:Hello World} !! =====>>');echo'</pre>';exit;"
+            "die(var_dump('${1:Hello World} !! =====>>'));"
         ],
         "description": "Var_dump to find position."
     },
