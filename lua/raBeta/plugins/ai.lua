@@ -206,7 +206,7 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                         condition = function()
                             local ft, bt = vim.bo.filetype, vim.bo.buftype
 
-                            if bt == 'nofile' and ft ~= 'codecompanion' and ft ~= 'mcphub' then
+                            if bt == 'nofile' and ft ~= 'Avante' then
                                 return false
                             end
 

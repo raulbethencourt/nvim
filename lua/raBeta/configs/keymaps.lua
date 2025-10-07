@@ -39,6 +39,21 @@ keymap('n', '<leader>tc', function()
         vim.notify("Copilot disable", vim.log.levels.INFO)
     end
 end, 'toggle [C]opilot')
+keymap('n', '<leader>tq', function()
+    local qf_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win.quickfix == 1 then
+            qf_exists = true
+            break
+        end
+    end
+    if qf_exists then
+        vim.cmd('cclose')
+    else
+        vim.cmd('copen')
+    end
+end, 'toggle [Q]uickfix')
+
 
 -- Lazy
 keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
