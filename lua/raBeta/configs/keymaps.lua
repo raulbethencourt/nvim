@@ -47,11 +47,7 @@ keymap('n', '<leader>tq', function()
             break
         end
     end
-    if qf_exists then
-        vim.cmd('cclose')
-    else
-        vim.cmd('copen')
-    end
+    vim.cmd(qf_exists and 'cclose' or 'copen')
 end, 'toggle [Q]uickfix')
 
 

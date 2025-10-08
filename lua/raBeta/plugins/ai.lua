@@ -159,6 +159,9 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                 language
             )
         end,
+        keys = {
+            { '<leader>ac', '<cmd>AvanteClear<cr>', desc = 'avante: clear' },
+        },
         dependencies = {
             'nvim-lua/plenary.nvim',
             'MunifTanjim/nui.nvim',
@@ -187,11 +190,8 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                 ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
                 opts = {
                     max_length = 99999,
-                    code_blocks = {
-                        style = 'language',
-                        border_hl = 'MarkviewCode',
-                    },
                     preview = {
+                        icon_provider = 'devicons',
                         filetypes = {
                             'md',
                             'markdown',
@@ -206,11 +206,7 @@ Provide simple and modular code solutions following SuiteCRM best practices:
                         condition = function()
                             local ft, bt = vim.bo.filetype, vim.bo.buftype
 
-                            if bt == 'nofile' and ft ~= 'Avante' then
-                                return false
-                            end
-
-                            return true
+                            return (bt == 'nofile' and ft ~= 'Avante') and false or true
                         end,
                     },
                 },
