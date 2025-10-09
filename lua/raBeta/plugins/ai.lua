@@ -160,7 +160,7 @@ Provide simple and modular code solutions following SuiteCRM best practices:
             )
         end,
         keys = {
-            { '<leader>ac', '<cmd>AvanteClear<cr>', desc = 'avante: clear' },
+            { '<leader>al', '<cmd>AvanteClear<cr>', desc = 'avante: clear' },
         },
         dependencies = {
             'nvim-lua/plenary.nvim',
