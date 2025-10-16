@@ -21,6 +21,7 @@ return {
                     show_hidden = true,
                 },
                 float = {
+                    border = 'rounded',
                     padding = 5,
                     max_width = 0,
                     max_height = 0,
@@ -34,9 +35,22 @@ return {
                     },
                 },
                 progress = {
+                    border = 'rounded',
                     win_options = {
                         winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
                     },
+                },
+                confirmation = {
+                    border = 'rounded',
+                    win_options = {
+                        winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
+                    },
+                },
+                ssh = {
+                    border = 'rounded',
+                },
+                keymaps_help = {
+                    border = 'rounded',
                 },
             }
             keymap('n', '<leader>e', require('oil').toggle_float, '[O]il [T]oggle float')
