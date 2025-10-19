@@ -153,6 +153,27 @@ local servers = {
                 },
                 telemetry = { enable = false },
                 format = { enable = false },
+                diagnostics = {
+                    enable = true,
+                    globals = { 'vim' },
+                    disable = { 'missing-fields' },
+                },
+                completion = {
+                    enable = true,
+                    showWord = 'Disable',
+                    keywordSnippet = 'Disable',
+                },
+                hint = {
+                    enable = true,
+                    setType = true,
+                    paramType = true,
+                    paramName = 'Disable',
+                    semicolon = 'Disable',
+                    arrayIndex = 'Disable',
+                },
+                misc = {
+                    parameters = { '--loglevel=trace' },
+                },
             },
         },
     },
