@@ -51,5 +51,5 @@ vim.api.nvim_create_autocmd('TermOpen', {
 -- NOTE: Start copilot disable by default
 vim.api.nvim_create_autocmd({ 'VimEnter' }, {
     pattern = { '*' },
-    command = 'silent! Copilot disable'
+    command = 'silent! Copilot disable',
 })
