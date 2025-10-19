@@ -5,16 +5,36 @@ require 'raBeta.configs.lsp.languages.js'
 require 'raBeta.configs.lsp.languages.typescript'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-local mason_lspconfig = require 'mason-lspconfig'
+
 -- Get intelephense licence
 local get_intelephense_license = function()
-    local f = assert(io.open(os.getenv 'HOME' .. '/intelephense/licence.txt', 'rb'))
-    local content = f:read '*a'
+    local license_path = os.getenv('HOME') .. '/intelephense/licence.txt'
+    local f, err = io.open(license_path, 'rb')
+
+    if not f then
+        vim.notify('Intelephense license file not found at: ' .. license_path .. ' - using free version', vim.log.levels.INFO)
+        return nil
+    end
+
+    local content = f:read('*a')
     f:close()
-    return string.gsub(content, '%s+', '')
+
+    if not content or content == '' then
+        vim.notify('Intelephense license file is empty - using free version', vim.log.levels.WARN)
+        return nil
+    end
+
+    -- Remove whitespace and newlines
+    local license = string.gsub(content, '%s+', '')
+    if license == '' then
+        vim.notify('Intelephense license appears to be empty after cleaning - using free version', vim.log.levels.WARN)
+        return nil
+    end
+
+    return license
 end
 
--- NOTE: stop saving lsp logs, change to 'debug' to see them
+-- Stop saving lsp logs, change to 'debug' to see them
 vim.lsp.log.set_level 'off'
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
@@ -141,7 +161,6 @@ local servers = {
         cmd = { 'intelephense', '--stdio' },
         filetypes = { 'php' },
         init_options = {
-            licenceKey = get_intelephense_license(),
             storagePath = '/home/rabeta/.intelephense',
             files = {
                 maxSize = 5000000,
@@ -169,6 +188,13 @@ local servers = {
     sqls = {},
     ts_ls = {},
 }
+
+-- Add license to intelephense if available
+local license = get_intelephense_license()
+if license and servers.intelephense then
+    servers.intelephense.init_options.licenceKey = license
+end
+
 for server, config in pairs(servers) do
     vim.lsp.enable(server)
     vim.lsp.config[server] = config
