@@ -1,5 +1,32 @@
 return {
     {
+        'OXY2DEV/markview.nvim',
+        lazy = false,
+        ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
+        opts = {
+            max_length = 99999,
+            preview = {
+                icon_provider = 'devicons',
+                filetypes = {
+                    'md',
+                    'markdown',
+                    'norg',
+                    'rmd',
+                    'org',
+                    'vimwiki',
+                    'codecompanion',
+                    'Avante',
+                },
+                ignore_buftypes = {},
+                condition = function()
+                    local ft, bt = vim.bo.filetype, vim.bo.buftype
+
+                    return (bt == 'nofile' and ft ~= 'Avante') and false or true
+                end,
+            },
+        },
+    },
+    {
         'uga-rosa/ccc.nvim',
         config = function()
             require('ccc').setup {

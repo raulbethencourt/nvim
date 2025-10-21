@@ -24,6 +24,7 @@ return {
                     border = 'rounded',
                     padding = 5,
                     max_width = 0,
+                    border = "rounded",
                     max_height = 0,
                     win_options = {
                         winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',

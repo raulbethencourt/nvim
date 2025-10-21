@@ -1,4 +1,4 @@
-local utils = require("raBeta.utils.utils")
+local utils = require 'raBeta.utils.utils'
 local keymap = utils.keymap
 
 -- stop space normal
@@ -10,11 +10,11 @@ keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
 keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
 keymap('n', '<leader>zb', ':bp<bar>sp<bar>bn<bar>bd!<cr>', '[B]uffer delete')
 keymap('n', '<leader>zv', function()
-    vim.cmd([[bp
+    vim.cmd [[bp
     sp
     bn
     bd!
-    q]])
+    q]]
 end, '[B]uffer delete')
 
 -- Toggles
@@ -30,16 +30,22 @@ keymap('n', '<leader>tj', function()
 end, 'toggle command [H]eight and show line')
 keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
 keymap('n', '<leader>tc', function()
-    local status = require("copilot.client").is_disabled()
+    local status = require('copilot.client').is_disabled()
     if status then
-        vim.cmd("Copilot enable")
-        vim.notify("Copilot enable", vim.log.levels.INFO)
+        vim.cmd 'Copilot enable'
+        vim.notify('Copilot enable', vim.log.levels.INFO)
     else
-        vim.cmd("Copilot disable")
-        vim.notify("Copilot disable", vim.log.levels.INFO)
+        vim.cmd 'Copilot disable'
+        vim.notify('Copilot disable', vim.log.levels.INFO)
     end
 end, 'toggle [C]opilot')
-keymap('n', '<leader>tq', function()
+
+-- Quickfix
+keymap('n', '<leader>qn', '<cmd>cnext<cr>', '[Q]uickfix [N]ext')
+keymap('n', '<leader>qp', '<cmd>cprevious<cr>', '[Q]uickfix [P]revius')
+keymap('n', '<leader>qf', '<cmd>cfirst<cr>', '[Q]uickfix [F]irst')
+keymap('n', '<leader>ql', '<cmd>clast<cr>', '[Q]uickfix [L]ast')
+keymap('n', '<leader>qt', function()
     local qf_exists = false
     for _, win in pairs(vim.fn.getwininfo()) do
         if win.quickfix == 1 then
@@ -48,15 +54,13 @@ keymap('n', '<leader>tq', function()
         end
     end
     vim.cmd(qf_exists and 'cclose' or 'copen')
-end, 'toggle [Q]uickfix')
-
+end, '[Q]uickfix [T]oggle')
 
 -- Lazy
-keymap('n', "<leader>ps", '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
-keymap('n', "<leader>pi", '<cmd>Lazy install<cr>', 'Lazy [I]nstall')
-keymap('n', "<leader>pu", "<cmd>Lazy update<cr>", 'Lazy [U]update')
-keymap('n', "<leader>pc", "<cmd>Lazy clean<cr>", 'Lazy [C]lean')
-
+keymap('n', '<leader>ps', '<cmd>Lazy sync<cr>', 'Lazy [S]ync')
+keymap('n', '<leader>pi', '<cmd>Lazy install<cr>', 'Lazy [I]nstall')
+keymap('n', '<leader>pu', '<cmd>Lazy update<cr>', 'Lazy [U]update')
+keymap('n', '<leader>pc', '<cmd>Lazy clean<cr>', 'Lazy [C]lean')
 
 -- Git
 keymap('n', '<leader>gl', function()
@@ -66,24 +70,24 @@ keymap('n', '<leader>gl', function()
     local pos = vim.fn.getcurpos(win)
     local line = vim.fn.string(pos[2])
     local file_name = vim.api.nvim_buf_get_name(0)
-    local cmd = "git blame -L " .. line .. "," .. line .. " -- " .. file_name
+    local cmd = 'git blame -L ' .. line .. ',' .. line .. ' -- ' .. file_name
     local blame = vim.fn.string(vim.fn.system(cmd))
 
-    local split_blame = vim.fn.split(blame, ")")
+    local split_blame = vim.fn.split(blame, ')')
     local part_blame = vim.fn.strpart(split_blame[1], 1)
-    local second_split_blame = vim.fn.split(part_blame, "(")
-    local split_time_info = vim.fn.split(second_split_blame[2], " +")
-    local time_author = vim.fn.split(split_time_info[1], " ")
+    local second_split_blame = vim.fn.split(part_blame, '(')
+    local split_time_info = vim.fn.split(second_split_blame[2], ' +')
+    local time_author = vim.fn.split(split_time_info[1], ' ')
 
     local commit = second_split_blame[1]
-    local date = ""
-    local author = ""
+    local date = ''
+    local author = ''
 
     for i, x in pairs(time_author) do
-        if x:match('%d') then
-            date = date .. " " .. x
+        if x:match '%d' then
+            date = date .. ' ' .. x
         else
-            author = author .. " " .. x
+            author = author .. ' ' .. x
         end
     end
 
@@ -92,14 +96,14 @@ end, '[G]it blame [L]ine')
 
 -- Terminal & external commands
 keymap('n', '<leader>ci', function()
-    local cmd = vim.fn.input("Write your cmd : ")
+    local cmd = vim.fn.input 'Write your cmd : '
 
     utils.launch_cmd_in_floating_win(cmd, { close_term = false })
 end, '[C]md [I]nput')
 
 -- General
 keymap('n', '<leader>ze', function()
-    vim.cmd('messages | Fidget history')
+    vim.cmd 'messages | Fidget history'
 end, 'Messages and notifications')
 keymap('n', '<leader>zf', '<cmd>file<cr>', 'File info')
 keymap('n', '<leader>zi', '<C-w>|', 'Maximize')
