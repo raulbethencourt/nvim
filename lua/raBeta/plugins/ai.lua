@@ -1,17 +1,4 @@
 return {
-    {
-        'cousine/opencode-context.nvim',
-        opts = {
-            tmux_target = nil, -- Manual override: "session:window.pane"
-            auto_detect_pane = true, -- Auto-detect opencode pane in current window
-        },
-        keys = {
-            { '<leader>ac', '<cmd>OpencodeSend<cr>', mode = {'v', 'n'}, desc = 'Send prompt to opencode' },
-            { '<leader>at', '<cmd>OpencodeSwitchMode<cr>', desc = 'Toggle opencode mode' },
-            { '<leader>ap', '<cmd>OpencodePrompt<cr>', desc = 'Open opencode persistent prompt' },
-        },
-        cmd = { 'OpencodeSend', 'OpencodeSwitchMode' },
-    },
 --     {
 --         'yetone/avante.nvim',
 --         build = vim.fn.has 'win32' ~= 0 and 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false' or 'make',
