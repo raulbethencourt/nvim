@@ -4,7 +4,13 @@ return {
         lazy = false,
         ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
         opts = {
+            experimental = {
+                prefer_nvim = true,
+            },
             max_length = 99999,
+            yaml = {
+                enable = true,
+            },
             preview = {
                 icon_provider = 'devicons',
                 filetypes = {

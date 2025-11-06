@@ -5,10 +5,12 @@ require 'raBeta.configs.lsp.languages.js'
 require 'raBeta.configs.lsp.languages.typescript'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local telescope_builtin = require 'telescope.builtin'
+local telescope_themes = require 'telescope.themes'
 
 -- Get intelephense licence
 local get_intelephense_license = function()
-    local license_path = os.getenv('HOME') .. '/intelephense/licence.txt'
+    local license_path = os.getenv 'HOME' .. '/intelephense/licence.txt'
     local f, err = io.open(license_path, 'rb')
 
     if not f then
@@ -16,7 +18,7 @@ local get_intelephense_license = function()
         return nil
     end
 
-    local content = f:read('*a')
+    local content = f:read '*a'
     f:close()
 
     if not content or content == '' then
@@ -55,12 +57,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
                 border = 'rounded',
             }
         end, 'toggle signature')
-        -- keymap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        keymap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
-        -- keymap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]definition')
-        keymap('gd', vim.lsp.buf.definition, '[G]oto [D]definition')
+        keymap('gr', telescope_builtin.lsp_references, '[G]oto [R]eferences')
+        -- keymap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
+        keymap('gd', telescope_builtin.lsp_definitions, '[G]oto [D]efinition')
+        keymap('gT', telescope_builtin.lsp_type_definitions, '[G]oto [T]ype definition')
+        -- keymap('gd', vim.lsp.buf.definition, '[G]oto [D]definition')
         keymap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        keymap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+        keymap('gI', telescope_builtin.lsp_implementations, '[G]oto [I]mplementation')
         keymap('gl', '<cmd>lua vim.diagnostic.open_float()<CR>', '[G]oto [L]ine diagnostics')
         keymap('<leader>ld', vim.lsp.buf.type_definition, '[L]sp Type [D]efinition')
 
@@ -72,7 +75,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap('<leader>lD', '<cmd>Telescope diagnostics<CR>', '[L]sp Telescope Workspace [D]iagnostics')
 
         keymap('<leader>lb', function()
-            require('telescope.builtin').diagnostics(require('telescope.themes').get_dropdown {
+            telescope_builtin.diagnostics(telescope_themes.get_dropdown {
                 winblend = 0,
                 previewer = true,
                 layout_strategy = 'vertical_no_titles',
@@ -88,7 +91,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, '[L]sp Telescope [B]uffer Diagnostics')
 
         keymap('<leader>ls', function()
-            require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown {
+            telescope_builtin.lsp_document_symbols(telescope_themes.get_dropdown {
                 winblend = 0,
                 previewer = true,
                 layout_strategy = 'vertical_no_titles',
@@ -103,7 +106,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             })
         end, '[L]sp Document [S]ymbols')
 
-        keymap('<leader>lw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[L]sp [W]orkspace symbols')
+        keymap('<leader>lw', telescope_builtin.lsp_dynamic_workspace_symbols, '[L]sp [W]orkspace symbols')
         keymap('<leader>lr', vim.lsp.buf.rename, '[L]sp [R]ename')
         keymap('<leader>la', vim.lsp.buf.code_action, '[L]sp code [A]ction')
         keymap('<leader>ln', vim.lsp.buf.add_workspace_folder, '[L]sp [W]orkspace [A]dd Folder')

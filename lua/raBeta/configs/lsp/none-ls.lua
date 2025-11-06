@@ -14,6 +14,7 @@ nls.setup {
         nls.builtins.formatting.pretty_php,
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.sqlfmt,
+        nls.builtins.formatting.yamlfmt,
         nls.builtins.formatting.prettier.with {
             extra_args = { '--print-with=100', '--tab-width=4' },
             filetypes = {
@@ -25,7 +26,6 @@ nls.setup {
                 'twig',
                 'javascript',
                 'json',
-                'yaml',
             },
         },
         -- NOTE: Lintings
