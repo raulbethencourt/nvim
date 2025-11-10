@@ -11,9 +11,9 @@ return {
             ui = {
                 window_type = 'float',
                 float = {
-                    width = 0.4,
+                    width = 0.8,
                     height = 4,
-                    margin = 8,
+                    margin = 2,
                     border = 'rounded',
                     position = 'bottom',
                     title_pos = 'left',
