@@ -13,6 +13,7 @@ nls.setup {
         nls.builtins.formatting.markdownlint,
         nls.builtins.formatting.pretty_php,
         nls.builtins.formatting.stylua,
+        nls.builtins.formatting.clang_format,
         nls.builtins.formatting.sqlfmt,
         nls.builtins.formatting.yamlfmt,
         nls.builtins.formatting.prettier.with {
