@@ -3,7 +3,7 @@
 
 local M = {}
 
-local plugin_manager = require('raBeta.optimization.plugin_manager')
+local plugin_manager = require 'raBeta.optimization.plugin_manager'
 
 -- Logger utility
 local function log(level, message)
@@ -14,14 +14,14 @@ end
 local rationales = {}
 
 -- Data storage path
-local data_dir = vim.fn.stdpath('config') .. '/_bmad-output'
+local data_dir = vim.fn.stdpath 'config' .. '/_bmad-output'
 local rationales_file = data_dir .. '/plugin_rationales.json'
 
 -- Load rationales from file
 local function load_rationales()
     local file = io.open(rationales_file, 'r')
     if file then
-        local content = file:read('*all')
+        local content = file:read '*all'
         file:close()
         local ok, data = pcall(vim.fn.json_decode, content)
         if ok and data then
