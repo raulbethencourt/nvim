@@ -211,6 +211,7 @@ local servers = {
     },
     sqls = {},
     ts_ls = {},
+    yamlls = {},
 }
 
 -- Add license to intelephense if available

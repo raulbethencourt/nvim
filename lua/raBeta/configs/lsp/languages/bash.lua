@@ -2,10 +2,12 @@ local dap = require "dap"
 local mason_path = vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/')
 local bashdb_dir = mason_path .. 'packages/bash-debug-adapter/extension/bashdb_dir'
 
+---@diagnostic disable-next-line: undefined-field
 dap.adapters.sh = {
     type = "executable",
     command = mason_path .. 'bin/bash-debug-adapter',
 }
+---@diagnostic disable-next-line: undefined-field
 dap.configurations.sh = {
     {
         name = "Launch Bash debugger",

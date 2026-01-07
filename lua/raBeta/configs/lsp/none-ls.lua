@@ -15,7 +15,6 @@ nls.setup {
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.clang_format,
         nls.builtins.formatting.sqlfmt,
-        nls.builtins.formatting.yamlfmt,
         nls.builtins.formatting.prettier.with {
             extra_args = { '--print-with=100', '--tab-width=4' },
             filetypes = {

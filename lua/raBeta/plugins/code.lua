@@ -24,7 +24,7 @@ return {
                     border = 'rounded',
                     padding = 5,
                     max_width = 0,
-                    border = "rounded",
+                    border = 'rounded',
                     max_height = 0,
                     win_options = {
                         winhl = 'Normal:Normal,NormalFloat:Normal,FloatBorder:Normal,FloatTitle:Normal',
@@ -83,16 +83,16 @@ return {
                 harpoon.ui:toggle_quick_menu(harpoon:list())
             end, { desc = 'Menu' })
 
-            vim.keymap.set('n', '<C-A-j>', function()
+            vim.keymap.set('n', '<A-J>', function()
                 harpoon:list():select(1)
             end, { desc = 'File 1' })
-            vim.keymap.set('n', '<C-A-k>', function()
+            vim.keymap.set('n', '<A-K>', function()
                 harpoon:list():select(2)
             end, { desc = 'File 2' })
-            vim.keymap.set('n', '<C-A-l>', function()
+            vim.keymap.set('n', '<A-L>', function()
                 harpoon:list():select(3)
             end, { desc = 'File 3' })
-            vim.keymap.set('n', '<C-A-m>', function()
+            vim.keymap.set('n', '<A-M>', function()
                 harpoon:list():select(4)
             end, { desc = 'File 4' })
 
