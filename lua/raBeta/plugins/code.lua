@@ -157,7 +157,6 @@ return {
                 'nvim-telescope/telescope-live-grep-args.nvim',
                 version = '^1.0.0',
             },
-            'nvim-telescope/telescope-ui-select.nvim',
             'nvim-tree/nvim-web-devicons',
         },
         config = function()
