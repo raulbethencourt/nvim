@@ -154,8 +154,6 @@ return {
         priority = 950,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
-            'gbprod/php-enhanced-treesitter.nvim',
-            { 'derekstride/tree-sitter-sql', build = ':TSInstall sql' },
         },
         build = ':TSUpdate',
         config = function()
