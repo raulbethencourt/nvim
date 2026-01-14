@@ -20,7 +20,6 @@ return {
                     'rmd',
                     'org',
                     'vimwiki',
-                    'codecompanion',
                     'Avante',
                 },
                 ignore_buftypes = {},

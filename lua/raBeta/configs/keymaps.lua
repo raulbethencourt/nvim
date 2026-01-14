@@ -29,16 +29,7 @@ keymap('n', '<leader>tj', function()
     vim.o.ls = vim.o.ls == 0 and 2 or 0
 end, 'toggle command [H]eight and show line')
 keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
-keymap('n', '<leader>tc', function()
-    local status = require('copilot.client').is_disabled()
-    if status then
-        vim.cmd 'Copilot enable'
-        vim.notify('Copilot enable', vim.log.levels.INFO)
-    else
-        vim.cmd 'Copilot disable'
-        vim.notify('Copilot disable', vim.log.levels.INFO)
-    end
-end, 'toggle [C]opilot')
+
 
 -- Quickfix
 keymap('n', '<leader>qn', '<cmd>cnext<cr>', '[Q]uickfix [N]ext')
@@ -139,3 +130,34 @@ keymap('n', '<C-d>', '<C-d>zz')
 keymap('n', '<C-u>', '<C-u>zz')
 keymap('n', 'n', 'nzzzv')
 keymap('n', 'N', 'Nzzzv')
+
+-- Optimization
+-- Plugin Analysis
+keymap('n', '<leader>wa', ':lua vim.notify(vim.inspect(require("raBeta.optimization.plugin_manager").get_summary()))<cr>', 'Plugin summary')
+keymap('n', '<leader>wb', ':lua vim.notify(vim.inspect(require("raBeta.optimization.audit_engine").analyze_plugin_load_times()))<cr>', 'Plugin categories')
+keymap('n', '<leader>wc', ':lua vim.notify(vim.inspect(require("raBeta.optimization.plugin_manager").get_usage_stats()))<cr>', 'Usage statistics')
+keymap('n', '<leader>wd', ':lua vim.notify("Unused plugins analysis not implemented yet")<cr>', 'Unused plugins')
+
+-- Performance Measurement
+keymap('n', '<leader>wpm', ':lua require("raBeta.optimization.performance_tracker").measure_memory_usage()<cr>', 'Memory usage')
+keymap('n', '<leader>wps', ':lua require("raBeta.optimization.performance_tracker").measure_startup_time()<cr>', 'Startup time')
+keymap('n', '<leader>wpr', ':lua require("raBeta.optimization.performance_tracker").generate_report()<cr>', 'Performance report')
+keymap('n', '<leader>wpb', ':lua vim.notify(vim.inspect(require("raBeta.optimization.audit_engine").quick_performance_check()))<cr>', 'Quick performance check')
+
+-- Plugin Management
+keymap('n', '<leader>wrs', ':lua local plugin = vim.fn.input("Plugin name: "); vim.notify("Simulate removal for " .. plugin)<cr>', 'Simulate plugin removal')
+keymap('n', '<leader>wrd', ':lua vim.notify(vim.inspect(require("raBeta.optimization.documentation_integrator").list_rationales()))<cr>', 'Removal rationales')
+
+-- Documentation
+keymap('n', '<leader>wdd', ':lua require("raBeta.optimization.documentation_integrator").generate_documentation()<cr>', 'Generate documentation')
+keymap('n', '<leader>wdr', ':lua vim.notify(vim.inspect(require("raBeta.optimization.documentation_integrator").list_rationales()))<cr>', 'Plugin rationales')
+
+-- Version Tracking
+keymap('n', '<leader>wvc', ':lua local desc = vim.fn.input("Version description: "); require("raBeta.optimization.version_tracker").create_version(desc)<cr>', 'Create version')
+keymap('n', '<leader>wvh', ':lua vim.notify(vim.inspect(require("raBeta.optimization.version_tracker").get_history()))<cr>', 'Version history')
+keymap('n', '<leader>wvv', ':lua vim.notify("Current version: " .. require("raBeta.optimization.version_tracker").get_current_version())<cr>', 'Current version')
+keymap('n', '<leader>wvr', ':lua local ver = vim.fn.input("Target version: "); require("raBeta.optimization.version_tracker").rollback_to_version(ver)<cr>', 'Rollback version')
+
+-- General Optimization
+keymap('n', '<leader>woa', ':lua require("raBeta.optimization.audit_engine").generate_bottleneck_report()<cr>', 'Complete audit')
+keymap('n', '<leader>wor', ':lua require("raBeta.optimization.audit_engine").generate_bottleneck_report()<cr>', 'Full optimization report')
