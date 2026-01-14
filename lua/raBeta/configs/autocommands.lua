@@ -48,8 +48,4 @@ vim.api.nvim_create_autocmd('TermOpen', {
     command = 'startinsert',
 })
 
--- NOTE: Start copilot disable by default
-vim.api.nvim_create_autocmd({ 'VimEnter' }, {
-    pattern = { '*' },
-    command = 'silent! Copilot disable',
-})
+
