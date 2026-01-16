@@ -12,8 +12,16 @@ return {
                     tmux = {},
                 },
             }
-
+            
             vim.o.autoread = true
+            
+            -- Recommended/example keymaps.
+            vim.keymap.set({ 'n', 'x' }, 'go', function()
+                return require('opencode').operator '@this '
+            end, { expr = true, desc = 'Add range to opencode' })
+            vim.keymap.set('n', 'goo', function()
+                return require('opencode').operator '@this ' .. '_'
+            end, { expr = true, desc = 'Add line to opencode' })
 
             keymap({ 'n', 'x' }, '<leader>oa', function()
                 require('opencode').ask('@this: ', { submit = true })
@@ -29,6 +37,9 @@ return {
             end, 'Toggle opencode')
             keymap({ 'n', 't' }, '<leader>ol', function()
                 require('opencode').command 'session.list'
+            end, 'Toggle opencode')
+            keymap({ 'n', 't' }, '<leader>oc', function()
+                require('opencode').command 'agent.cycle'
             end, 'Toggle opencode')
             keymap('n', '<S-C-u>', function()
                 require('opencode').command 'session.half.page.up'
