@@ -151,9 +151,14 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        priority = 950,
+        lazy = false,
+        branch = 'main',
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
+            {
+                'nvim-treesitter/nvim-treesitter-textobjects',
+                branch = 'main',
+                event = 'VeryLazy',
+            },
         },
         build = ':TSUpdate',
         config = function()
