@@ -159,6 +159,15 @@ return {
                 branch = 'main',
                 event = 'VeryLazy',
             },
+            {
+                'nvim-treesitter/nvim-treesitter-context',
+                event = 'VeryLazy',
+                config = function()
+                    keymap('n', 'gj', function()
+                        require('treesitter-context').go_to_context(vim.v.count1)
+                    end)
+                end,
+            },
         },
         build = ':TSUpdate',
         config = function()

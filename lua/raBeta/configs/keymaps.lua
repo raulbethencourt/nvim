@@ -104,9 +104,6 @@ keymap('n', '<leader>zp', ':lua print(unpack(vim.api.nvim_win_get_cursor(0)))<cr
 keymap('v', '<leader>zs', [[:'<,'>!awk '{s+=$1} END {print s}'<cr>]], 'Visual [S]um')
 keymap('v', '<leader>zm', [[:'<,'>!awk '{s*=$1} END {print s}'<cr>]], 'Visual [M]ultiplication')
 
-keymap('n', '<leader>i', ':put _<cr>', 'insert line up')
-keymap('n', '<leader>I', ':-put _<cr>', 'insert line down')
-
 keymap('n', '<leader>v', '<cmd>vsplit<cr>', '[V]split')
 keymap('n', '<leader>h', '<cmd>split<cr>', 'Split')
 
