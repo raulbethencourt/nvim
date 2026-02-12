@@ -36,3 +36,6 @@ undo/*
 cache/
 .luarc.json
 lazy-lock.json
+
+# 99 plugin
+tmp/
