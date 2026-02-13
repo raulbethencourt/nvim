@@ -96,7 +96,6 @@ end, '[C]md [I]nput')
 keymap('n', '<leader>ze', function()
     vim.cmd 'messages | Fidget history'
 end, 'Messages and notifications')
-keymap('n', '<leader>zf', '<cmd>file<cr>', 'File info')
 keymap('n', '<leader>zi', '<C-w>|', 'Maximize')
 keymap('n', '<leader>zn', ':nohlsearch<cr>', '[N]o highlights')
 keymap('n', '<leader>zo', '<C-w>=', 'Equilify')

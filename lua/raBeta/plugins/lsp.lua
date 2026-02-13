@@ -152,11 +152,11 @@ return {
     {
         'nvim-treesitter/nvim-treesitter',
         lazy = false,
-        branch = 'main',
+        branch = 'master',
         dependencies = {
             {
                 'nvim-treesitter/nvim-treesitter-textobjects',
-                branch = 'main',
+                branch = 'master',
                 event = 'VeryLazy',
             },
             {

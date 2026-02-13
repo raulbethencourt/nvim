@@ -77,10 +77,10 @@ return {
             end, 'Toggle opencode')
             keymap({ 'n', 't' }, '<leader>ol', function()
                 require('opencode').command 'session.list'
-            end, 'Toggle opencode')
+            end, 'Session list')
             keymap({ 'n', 't' }, '<leader>oc', function()
                 require('opencode').command 'agent.cycle'
-            end, 'Toggle opencode')
+            end, 'agent cycle')
             keymap('n', '<S-C-u>', function()
                 require('opencode').command 'session.half.page.up'
             end, 'opencode half page up')
