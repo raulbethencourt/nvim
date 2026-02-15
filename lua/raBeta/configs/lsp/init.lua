@@ -201,6 +201,13 @@ local servers = {
             debounce_text_changes = 150,
         },
     },
+    gopls = {
+        analyses = {
+            unusedparams = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+    },
     zls = {
         format = {
             enable = true,
