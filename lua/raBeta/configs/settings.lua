@@ -49,6 +49,7 @@ local options = {
     equalalways = true,
     fixeol = false,
     textwidth = 100,
+    autoread = true,
     guicursor = table.concat({
         'n-v-c:block-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',
         'i-ci:ver25-Cursor/lCursor-blinkwait100-blinkon50-blinkoff50',
