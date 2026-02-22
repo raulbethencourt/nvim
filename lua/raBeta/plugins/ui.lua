@@ -1,33 +1,23 @@
 return {
     {
-        'OXY2DEV/markview.nvim',
-        lazy = false,
-        ft = { 'markdown', 'norg', 'rmd', 'org', 'vimwiki', 'Avante' },
+        'MeanderingProgrammer/render-markdown.nvim',
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons',
+        },
         opts = {
-            experimental = {
-                prefer_nvim = true,
+            filetypes = {
+                'md',
+                'markdown',
+                'norg',
+                'rmd',
+                'org',
+                'vimwiki',
             },
-            max_length = 99999,
-            yaml = {
-                enable = true,
-            },
-            preview = {
-                icon_provider = 'devicons',
-                filetypes = {
-                    'md',
-                    'markdown',
-                    'norg',
-                    'rmd',
-                    'org',
-                    'vimwiki',
-                    'Avante',
+            completions = {
+                lsp = {
+                    enabled = true,
                 },
-                ignore_buftypes = {},
-                condition = function()
-                    local ft, bt = vim.bo.filetype, vim.bo.buftype
-
-                    return (bt == 'nofile' and ft ~= 'Avante') and false or true
-                end,
             },
         },
     },
