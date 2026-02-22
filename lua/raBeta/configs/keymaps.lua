@@ -28,7 +28,7 @@ keymap('n', '<leader>tj', function()
     vim.o.cmdheight = vim.o.cmdheight == 0 and 1 or 0
     vim.o.ls = vim.o.ls == 0 and 2 or 0
 end, 'toggle command [H]eight and show line')
-keymap('n', '<leader>tm', '<cmd>Markview Toggle<CR>', 'toggle [M]arkview')
+keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle [M]arkview')
 
 
 -- Quickfix
