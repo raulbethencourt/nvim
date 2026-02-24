@@ -1,3 +1,5 @@
+local keymap = require('raBeta.utils.utils').keymap
+
 return {
     {
         'MeanderingProgrammer/render-markdown.nvim',
@@ -30,8 +32,8 @@ return {
                     lsp = true,
                 },
             }
-            vim.keymap.set('n', '<leader>cp', '<cmd>CccPick<CR>', { desc = '[C]cc [P]ick' })
-            vim.keymap.set('n', '<leader>cc', '<cmd>CccConvert<CR>', { desc = '[C]cc [C]onvert' })
+            keymap('n', '<leader>cp', '<cmd>CccPick<CR>', '[C]cc [P]ick')
+            keymap('n', '<leader>cc', '<cmd>CccConvert<CR>', '[C]cc [C]onvert')
         end,
     },
     {

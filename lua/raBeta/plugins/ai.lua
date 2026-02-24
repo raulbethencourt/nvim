@@ -3,6 +3,7 @@ local keymap = require('raBeta.utils.utils').keymap
 return {
     {
         'NickvanDyke/opencode.nvim',
+        version = '*', -- Latest stable release.
         config = function()
             ---@type opencode.Opts
             vim.g.opencode_opts = {
