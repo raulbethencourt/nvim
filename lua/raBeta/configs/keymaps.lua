@@ -30,7 +30,7 @@ keymap('n', '<leader>tj', function()
 end, 'toggle command [H]eight and show line')
 keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle [M]arkview')
 -- IMPORTANT: Need inlyne installed to make it works
-keymap('n', '<leader>ti', ':!inlyne view $(realpath %) -t dark<CR>', 'toggle [I]nlyne')
+keymap('n', '<leader>ti', ':!inlyne view "%" -t dark<CR>', 'toggle [I]nlyne')
 
 
 -- Quickfix
