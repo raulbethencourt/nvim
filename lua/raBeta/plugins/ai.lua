@@ -5,13 +5,12 @@ return {
         'NickvanDyke/opencode.nvim',
         version = '*', -- Latest stable release.
         config = function()
-            local opencode_cmd = 'opencode --port 777'
+            local opencode_cmd = 'opencode --port'
             local tmux_pane_id = nil -- tracks the pane for reuse
 
             ---@type opencode.Opts
             vim.g.opencode_opts = {
                 server = {
-                    port = 777,
                     start = function()
                         -- Split a new tmux pane (horizontal, e.g. 35% width on the right)
                         -- Capture the pane ID for later reuse
