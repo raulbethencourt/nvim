@@ -5,11 +5,44 @@ return {
         'NickvanDyke/opencode.nvim',
         version = '*', -- Latest stable release.
         config = function()
+            local opencode_cmd = 'opencode --port 777'
+            local tmux_pane_id = nil -- tracks the pane for reuse
+
             ---@type opencode.Opts
             vim.g.opencode_opts = {
-                provider = {
-                    enabled = 'tmux',
-                    tmux = {},
+                server = {
+                    port = 777,
+                    start = function()
+                        -- Split a new tmux pane (horizontal, e.g. 35% width on the right)
+                        -- Capture the pane ID for later reuse
+                        local pane = vim.fn.system('tmux split-window -h -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
+                        tmux_pane_id = vim.trim(pane)
+                    end,
+                    stop = function()
+                        -- Kill the tracked pane if it exists
+                        if tmux_pane_id then
+                            vim.fn.system('tmux kill-pane -t ' .. tmux_pane_id)
+                            tmux_pane_id = nil
+                        end
+                    end,
+                    toggle = function()
+                        -- If no pane exists or pane is dead, start a new one
+                        -- If pane exists and is alive, kill it (toggle off)
+                        if tmux_pane_id then
+                            -- Check if pane still exists
+                            local check = vim.fn.system('tmux has-session -t ' .. tmux_pane_id .. ' 2>/dev/null; echo $?')
+                            -- More reliable: list panes and check
+                            local exists = vim.fn.system 'tmux list-panes -F "#{pane_id}"'
+                            if exists:find(tmux_pane_id, 1, true) then
+                                vim.fn.system('tmux kill-pane -t ' .. tmux_pane_id)
+                                tmux_pane_id = nil
+                                return
+                            end
+                        end
+                        -- Start new pane
+                        local pane = vim.fn.system('tmux split-window -h -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
+                        tmux_pane_id = vim.trim(pane)
+                    end,
                 },
             }
 
