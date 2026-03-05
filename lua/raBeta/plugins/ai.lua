@@ -12,7 +12,7 @@ return {
             vim.g.opencode_opts = {
                 server = {
                     start = function()
-                        -- Split a new tmux pane (horizontal, e.g. 35% width on the right)
+                        -- Split a new tmux pane 
                         -- Capture the pane ID for later reuse
                         local pane = vim.fn.system('tmux split-window -h -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
                         tmux_pane_id = vim.trim(pane)
@@ -28,9 +28,6 @@ return {
                         -- If no pane exists or pane is dead, start a new one
                         -- If pane exists and is alive, kill it (toggle off)
                         if tmux_pane_id then
-                            -- Check if pane still exists
-                            local check = vim.fn.system('tmux has-session -t ' .. tmux_pane_id .. ' 2>/dev/null; echo $?')
-                            -- More reliable: list panes and check
                             local exists = vim.fn.system 'tmux list-panes -F "#{pane_id}"'
                             if exists:find(tmux_pane_id, 1, true) then
                                 vim.fn.system('tmux kill-pane -t ' .. tmux_pane_id)
@@ -38,7 +35,6 @@ return {
                                 return
                             end
                         end
-                        -- Start new pane
                         local pane = vim.fn.system('tmux split-window -h -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
                         tmux_pane_id = vim.trim(pane)
                     end,
