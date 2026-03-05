@@ -7,12 +7,13 @@ return {
         config = function()
             local opencode_cmd = 'opencode --port'
             local tmux_pane_id = nil -- tracks the pane for reuse
+            local oc = require 'opencode'
 
             ---@type opencode.Opts
             vim.g.opencode_opts = {
                 server = {
                     start = function()
-                        -- Split a new tmux pane 
+                        -- Split a new tmux pane
                         -- Capture the pane ID for later reuse
                         local pane = vim.fn.system('tmux split-window -h -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
                         tmux_pane_id = vim.trim(pane)
@@ -43,43 +44,43 @@ return {
 
             -- Recommended/example keymaps.
             vim.keymap.set({ 'n', 'x' }, 'go', function()
-                return require('opencode').operator '@this '
+                return oc.operator '@this '
             end, { expr = true, desc = 'Add range to opencode' })
             vim.keymap.set('n', 'goo', function()
-                return require('opencode').operator '@this ' .. '_'
+                return oc.operator '@this ' .. '_'
             end, { expr = true, desc = 'Add line to opencode' })
 
             keymap({ 'n' }, '<leader>oa', function()
-                require('opencode').ask('@buffer: ', { submit = true })
+                oc.ask('@buffer: ', { submit = true })
             end, 'Ask opencode')
             keymap({ 'n', 'x' }, '<leader>ok', '<cmd>!pkill opencode<cr>', 'Kill opencode')
             keymap({ 'x' }, '<leader>oA', function()
-                require('opencode').ask('@this: ', { submit = true })
+                oc.ask('@this: ', { submit = true })
             end, 'Ask opencode selection')
             keymap({ 'n', 'x' }, '<leader>os', function()
-                require('opencode').select()
+                oc.select()
             end, 'Execute opencode action…')
             keymap({ 'n', 't' }, '<leader>ot', function()
-                require('opencode').toggle()
+                oc.toggle()
             end, 'Toggle opencode')
             keymap({ 'n', 't' }, '<leader>oc', function()
-                require('opencode').command 'agent.cycle'
+                oc.command 'agent.cycle'
             end, 'agent cycle')
             keymap({ 'n', 't' }, '<leader>ol', function()
-                require('opencode').command 'session.select'
+                oc.command 'session.select'
             end, 'session select')
             keymap({ 'n', 't' }, '<leader>oe', function()
-                require('opencode').command 'session.compact'
+                oc.command 'session.compact'
             end, 'Session compact')
 
             keymap('n', '<leader>op', function()
-                require('opencode').command 'prompt.submit'
+                oc.command 'prompt.submit'
             end, 'Prompt submit')
             keymap('n', '<leader>ou', function()
-                require('opencode').command 'session.half.page.up'
+                oc.command 'session.half.page.up'
             end, 'opencode half page up')
             keymap('n', '<leader>od', function()
-                require('opencode').command 'session.half.page.down'
+                oc.command 'session.half.page.down'
             end, 'opencode half page down')
         end,
     },
