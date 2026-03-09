@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'zsh',
     callback = function()
-        require('nvim-treesitter.highlight').attach(0, 'bash')
+        vim.treesitter.start(0, 'bash')
     end,
 })
 
@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'hbs',
     callback = function()
-        require('nvim-treesitter.highlight').attach(0, 'javascript')
+        vim.treesitter.start(0, 'bash')
     end,
 })
 
@@ -47,5 +47,3 @@ vim.api.nvim_create_autocmd('TermOpen', {
     pattern = '*',
     command = 'startinsert',
 })
-
-
