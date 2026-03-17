@@ -112,7 +112,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         keymap('<leader>ln', vim.lsp.buf.add_workspace_folder, '[L]sp [W]orkspace [A]dd Folder')
         keymap('<leader>lx', vim.lsp.buf.remove_workspace_folder, '[L]sp [W]orkspace [R]emove Folder')
         keymap('<leader>lI', '<cmd>Mason<cr>', '[L]sp [I]nstall with mason')
-        keymap('<leader>li', '<cmd>LspInfo<cr>', '[L]sp [I]nfo')
+        keymap('<leader>li', '<cmd>che vim.lsp<CR>', '[L]sp Type [D]efinition')
         keymap('<leader>ll', function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, '[L]sp [W]orkspace [L]ist Folders')

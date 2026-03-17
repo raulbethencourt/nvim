@@ -211,7 +211,7 @@ telescope.load_extension 'ui-select'
 
 -- NOTE: Keymaps
 keymap('n', '<leader><space>', builtin.buffers, 'Buffers')
-keymap('n', '<leader>ss', builtin.spell_suggest, '[S]pell [S]uggest')
+keymap('n', 'z=', builtin.spell_suggest, '[S]pell [S]uggest')
 keymap('n', '<leader>sl', telescope.extensions.live_grep_args.live_grep_args, '[S]earch [L]ive Grep Args')
 keymap('n', '<leader>so', builtin.command_history, '[S]earch command hist[O]ry')
 keymap('n', '<leader>sf', builtin.find_files, '[S]earch [F]iles')
