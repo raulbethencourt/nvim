@@ -219,6 +219,7 @@ local servers = {
     sqls = {},
     ts_ls = {},
     yamlls = {},
+    pyright = {},
 }
 
 -- Add license to intelephense if available
