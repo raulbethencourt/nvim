@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('FileType', {
     pattern = 'hbs',
     callback = function()
-        vim.treesitter.start(0, 'bash')
+        vim.treesitter.start(0, 'javascript')
     end,
 })
 
