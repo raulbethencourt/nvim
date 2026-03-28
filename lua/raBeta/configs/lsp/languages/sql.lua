@@ -1,3 +1,5 @@
+local keymap = require('raBeta.utils.utils').keymap
+
 local function sqls_exec(command, arguments, range, callback)
     local clients = vim.lsp.get_clients { bufnr = 0, name = 'sqls' }
     if #clients == 0 then
@@ -19,19 +21,9 @@ local function sqls_exec(command, arguments, range, callback)
             vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
             vim.bo[buf].filetype = 'sqls_output'
             vim.bo[buf].modifiable = false
-            local width = math.min(120, vim.o.columns - 4)
-            local height = math.min(#lines + 1, math.floor(vim.o.lines * 0.6))
-            vim.api.nvim_open_win(buf, true, {
-                relative = 'editor',
-                width = width,
-                height = height,
-                row = math.floor((vim.o.lines - height) / 2),
-                col = math.floor((vim.o.columns - width) / 2),
-                style = 'minimal',
-                border = 'rounded',
-                title = ' sqls: ' .. command .. ' ',
-                title_pos = 'center',
-            })
+            local height = math.min(#lines + 1, math.floor(vim.o.lines * 0.7))
+            vim.cmd('botright ' .. height .. 'split')
+            vim.api.nvim_win_set_buf(0, buf)
             vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = buf, silent = true })
         end
     end)
@@ -94,28 +86,25 @@ end
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'sql', 'mysql' },
     callback = function(args)
-        local buf = args.buf
-        local opts = { buffer = buf, silent = true }
-
         -- Execute whole buffer query
-        vim.keymap.set('n', '<leader>sq', function()
+        keymap('n', '<leader>xq', function()
             execute_query(nil)
-        end, vim.tbl_extend('force', opts, { desc = '[S]qls [Q]uery execute buffer' }))
+        end, 'Sqls [Q]uery execute buffer')
 
         -- Execute visual selection
-        vim.keymap.set('v', '<leader>sq', function()
+        keymap('v', '<leader>xq', function()
             execute_query(get_visual_range())
-        end, vim.tbl_extend('force', opts, { desc = '[S]qls [Q]uery execute selection' }))
+        end, 'Sqls [Q]uery execute selection')
 
         -- Show tables
-        vim.keymap.set('n', '<leader>st', function()
+        keymap('n', '<leader>xt', function()
             sqls_exec 'showTables'
-        end, vim.tbl_extend('force', opts, { desc = '[S]qls show [T]ables' }))
+        end, 'Sqls show [T]ables')
 
         -- Switch database
-        vim.keymap.set('n', '<leader>sd', switch_database, vim.tbl_extend('force', opts, { desc = '[S]qls switch [D]atabase' }))
+        keymap('n', '<leader>xd', switch_database, 'Sqls switch [D]atabase')
 
         -- Switch connection
-        vim.keymap.set('n', '<leader>sc', switch_connection, vim.tbl_extend('force', opts, { desc = '[S]qls switch [C]onnection' }))
+        keymap('n', '<leader>xc', switch_connection, 'Sqls switch [C]onnection')
     end,
 })
