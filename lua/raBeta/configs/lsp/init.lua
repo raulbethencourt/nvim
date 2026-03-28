@@ -1,4 +1,5 @@
 require 'raBeta.configs.lsp.languages.php'
+require 'raBeta.configs.lsp.languages.sql'
 require 'raBeta.configs.lsp.languages.bash'
 require 'raBeta.configs.lsp.languages.lua'
 require 'raBeta.configs.lsp.languages.js'
@@ -216,7 +217,30 @@ local servers = {
             enable = true,
         },
     },
-    sqls = {},
+    sqls = {
+        root_markers = { '.git', '.' },
+        settings = {
+            sqls = {
+                connections = {
+                    {
+                        driver = 'mysql',
+                        dataSourceName = 'root:root@tcp(127.0.0.1:8085)/certif25',
+                    },
+                    {
+                        driver = 'mysql',
+                        dataSourceName = 'root:root@tcp(127.0.0.1:8085)/modele25',
+                    },
+                    {
+                        driver = 'mysql',
+                        dataSourceName = 'root:root@tcp(127.0.0.1:8085)/icare25',
+                    },
+                },
+                format = {
+                    enable = true,
+                },
+            },
+        },
+    },
     ts_ls = {},
     yamlls = {},
 }
