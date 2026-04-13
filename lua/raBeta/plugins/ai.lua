@@ -5,7 +5,7 @@ return {
         'NickvanDyke/opencode.nvim',
         version = '*', -- Latest stable release.
         config = function()
-            local opencode_cmd = 'opencode --port 4096'
+            local opencode_cmd = 'opencode'
             local tmux_pane_id = nil -- tracks the pane for reuse
             local oc = require 'opencode'
 
