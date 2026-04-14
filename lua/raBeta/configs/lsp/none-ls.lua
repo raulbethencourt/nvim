@@ -14,8 +14,10 @@ nls.setup {
         nls.builtins.formatting.markdownlint,
         nls.builtins.formatting.pretty_php,
         nls.builtins.formatting.stylua,
+        nls.builtins.formatting.sqlfmt.with {
+            extra_args = { '--line-length', '120' },
+        },
         nls.builtins.formatting.clang_format,
-        nls.builtins.formatting.sqlfmt,
         nls.builtins.formatting.prettier.with {
             extra_args = { '--print-with=100', '--tab-width=4' },
             filetypes = {
@@ -31,7 +33,6 @@ nls.setup {
         },
         -- NOTE: Lintings
         nls.builtins.diagnostics.markdownlint,
-        nls.builtins.diagnostics.sqruff,
         nls.builtins.diagnostics.phpstan,
         nls.builtins.diagnostics.codespell.with {
             filetypes = { '*' }

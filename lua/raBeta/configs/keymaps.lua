@@ -7,7 +7,7 @@ keymap({ 'n', 'v' }, '<Space>', '<Nop>')
 -- TAB in general mode will move to text buffer
 keymap('n', '<TAB>', '<cmd>bnext<cr>', 'Bnext')
 keymap('n', '<S-TAB>', '<cmd>bprev<cr>', 'Bprev')
-keymap('n', '<space>xf', ':source %<cr>', 'Source [F]ile')
+keymap('n', '<space>zz', ':source %<cr>', 'Source [F]ile')
 keymap('n', '<leader>zb', ':bp<bar>sp<bar>bn<bar>bd!<cr>', '[B]uffer delete')
 keymap('n', '<leader>zv', function()
     vim.cmd [[bp
@@ -31,6 +31,8 @@ end, 'toggle command [H]eight and show line')
 keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle [M]arkview')
 -- IMPORTANT: Need inlyne installed to make it works
 keymap('n', '<leader>ti', ':!inlyne view "%" -t dark<CR>', 'toggle [I]nlyne')
+-- IMPORTANT: Need obisdian installed to make it works
+keymap('n', '<leader>to', '<cmd>ObsidianOpen<CR>', 'toggle [I]nlyne')
 
 
 -- Quickfix
@@ -98,6 +100,7 @@ end, '[C]md [I]nput')
 keymap('n', '<leader>ze', function()
     vim.cmd 'messages | Fidget history'
 end, 'Messages and notifications')
+keymap('n', '<leader>zf', ':%s/\\%x1b\\[27;5;106\\~ \\?/\\r/g<CR>', 'Fix paste escape sequences')
 keymap('n', '<leader>zi', '<C-w>|', 'Maximize')
 keymap('n', '<leader>zn', ':nohlsearch<cr>', '[N]o highlights')
 keymap('n', '<leader>zo', '<C-w>=', 'Equilify')
@@ -124,6 +127,10 @@ keymap('v', '<', '<gv')
 keymap('v', '>', '>gv')
 keymap('v', 'p', '"_dP')
 keymap('x', '<leader>p', [["_dP]])
+
+-- Fix Ctrl+V paste in insert mode (modifyOtherKeys terminal issue)
+keymap('i', '<C-v>', '<C-r>+', 'Paste from clipboard')
+
 keymap('n', '<C-d>', '<C-d>zz')
 keymap('n', '<C-u>', '<C-u>zz')
 keymap('n', 'n', 'nzzzv')
