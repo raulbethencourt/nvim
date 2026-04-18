@@ -5,7 +5,7 @@ return {
         'NickvanDyke/opencode.nvim',
         version = '*', -- Latest stable release.
         config = function()
-            local opencode_cmd = 'opencode'
+            local opencode_cmd = 'opencode --port'
             local tmux_pane_id = nil -- tracks the pane for reuse
             local oc = require 'opencode'
 
@@ -15,7 +15,7 @@ return {
                     start = function()
                         -- Split a new tmux pane
                         -- Capture the pane ID for later reuse
-                        local pane = vim.fn.system('tmux split-window -dhl 45% -P -F "#{pane_id}" ' .. opencode_cmd)
+                        local pane = vim.fn.system('tmux split-window -dh -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
                         tmux_pane_id = vim.trim(pane)
                     end,
                     stop = function()
@@ -36,7 +36,7 @@ return {
                                 return
                             end
                         end
-                        local pane = vim.fn.system('tmux split-window -dhl 45% -P -F "#{pane_id}" ' .. opencode_cmd)
+                        local pane = vim.fn.system('tmux split-window -dh -l 45% -P -F "#{pane_id}" ' .. opencode_cmd)
                         tmux_pane_id = vim.trim(pane)
                     end,
                 },
