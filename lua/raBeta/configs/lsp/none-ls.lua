@@ -5,7 +5,7 @@ nls.setup {
     save_after_format = false,
     sources = {
         -- NOTE: Formatting
-        nls.builtins.formatting.black,
+        -- nls.builtins.formatting.black,
         nls.builtins.formatting.shfmt.with {
             filetypes = { 'sh', 'zsh', 'bash' },
             extra_args = { '-i', '2' },

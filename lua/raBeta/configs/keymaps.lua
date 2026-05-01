@@ -1,6 +1,8 @@
 local utils = require 'raBeta.utils.utils'
 local keymap = utils.keymap
 
+require 'raBeta.configs.pi_keymaps'
+
 -- stop space normal
 keymap({ 'n', 'v' }, '<Space>', '<Nop>')
 
@@ -33,7 +35,6 @@ keymap('n', '<leader>tm', '<cmd>RenderMarkdown toggle<CR>', 'toggle [M]arkview')
 keymap('n', '<leader>ti', ':!inlyne view "%" -t dark<CR>', 'toggle [I]nlyne')
 -- IMPORTANT: Need obisdian installed to make it works
 keymap('n', '<leader>to', '<cmd>ObsidianOpen<CR>', 'toggle [I]nlyne')
-
 
 -- Quickfix
 keymap('n', '<leader>qn', '<cmd>cnext<cr>', '[Q]uickfix [N]ext')
@@ -92,7 +93,6 @@ end, '[G]it blame [L]ine')
 -- Terminal & external commands
 keymap('n', '<leader>ci', function()
     local cmd = vim.fn.input 'Write your cmd : '
-
     utils.launch_cmd_in_floating_win(cmd, { close_term = false })
 end, '[C]md [I]nput')
 
@@ -158,11 +158,25 @@ keymap('n', '<leader>wdd', ':lua require("raBeta.optimization.documentation_inte
 keymap('n', '<leader>wdr', ':lua vim.notify(vim.inspect(require("raBeta.optimization.documentation_integrator").list_rationales()))<cr>', 'Plugin rationales')
 
 -- Version Tracking
-keymap('n', '<leader>wvc', ':lua local desc = vim.fn.input("Version description: "); require("raBeta.optimization.version_tracker").create_version(desc)<cr>', 'Create version')
+keymap(
+    'n',
+    '<leader>wvc',
+    ':lua local desc = vim.fn.input("Version description: "); require("raBeta.optimization.version_tracker").create_version(desc)<cr>',
+    'Create version'
+)
 keymap('n', '<leader>wvh', ':lua vim.notify(vim.inspect(require("raBeta.optimization.version_tracker").get_history()))<cr>', 'Version history')
-keymap('n', '<leader>wvv', ':lua vim.notify("Current version: " .. require("raBeta.optimization.version_tracker").get_current_version())<cr>', 'Current version')
-keymap('n', '<leader>wvr', ':lua local ver = vim.fn.input("Target version: "); require("raBeta.optimization.version_tracker").rollback_to_version(ver)<cr>', 'Rollback version')
+keymap(
+    'n',
+    '<leader>wvv',
+    ':lua vim.notify("Current version: " .. require("raBeta.optimization.version_tracker").get_current_version())<cr>',
+    'Current version'
+)
+keymap(
+    'n',
+    '<leader>wvr',
+    ':lua local ver = vim.fn.input("Target version: "); require("raBeta.optimization.version_tracker").rollback_to_version(ver)<cr>',
+    'Rollback version'
+)
 
 -- General Optimization
 keymap('n', '<leader>woa', ':lua require("raBeta.optimization.audit_engine").generate_bottleneck_report()<cr>', 'Complete audit')
-keymap('n', '<leader>wor', ':lua require("raBeta.optimization.audit_engine").generate_bottleneck_report()<cr>', 'Full optimization report')
