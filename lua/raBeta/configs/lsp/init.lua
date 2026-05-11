@@ -122,7 +122,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- Servers configuration
 local servers = {
-    angularls = {},
     emmet_ls = {
         filetypes = { 'twig', 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
         init_options = {

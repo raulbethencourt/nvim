@@ -58,7 +58,7 @@ return {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
-        enabled = false,
+        enabled = true,
         config = function()
             vim.g.gruvbox_material_background = 'hard'
             vim.g.gruvbox_material_foreground = 'material'
@@ -68,7 +68,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_visual = 'green background'
             vim.g.gruvbox_material_ui_contrast = 'low'
-            vim.g.gruvbox_material_float_style = 'dim'
+            vim.g.gruvbox_material_float_style = 'blend'
             vim.g.gruvbox_material_show_eob = false
             vim.g.gruvbox_material_diagnostic_text_highlight = true
             vim.g.gruvbox_material_diagnostic_line_highlight = true
@@ -78,7 +78,7 @@ return {
         'neanias/everforest-nvim',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             require('everforest').setup {
                 background = 'hard',
