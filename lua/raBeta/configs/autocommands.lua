@@ -32,6 +32,14 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 
+--NOTE: let treesitter understand all patterns for twig
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'twig',
+    callback = function()
+        vim.treesitter.start(0, 'twig')
+    end,
+})
+
 -- NOTE: Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
