@@ -61,7 +61,7 @@ require('lazy').setup({
     spec = {
         import = env_name .. '.plugins',
     },
-    checker = { enabled = true },
+    checker = { enabled = true, notify = false },
 }, {})
 
 require(env_name .. '.configs')

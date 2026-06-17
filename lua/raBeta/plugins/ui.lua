@@ -68,7 +68,7 @@ return {
             vim.g.gruvbox_material_cursor = 'green'
             vim.g.gruvbox_material_visual = 'green background'
             vim.g.gruvbox_material_ui_contrast = 'low'
-            vim.g.gruvbox_material_float_style = 'dim'
+            vim.g.gruvbox_material_float_style = 'blend'
             vim.g.gruvbox_material_show_eob = false
             vim.g.gruvbox_material_diagnostic_text_highlight = true
             vim.g.gruvbox_material_diagnostic_line_highlight = true
