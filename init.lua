@@ -67,7 +67,4 @@ require('lazy').setup({
 require(env_name .. '.configs')
 
 -- NOTE: install colorscheme
--- 
--- Extra colorschemes
--- require('raBeta.themes.forest_green')
-vim.cmd.colorscheme 'everforest'
+vim.cmd.colorscheme 'van-gogh'

@@ -58,7 +58,7 @@ return {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
-        enabled = false,
+        enabled = true,
         config = function()
             vim.g.gruvbox_material_background = 'hard'
             vim.g.gruvbox_material_foreground = 'material'
@@ -78,7 +78,7 @@ return {
         'neanias/everforest-nvim',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             require('everforest').setup {
                 background = 'hard',
@@ -87,5 +87,12 @@ return {
                 spell_foreground = true,
             }
         end,
+    },
+    {
+        'Nirmal314/van-gogh.nvim',
+        name = 'van-gogh',
+        lazy = false,
+        priority = 1000,
+        enabled = true,
     },
 }
