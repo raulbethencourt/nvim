@@ -233,6 +233,10 @@ local servers = {
                         driver = 'mysql',
                         dataSourceName = 'root:root@tcp(127.0.0.1:8085)/icare25',
                     },
+                    {
+                        driver = 'mysql',
+                        dataSourceName = 'root:root@tcp(127.0.0.1:8085)/idsoftf25',
+                    },
                 },
                 format = {
                     enable = true,
