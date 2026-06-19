@@ -58,7 +58,7 @@ return {
         'sainnhe/gruvbox-material',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             vim.g.gruvbox_material_background = 'hard'
             vim.g.gruvbox_material_foreground = 'material'
@@ -93,6 +93,69 @@ return {
         name = 'van-gogh',
         lazy = false,
         priority = 1000,
+        enabled = false,
+    },
+    {
+        'xero/miasma.nvim',
+        lazy = false,
+        priority = 1000,
         enabled = true,
+        config = function()
+            -- Override highlight groups for a darker background
+            -- Applied via ColorScheme autocmd to persist after colorscheme loads
+            local dark_bg = '#151515'
+            local highlights = {
+                Normal = { bg = dark_bg },
+                NormalFloat = { bg = dark_bg },
+                NormalNC = { bg = dark_bg },
+                SignColumn = { bg = dark_bg },
+                LineNr = { bg = dark_bg },
+                Folded = { bg = dark_bg },
+                FoldColumn = { bg = dark_bg },
+                CursorLineNr = { bg = dark_bg },
+                VertSplit = { bg = dark_bg },
+                StatusLine = { bg = dark_bg },
+                StatusLineNC = { bg = dark_bg },
+                TabLine = { bg = dark_bg },
+                TabLineFill = { bg = dark_bg },
+                TabLineSel = { bg = dark_bg },
+                Pmenu = { bg = dark_bg },
+                PmenuSel = { bg = dark_bg },
+                PmenuSbar = { bg = dark_bg },
+                PmenuThumb = { bg = dark_bg },
+                FloatBorder = { bg = dark_bg },
+                EndOfBuffer = { bg = dark_bg },
+                NonText = { bg = dark_bg },
+                Whitespace = { bg = dark_bg },
+                TelescopeNormal = { bg = dark_bg },
+                TelescopeBorder = { bg = dark_bg },
+                TelescopePromptNormal = { bg = dark_bg },
+                TelescopePromptBorder = { bg = dark_bg },
+                TelescopePromptTitle = { bg = dark_bg },
+                TelescopeResultsNormal = { bg = dark_bg },
+                TelescopeResultsBorder = { bg = dark_bg },
+                TelescopeResultsTitle = { bg = dark_bg },
+                TelescopePreviewNormal = { bg = dark_bg },
+                TelescopePreviewBorder = { bg = dark_bg },
+                TelescopePreviewTitle = { bg = dark_bg },
+                TelescopeTitle = { bg = dark_bg },
+                TelescopeSelection = { bg = '#202020' },
+                TelescopeMatching = { fg = '#c9a554' },
+            }
+            local apply_overrides = function()
+                for hl_group, opts in pairs(highlights) do
+                    vim.api.nvim_set_hl(0, hl_group, opts)
+                end
+            end
+            local augroup = vim.api.nvim_create_augroup('MiasmaOverrides', { clear = true })
+            vim.api.nvim_create_autocmd('ColorScheme', {
+                group = augroup,
+                pattern = '*',
+                callback = apply_overrides,
+                desc = 'Apply miasma highlight overrides after colorscheme loads',
+            })
+            -- Apply immediately so overrides take effect on initial load
+            apply_overrides()
+        end,
     },
 }
