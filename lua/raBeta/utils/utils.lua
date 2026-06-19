@@ -28,12 +28,14 @@ M.create_floting_win = function(opts)
 
     ---@diagnostic disable-next-line: param-type-mismatch
     local win = vim.api.nvim_open_win(buf, true, {
+        ---@diagnostic disable-next-line: assign-type-mismatch
         style = opts.style or 'minimal',
         relative = 'editor',
         width = width,
         height = height,
         row = row,
         col = col,
+        ---@diagnostic disable-next-line: assign-type-mismatch
         border = opts.border or 'rounded',
     })
     return { buf = buf, win = win }
