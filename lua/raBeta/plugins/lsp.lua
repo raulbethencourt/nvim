@@ -36,6 +36,12 @@ return {
             'williamboman/mason-lspconfig.nvim',
             'WhoIsSethDaniel/mason-tool-installer.nvim',
             { 'j-hui/fidget.nvim' },
+            {
+                'ziglang/zig.vim',
+                config = function()
+                    vim.g.zig_fmt_autosave = 0
+                end,
+            },
         },
     },
     {
