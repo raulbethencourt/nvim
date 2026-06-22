@@ -65,7 +65,7 @@ return {
             vim.g.gruvbox_material_enable_italic = true
             vim.g.gruvbox_material_better_performance = true
             vim.g.gruvbox_material_transparent_background = 2
-            vim.g.gruvbox_material_cursor = 'red'
+            vim.g.gruvbox_material_cursor = 'blue'
             vim.g.gruvbox_material_visual = 'green background'
             vim.g.gruvbox_material_ui_contrast = 'low'
             vim.g.gruvbox_material_float_style = 'blend'
