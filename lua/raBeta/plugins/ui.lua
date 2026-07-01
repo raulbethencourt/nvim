@@ -99,7 +99,7 @@ return {
         'xero/miasma.nvim',
         lazy = false,
         priority = 1000,
-        enabled = true,
+        enabled = false,
         config = function()
             -- Override highlight groups for a darker background
             -- Applied via ColorScheme autocmd to persist after colorscheme loads
@@ -156,6 +156,28 @@ return {
             })
             -- Apply immediately so overrides take effect on initial load
             apply_overrides()
+        end,
+    },
+    {
+        'Shatur/neovim-ayu',
+        lazy = false,
+        priority = 1000,
+        enabled = true,
+        config = function()
+            require('ayu').setup {
+                mirage = false,
+                terminal = true,
+                overrides = {
+                    Comment = { italic = true },
+                    Normal = { bg = 'None' },
+                    NormalFloat = { bg = 'none' },
+                    ColorColumn = { bg = 'None' },
+                    SignColumn = { bg = 'None' },
+                    Folded = { bg = 'None' },
+                    FoldColumn = { bg = 'None' },
+                    VertSplit = { bg = 'None' },
+                },
+            }
         end,
     },
 }

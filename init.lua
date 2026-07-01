@@ -67,4 +67,4 @@ require('lazy').setup({
 require(env_name .. '.configs')
 
 -- NOTE: install colorscheme
-vim.cmd.colorscheme 'miasma'
+vim.cmd.colorscheme 'ayu'
