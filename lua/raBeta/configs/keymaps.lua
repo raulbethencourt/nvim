@@ -1,7 +1,7 @@
 local utils = require 'raBeta.utils.utils'
 local keymap = utils.keymap
 
-require 'raBeta.configs.pi_keymaps'
+-- require 'raBeta.configs.pi_keymaps'
 
 -- stop space normal
 keymap({ 'n', 'v' }, '<Space>', '<Nop>')

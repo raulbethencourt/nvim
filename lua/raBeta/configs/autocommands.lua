@@ -55,3 +55,18 @@ vim.api.nvim_create_autocmd('TermOpen', {
     pattern = '*',
     command = 'startinsert',
 })
+
+-- NOTE: Claude tmux connection -- focus the pane actually running `claude` after a send
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'ClaudeCodeSendComplete',
+    callback = function(ev)
+        -- ev.data.file_path / ev.data.start_line / ev.data.end_line / ev.data.context
+        if not vim.env.TMUX then
+            return
+        end
+        local pane_id = require('raBeta.utils.utils').find_tmux_pane_by_cmd 'claude'
+        if pane_id then
+            vim.fn.system { 'tmux', 'select-pane', '-t', pane_id }
+        end
+    end,
+})

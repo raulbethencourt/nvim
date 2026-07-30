@@ -106,6 +106,26 @@ M.keymap = function(mode, keys, func, desc)
     vim.keymap.set(mode, keys, func, { noremap = true, silent = true, desc = desc })
 end
 
+---Find a tmux pane currently running the given shell command name
+---@param cmd_name string
+---@return string|nil pane_id
+---@return string|nil err
+---
+M.find_tmux_pane_by_cmd = function(cmd_name)
+    if not vim.env.TMUX then
+        return nil, 'Not inside tmux session'
+    end
+
+    local panes = vim.fn.system 'tmux list-panes -F "#{pane_id} #{pane_current_command}"'
+    for pane_id, cmd in panes:gmatch '(%%[%d]+)%s+(%S+)' do
+        if cmd == cmd_name then
+            return pane_id
+        end
+    end
+
+    return nil, ('No tmux pane running "%s" found'):format(cmd_name)
+end
+
 ---Formats visual selection only
 ---@return nil
 ---

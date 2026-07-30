@@ -118,14 +118,7 @@ return {
                     },
                 },
             }
-            keymap('n', '<leader>ah', '<cmd>ObsidianToggleCheckbox<CR>', '[O]bsidian toggle c[H]eckbox')
-            keymap('n', '<leader>ab', '<cmd>ObsidianBacklinks<CR>', '[O]bsidian [B]ack links')
-            keymap('n', '<leader>at', '<cmd>ObsidianTags<CR>', '[O]bsidian [T]ags')
             keymap('n', '<leader>ad', '<cmd>ObsidianToday<CR>', '[O]bsidian to[D]ay')
-            keymap('n', '<leader>ai', '<cmd>ObsidianPasteImg<CR>', '[O]bsidian paste [I]mage')
-            keymap('n', '<leader>aw', '<cmd>ObsidianWorkspace<CR>', '[O]bsidian [W]orkspace')
-            keymap('n', '<leader>ao', '<cmd>ObsidianOpen<CR>', '[O]bsidian [O]pen')
-            keymap('n', '<leader>ae', '<cmd>ObsidianTemplate<CR>', '[O]bsidian t[E]mplate')
         end,
     },
     {

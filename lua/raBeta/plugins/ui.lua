@@ -31,8 +31,8 @@ return {
                     lsp = true,
                 },
             }
-            keymap('n', '<leader>cp', '<cmd>CccPick<CR>', '[C]cc [P]ick')
-            keymap('n', '<leader>cc', '<cmd>CccConvert<CR>', '[C]cc [C]onvert')
+            keymap('n', '<leader>ap', '<cmd>CccPick<CR>', '[C]cc [P]ick')
+            keymap('n', '<leader>ac', '<cmd>CccConvert<CR>', '[C]cc [C]onvert')
         end,
     },
     {
